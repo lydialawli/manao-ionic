@@ -13,6 +13,7 @@ import {
 import React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { AppPage } from '../declarations';
+import '../styles/menu.css'
 
 interface MenuProps extends RouteComponentProps {
   appPages: AppPage[];
@@ -20,12 +21,12 @@ interface MenuProps extends RouteComponentProps {
 
 const Menu: React.FunctionComponent<MenuProps> = ({ appPages }) => (
   <IonMenu contentId="main" type="overlay">
-    <IonContent>
-      <IonList>
+    <IonContent className="menu">
+      <IonList >
         {appPages.map((appPage, index) => {
           return (
             <IonMenuToggle key={index} autoHide={false}>
-              <IonItem href={appPage.url} routerDirection="none">
+              <IonItem href={appPage.url} routerDirection="none" >
                 <IonIcon slot="start" icon={appPage.icon} />
                 <IonLabel>{appPage.title}</IonLabel>
               </IonItem>

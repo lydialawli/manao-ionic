@@ -9,7 +9,7 @@ import Home from './pages/Home.jsx';
 import Join from './pages/Join.jsx';
 import Settings from './pages/Settings.jsx';
 import About from './pages/About.jsx';
-import { home, list, football, cog } from 'ionicons/icons';
+import { home, list, options, planet, football, cog } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -44,12 +44,12 @@ const appPages: AppPage[] = [
   {
     title: 'User Settings',
     url: '/profile/:id/settings',
-    icon: cog
+    icon: options
   },
   {
-    title: 'About',
+    title: 'About Manao',
     url: '/about',
-    icon: list
+    icon: planet
   }
 ];
 
