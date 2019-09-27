@@ -1,0 +1,17 @@
+.main {
+	--background: #484C60;
+	position: relative;
+}
+
+.play {
+	--background: #FFFF00;
+	width: 150px;
+	height: 50px;
+	margin: 10px;
+	color: #484C60;
+	--border-radius: 0;
+	position: absolute;
+	z-index: 1;
+	left: 25%;
+	bottom: 12%;
+}

@@ -5,7 +5,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { AppPage } from './declarations';
 
 import Menu from './components/Menu';
-import Home from './pages/Home';
+import Home from './pages/Home.jsx';
 import List from './pages/List';
 import { home, list } from 'ionicons/icons';
 

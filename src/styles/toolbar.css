@@ -1,0 +1,28 @@
+.toolbar {
+	--background: #212121;
+	color: white;
+}
+
+.logo {
+	--color: #F3CB00
+}
+
+.profile {
+	padding-right: 10px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+
+.avatar {
+	background: #ffffff;
+	border-radius: 50px;
+	height: 40px;
+	width: 40px;
+}
+
+ion-avatar {
+    max-width: 35px;
+    max-height: 35px;
+}
+

@@ -1,0 +1,30 @@
+.button {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.btnText {
+	position: absolute;
+	top: auto;
+	bottom: auto;
+	left: 20px;
+	font-size: 10px;
+}
+
+.trapezoid {
+  border: 0 solid #E14848;
+  width: 80px;
+  border-bottom-width: 30px;
+  border-right-width: 4px;
+  border-right-color: transparent;
+}
+
+.triangle {
+  border: 0 solid #E14848;
+	width: 80px;
+  border-right-width: 80px;
+  border-bottom-width: 4px;
+  border-bottom-color: transparent;
+}
