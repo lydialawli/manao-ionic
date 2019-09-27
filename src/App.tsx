@@ -7,8 +7,9 @@ import { AppPage } from './declarations';
 import Menu from './components/Menu';
 import Home from './pages/Home.jsx';
 import Join from './pages/Join.jsx';
+import Settings from './pages/Settings.jsx';
 import About from './pages/About.jsx';
-import { home, list, bug } from 'ionicons/icons';
+import { home, list, football, cog } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -37,12 +38,17 @@ const appPages: AppPage[] = [
   },
   {
     title: 'Join a Game',
-    url: '/home/join',
-    icon: bug
+    url: '/join',
+    icon: football
+  },
+  {
+    title: 'User Settings',
+    url: '/profile/:id/settings',
+    icon: cog
   },
   {
     title: 'About',
-    url: '/home/about',
+    url: '/about',
     icon: list
   }
 ];
@@ -54,8 +60,9 @@ const App: React.FC = () => (
         <Menu appPages={appPages} />
         <IonRouterOutlet id="main">
           <Route path="/home" component={Home} exact={true} />
-          <Route path="/home/join" component={Join} exact={true} />
-          <Route path="/home/about" component={About} exact={true} />
+          <Route path="/join" component={Join} exact={true} />
+          <Route path="/profile/:id/settings" component={Settings} exact={true} />
+          <Route path="/about" component={About} exact={true} />
           <Route exact path="/" render={() => <Redirect to="/home" />} />
         </IonRouterOutlet>
       </IonSplitPane>
