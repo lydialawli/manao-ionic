@@ -1,25 +1,28 @@
 import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { americanFootball, basketball, beer, bluetooth, boat, build, flask, football, paperPlane, wifi } from 'ionicons/icons';
 import React from 'react';
+import '../styles/toolbar.css'
 
-const ListPage: React.FC = () => {
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>List</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+class About extends React.Component {
+  render() {
+    return (
+      <IonPage>
+        <IonHeader>
+          <IonToolbar className="toolbar">
+            <IonButtons slot="start">
+              <IonMenuButton />
+            </IonButtons>
+            <IonTitle>About Manao</IonTitle>
+          </IonToolbar>
+        </IonHeader>
 
-      <IonContent>
-        <ListItems />
-      </IonContent>
-    </IonPage>
-  );
-};
+        <IonContent>
+          <ListItems />
+        </IonContent>
+      </IonPage >
+    )
+  }
+}
 
 const ListItems = () => {
   const icons = [
@@ -50,4 +53,5 @@ const ListItems = () => {
   return <IonList>{items}</IonList>;
 };
 
-export default ListPage;
+
+export default About;

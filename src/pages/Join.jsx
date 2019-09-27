@@ -1,11 +1,9 @@
 import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonSlides, IonSlide, IonButtons, IonButton, IonGrid, IonRow, IonCol, IonMenuButton, IonAvatar, IonChip, IonItem, IonLabel } from '@ionic/react';
 import React from 'react';
-import Card from '../components/Card.jsx'
-import Button from '../components/Buttons.jsx'
 import '../styles/toolbar.css'
 import '../styles/home.css'
 
-class Home extends React.Component {
+class Join extends React.Component {
 
   render() {
     return (
@@ -26,34 +24,7 @@ class Home extends React.Component {
 
 
         <IonContent className="main ion-padding">
-          <IonGrid>
-            <IonRow>
-              <IonCol>
-                <Button />
-              </IonCol>
-              <IonCol>
-                <Button />
-              </IonCol>
-              <IonCol>
-                <Button />
-              </IonCol>
-            </IonRow>
-          </IonGrid>
-          <IonSlides>
-            <IonSlide>
-              <Card />
-            </IonSlide>
-            <IonSlide>
-              <Card />
-            </IonSlide>
-            <IonSlide>
-              <Card />
-            </IonSlide>
-            <IonSlide>
-              <Card />
-            </IonSlide>
-          </IonSlides>
-          <IonButton className="play">PLAY THIS GAME!</IonButton>
+          <IonButton className="play">JOIN GAME!</IonButton>
         </IonContent>
       </IonPage>
     );
@@ -61,4 +32,4 @@ class Home extends React.Component {
 
 };
 
-export default Home;
+export default Join;
