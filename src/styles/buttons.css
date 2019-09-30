@@ -7,10 +7,8 @@
 
 .btnText {
 	position: absolute;
-	top: auto;
-	bottom: auto;
-	left: 20px;
-	font-size: 10px;
+	top: 7px;
+	left: 30%;
 }
 
 .trapezoid {
@@ -19,12 +17,26 @@
   border-bottom-width: 30px;
   border-right-width: 4px;
   border-right-color: transparent;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3
 }
 
 .triangle {
   border: 0 solid #E14848;
 	width: 80px;
   border-right-width: 80px;
-  border-bottom-width: 4px;
+  border-bottom-width: 5px;
   border-bottom-color: transparent;
+	border-bottom-right-radius: 3px;
+
+}
+
+.filterIcon {
+	font-size: 20px;
+	color: #000000;
+}
+
+.fas {
+	font-size: 20px;
+	color: white;
 }

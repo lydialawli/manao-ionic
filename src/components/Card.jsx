@@ -4,34 +4,70 @@ import '../styles/card.css'
 import { time, logoUsd, walk, star } from 'ionicons/icons'
 
 class Card extends React.Component {
+	state = {
+		game: {
+			image: '',
+			title: '',
+			location: '',
+			intro: '',
+			duration: '',
+			rating: [0]
+		},
+		rate:0,
+		duration:0
+	}
+
+	UNSAFE_componentWillReceiveProps(props) {
+		console.log('props received', props);
+		this.setState({game: props.game})
+	}
+
+	UNSAFE_componentWillMount() {
+		console.log('this.props', this.props);
+		let game = this.props.game
+		let rate = this.state.rate
+		let duration = this.state.duration
+		duration = parseInt(game.duration / 3600)
+		console.log(game.duration);
+		rate = game.rating.reduce((a,b) => a + b) / game.rating.length
+
+		this.setState({
+			game: game,
+			rate: rate,
+			duration: duration
+		})
+	}
+
 	render () {
 		return (
 			<IonCard className="gameCard">
-				<img className="cardImg" style={{width:'100%'}} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTosGP_0xskdLBsyul_SpdUfA_NP8o0JM8I3FZVvztD96y-9XY9' alt=''/>
+				<div className="imgContainer">
+					<img className="cardImg" style={{width:'100%'}} src={this.state.game.image} alt=''/>
+						<div className="gameRating">
+							<span>
+								{
+									[...Array(this.state.rate)].map((e,i) => <IonIcon key={i} className="starRating" icon={star}></IonIcon>)
+								}
+							</span>
+						</div>
+					<div className="idkYet"></div>
+				</div>
+
 				<IonCardHeader>
-					<IonCardTitle>Discover Lamai</IonCardTitle>
-					<IonCardSubtitle>Lamai Beach, Koh Samui</IonCardSubtitle>
+					<IonCardTitle className="gameTitle">{this.state.game.title}</IonCardTitle>
+					<IonCardSubtitle>{this.state.game.location}</IonCardSubtitle>
 				</IonCardHeader>
-				<IonCardContent>
-						Dare to play the silliest game of all? Play to discover a little nice area
-				</IonCardContent>
+				<IonCardContent className="gameIntro">{this.state.game.intro}</IonCardContent>
+
 				<div className="tags">
-					<div className="tag">
-						<span><IonIcon className="icon" icon={time}/> 2h</span>
+					<div>
+						<span><IonIcon className="tag time" icon={time}/> {this.state.duration} h</span>
 					</div>
-					<div className="tag">
-						<span><IonIcon icon={logoUsd}></IonIcon><IonIcon icon={logoUsd}></IonIcon></span>
+					<div>
+						<span><IonIcon className="tag" icon={logoUsd}></IonIcon><IonIcon className="tag" icon={logoUsd}></IonIcon></span>
 					</div>
-					<div className="tag">
-						<span><IonIcon icon={walk}></IonIcon> 2km</span>
-					</div>
-					<div className="tag">
-						<span>
-							<IonIcon icon={star}></IonIcon>
-							<IonIcon icon={star}></IonIcon>
-							<IonIcon icon={star}></IonIcon>
-							<IonIcon icon={star}></IonIcon>
-						</span>
+					<div>
+						<span><IonIcon className="tag" icon={walk}></IonIcon> 2 km</span>
 					</div>
 				</div>
 			</IonCard>

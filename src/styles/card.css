@@ -1,19 +1,60 @@
 .gameCard {
-	--background: #ffffff
+	--background: #ffffff;
+	--box-shadow: 10px 30px rgba(0, 0, 0, 0.3);
+	color: black;
+	border-radius: 0px;
+}
+
+.imgContainer {
+	position: relative;
+}
+
+.cardImg {
+	max-height: 175px;
+}
+
+.idkYet {
+	border: 0 solid #ffffff;
+	width: 100%;
+  border-right-width: 400px;
+  border-top-width: 40px;
+  border-top-color: transparent;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+
+.gameRating {
+	position: absolute;
+	z-index: 1;
+	right: 20px;
+	bottom: 10px;
+}
+
+.starRating {
+	color: #FFE500;
+	font-size: 25px;
 }
 
 .tags {
-	border-radius: 5px;
-	border: 1px solid gray;
 	padding: 16px;
 	margin: 16px;
 	margin-top: 0px;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr auto;
+	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 5px;
+	font-family: 'Titan One', cursive;
 }
 
-.icon {
-	padding: 0;
-	margin: 0;
+.tag {
+	color: #E14848;
+	font-size: 20px;
+}
+
+.gameTitle {
+	font-family: 'Skranji', cursive;
+}
+
+.gameIntro {
+	padding: 20px 45px 30px 45px;
 }
