@@ -1,5 +1,5 @@
 import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText } from '@ionic/react';
-import { flask, football, paperPlane, wifi, lock } from 'ionicons/icons';
+import { lock, map } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
 
@@ -8,12 +8,15 @@ class Quiz extends React.Component {
     render() {
         return (
             <IonPage>
-                <IonHeader>
-                    <IonToolbar className="quizbar">
+                <IonHeader className="noShadow">
+                    <IonToolbar className="quizbar noShadow">
                         <IonButtons slot="start">
                             <IonMenuButton />
                         </IonButtons>
                         <div className="yellowBox"></div>
+                        <IonButtons >
+                            <IonIcon className="mapIcon" slot="end" icon={map}></IonIcon>
+                        </IonButtons>
                     </IonToolbar>{" "}
                 </IonHeader>{" "}
 
@@ -44,7 +47,7 @@ class Quiz extends React.Component {
                             </IonCol>
                         </IonRow>
                     </IonGrid>
-                    <div className="triangle"></div>
+                    <div className="triangleGame"></div>
                     <div className="footerQuiz ">
                         <IonIcon className="lockIcon" icon={lock}></IonIcon>
                     </div>
