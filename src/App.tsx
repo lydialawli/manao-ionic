@@ -9,6 +9,7 @@ import List from './pages/List';
 import Game from './pages/Game.jsx'
 import Games from './pages/Games.jsx'
 import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
 import { home, list } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
@@ -52,6 +53,7 @@ const App: React.FC = () => (
 					<Route path="/login" component={Login} exact={true} />
           <Route path="/games" component={Games} exact={true} />
 					<Route path="/game" component={Game} exact={true} />
+					<Route path="/signup" component={Signup} exact={true} />
           <Route path="/home/list" component={List} exact={true} />
           <Route exact path="/" render={() => <Redirect to="/games" />} />
         </IonRouterOutlet>

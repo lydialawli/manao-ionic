@@ -1,5 +1,5 @@
 import React from 'react'
-import { IonPage, IonGrid, IonRow, IonInput, IonItem, IonLabel, IonContent, IonButton, IonIcon } from '@ionic/react'
+import { IonPage, IonGrid, IonRow, IonInput, IonItem, IonLabel, IonContent, IonButton, IonIcon, IonText } from '@ionic/react'
 import '../styles/login.css'
 import axios from 'axios'
 
@@ -9,7 +9,7 @@ class Login extends React.Component {
 			email:'',
 			password: ''
 		},
-		credentials: true
+		message: ''
 	}
 
 	login = (e) => {
@@ -23,7 +23,8 @@ class Login extends React.Component {
 					pathname: '/games'
 				})
 			} else {
-				this.setState({credentials: false})
+				let message = res.data
+				this.setState({message})
 			}
 		})
 	}
@@ -45,7 +46,7 @@ class Login extends React.Component {
 						</IonRow>
 
 						<IonRow>
-							<h1 className="loginTitle">LOGIN</h1>
+							<h1 className="formTitle">LOGIN</h1>
 						</IonRow>
 					</IonGrid>
 
@@ -59,8 +60,10 @@ class Login extends React.Component {
 						<IonInput type="password" className="label" onIonChange={(e) => this.changeField(e, 'password')}></IonInput>
 					</IonItem>
 
-					<IonButton className="loginBtn" onClick={this.login} >SUBMIT!</IonButton>
-					<IonButton className="newUser">Signup instead</IonButton>
+					<IonText className="error">{this.state.message}</IonText>
+
+					<IonButton className="submitBtn" onClick={this.login} >SUBMIT!</IonButton>
+					<IonButton href='/signup' className="changePage">Signup instead</IonButton>
 			  </IonContent>
 			</IonPage>
 		)
