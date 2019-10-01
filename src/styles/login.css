@@ -4,7 +4,7 @@
 }
 
 .form {
-	margin: 50px;
+	margin: 20px 50px;
 	--background: transparent;
 	--border-color: #E14848;
 	--border-width: 2px;
@@ -12,16 +12,20 @@
 	--highlight-color-focused: #E14848;
 }
 
+.signup {
+	margin: 10px 50px;
+}
+
 .label {
 	color: #9A9A9A;
 	font-family: 'Skranji', cursive;
 }
 
-.loginBtn {
+.submitBtn {
 	--background: #FFE500;
 	width: 50vw;
 	height: 50px;
-	margin: 10px;
+	margin: 30px auto 0px auto;
 	--border-radius: 0;
 	font-family: 'Titan One', cursive;
 	font-size: 25px;
@@ -30,7 +34,7 @@
 	margin-right: auto;
 }
 
-.loginTitle {
+.formTitle {
 	margin-left: auto;
 	margin-right: auto;
 	font-family: 'Titan One', cursive;
@@ -38,10 +42,9 @@
 	color: white;
 }
 
-.newUser {
-	position: absolute;
-	left: 20px;
-	bottom: 20px;
+.changePage {
+	margin: 50px auto 30px 20px;
+	width: 150px;
 	--background: #E14848;
 	--border-radius: 50px;
 	font-family: 'Skranji', cursive;
@@ -51,5 +54,14 @@
 .manaoLogo {
 	width: 100px;
   height: 100px;
-	margin: 70px auto 30px auto;
+	margin: 50px auto 20px auto;
+
+}
+
+.error {
+	margin: 0px;
+	margin-left: 100px;
+	--text-align: center;
+	font-family: 'Skranji', cursive;
+	color: #E14848;
 }
