@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, IonSlides, IonSlide, IonButtons, IonButton, IonGrid, IonRow, IonCol, IonMenuButton, IonAvatar, IonChip, IonItem, IonLabel } from '@ionic/react';
 import React from 'react';
 import '../styles/toolbar.css'
-import '../styles/home.css'
+import '../styles/games.css'
 
 class Settings extends React.Component {
 
