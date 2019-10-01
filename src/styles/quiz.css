@@ -1,6 +1,24 @@
+.quizbar {
+    --background:#78839E;
+    border-left: 6px solid #FFE500;
+    border-right: 6px solid #FFE500;
+     border-right: 6px solid #FFE500;
+}
+
+.yellowBox{
+    width: 60px;
+    height: 56px;
+    background-color: #FFE500;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-bottom-right-radius: 4px;
+}
+
 .quizMain {
     --background:#78839E;
-	border: 6px solid #FFE500;
+    border-left: 6px solid #FFE500;
+    border-right: 6px solid #FFE500;
 }
 
 .playMenu {
@@ -24,12 +42,14 @@
 .manaoLogo {
 	width: 60px;
     height: 60px;
-	margin: 70px auto 30px auto;
+    margin: auto;
 }
 
 .problem {
     background-color: #FFE500;
     padding:6px;
+    border-radius: 4px;
+    width: 200px;
 }
 
 .footerQuiz {
@@ -62,12 +82,13 @@
     /* height: 70px; */
 }
 
-.challengeNum {
+.titleChallenge {
     margin-left: auto;
 	margin-right: auto;
 	font-family: 'Skranji', cursive;
 	font-size: 24px;
-	color: black;
+    color: black;
+    text-shadow: 2px 2px 4px #00000067;
 }
 
 
