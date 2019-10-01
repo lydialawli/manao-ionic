@@ -1,12 +1,18 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar, IonInput } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar, IonInput, IonAlert } from '@ionic/react';
 import { lock, map } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
 
 
 class Quiz extends React.Component {
+    state = {
+        showHint: false
+    }
+
     showHint = () => {
-    alert("hello!")
+        let showHint = this.state.showHint
+        showHint = !showHint
+        this.setState({ showHint })
     }
 
     render() {
@@ -56,10 +62,21 @@ class Quiz extends React.Component {
                     <IonItem className="answerForm">
                         <IonInput className="answer" type="number" placeholder="_ _"></IonInput>
                     </IonItem>
-                    <IonIcon className="manaoLogo hint" src="assets/hint-shadow.svg" oClick={this.showHint}></IonIcon>
+                    {
+                        this.state.showHint ?
+                            <IonAlert
+                                className="hintContainer"
+                                isOpen={this.state.showHint}
+                                onDidDismiss={() => this.showHint()}
+                                // header="🌀"
+                                message="🌀"
+                            /> : ''
+                    }
+                    <IonButtons  className="hint" onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
                     <div className="triangleGame"></div>
                     <div className="footerQuiz ">
                         <IonIcon className="lockIcon" icon={lock}></IonIcon>
+
                     </div>
                 </IonContent>
             </IonPage >

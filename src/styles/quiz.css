@@ -149,3 +149,9 @@
     margin-bottom: 20px;
     z-index:1;
 }
+
+.hintContainer {
+    --background: #009688;
+    text-align: center;
+    font-size: 60px;
+}
