@@ -28,45 +28,52 @@ class Home extends React.Component {
 			rating: [5]
 		},
 		filterOptions: [
-			{filter: 'players', options: ['fas fa-user', 'fas fa-users']},
-			{filter: 'location', options: ['fas fa-map-marker-alt']},
-			{filter: 'transportation', options: ['fas fa-walking', 'fas fa-bicycle', 'fas fa-motorcycle']}
+			{ filter: 'players', options: ['fas fa-user', 'fas fa-users'] },
+			{ filter: 'location', options: ['fas fa-map-marker-alt'] },
+			{ filter: 'transportation', options: ['fas fa-walking', 'fas fa-bicycle', 'fas fa-motorcycle'] }
 		]
 	}
 
 	UNSAFE_componentDidMount() {
 		axios.get('http://localhost:4000/games')
-		.then(res => {
-			// let games = this.state.games.concat(res.data)
-			// console.log('games', games);
-			this.setState({
-				games: res.data,
-				game_ready: true
+			.then(res => {
+				// let games = this.state.games.concat(res.data)
+				// console.log('games', games);
+				this.setState({
+					games: res.data,
+					game_ready: true
+				})
 			})
+	}
+
+	goToQuiz = () => {
+		this.props.history.push({
+			pathname: '/quiz'
 		})
 	}
 
-  render() {
-    return (
-      <IonPage>
 
-        <IonHeader>
-          <IonToolbar className="toolbar">
-            <IonButtons slot="start">
-              <IonMenuButton />
-            </IonButtons>
-            <IonTitle> Manao </IonTitle>
-            <IonButtons slot="end">
-              <IonAvatar>
-                <img alt="" src="https://previews.123rf.com/images/alex9230/alex92301710/alex9230171000012/87612992-cute-face-of-lime-fruit-vector-illustration.jpg" />
-              </IonAvatar>
-            </IonButtons>
-          </IonToolbar>
-        </IonHeader>
+	render() {
+		return (
+			<IonPage>
 
-        <IonContent className="main ion-padding">
-          <IonGrid className="filters">
-            <IonRow>
+				<IonHeader>
+					<IonToolbar className="toolbar">
+						<IonButtons slot="start">
+							<IonMenuButton />
+						</IonButtons>
+						<IonTitle> Manao </IonTitle>
+						<IonButtons slot="end">
+							<IonAvatar>
+								<img alt="" src="https://previews.123rf.com/images/alex9230/alex92301710/alex9230171000012/87612992-cute-face-of-lime-fruit-vector-illustration.jpg" />
+							</IonAvatar>
+						</IonButtons>
+					</IonToolbar>
+				</IonHeader>
+
+				<IonContent className="main ion-padding">
+					<IonGrid className="filters">
+						<IonRow>
 							{
 								this.state.filterOptions.map((filter, key) =>
 									<IonCol key={key}>
@@ -74,38 +81,38 @@ class Home extends React.Component {
 									</IonCol>
 								)
 							}
-            </IonRow>
-          </IonGrid>
+						</IonRow>
+					</IonGrid>
 					<IonSlides>
 						<IonSlide>
-							<Card game={this.state.game}/>
+							<Card game={this.state.game} />
 						</IonSlide>
 						<IonSlide>
-							<Card game={this.state.game}/>
+							<Card game={this.state.game} />
 						</IonSlide>
 					</IonSlides>
 
-						{
-							this.state.game_ready ?
-							<IonSlides options={{slidesPerView:1}}>
+					{
+						this.state.game_ready ?
+							<IonSlides options={{ slidesPerView: 1 }}>
 								{
 									this.state.games.map((game, key) => {
 										return (
 											<IonSlide >
-												<Card game={game} key={key}/>
+												<Card game={game} key={key} />
 											</IonSlide>
 										)
 									})
 								}
-							</IonSlides> : <IonSlides options={{slidesPerView:1}}></IonSlides>
-						}
-          <IonButton className="play">PLAY NOW!</IonButton>
+							</IonSlides> : <IonSlides options={{ slidesPerView: 1 }}></IonSlides>
+					}
+					<IonButton className="play" onClick={this.goToQuiz}>PLAY NOW!</IonButton>
 					<IonIcon className="icon left" icon={arrowBack}></IonIcon>
 					<IonIcon className="icon right" icon={arrowForward}></IonIcon>
-        </IonContent>
-      </IonPage>
-    );
-  }
+				</IonContent>
+			</IonPage>
+		);
+	}
 
 };
 

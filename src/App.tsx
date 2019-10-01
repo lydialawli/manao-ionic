@@ -9,7 +9,8 @@ import About from './pages/About.jsx';
 import Games from './pages/Games.jsx'
 import Login from './pages/Login.jsx'
 import Join from './pages/Join.jsx'
-import Settings from './pages/Settings.jsx'
+import Settings from './pages/Settings.jsx';
+import Quiz from './pages/Quiz.jsx';
 
 import { home, list, football, options, planet } from 'ionicons/icons';
 
@@ -41,7 +42,7 @@ const appPages: AppPage[] = [
   {
     title: 'Join a Game',
     url: '/join',
-    icon: home
+    icon: football
   },
   {
     title: 'User Settings',
@@ -63,6 +64,7 @@ const App: React.FC = () => (
         <IonRouterOutlet id="main">
           <Route path="/join" component={Join} exact={true} />
           <Route path="/profile/:id/settings" component={Settings} exact={true} />
+          <Route path="/quiz" component={Quiz} exact={true} />
           <Route path="/about" component={About} exact={true} />
 					<Route path="/login" component={Login} exact={true} />
           <Route path="/games" component={Games} exact={true} />
