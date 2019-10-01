@@ -1,5 +1,5 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar, IonText } from '@ionic/react';
-import { flask, football, paperPlane, wifi } from 'ionicons/icons';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonColumn, IonRow, IonTitle, IonToolbar, IonText } from '@ionic/react';
+import { flask, football, paperPlane, wifi, lock } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
 
@@ -20,17 +20,35 @@ class Quiz extends React.Component {
         </IonHeader> */}
 
                 <IonContent className="quizMain  ion-padding">
-                    <div className="extraInfo">
-                        <h6>Extra info</h6>
-                        <p  className="description" >
-                            Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.
-                This exact spot on a Sunday evening is awesome!
+                    <IonGrid>
+                        <IonRow>
+                            <h1 className="challengeNum">CHALLENGE # 1</h1>
+                        </IonRow>
+                        <IonRow className="extraInfo">
+                            <h6>Extra info</h6>
+                            <p className="description" >
+                                Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.
+                    This exact spot on a Sunday evening is awesome!
                         </p>
+                        </IonRow>
+
+                    </IonGrid>
+                    <IonGrid>
+                        <IonIcon className="manaoLogo" src="assets/Logo.svg"></IonIcon>
+                        <p className="problem" >
+                            Wow, so hot in here! How do this people survive?
+                        </p>
+
+                    </IonGrid>
+                    <div className="triangle"></div>
+                    <div className="footerQuiz ">
+                        <IonIcon className="lockIcon" icon={lock}></IonIcon>
                     </div>
                 </IonContent>
             </IonPage >
         )
     }
 }
+
 
 export default Quiz;
