@@ -5,9 +5,10 @@ import { IonReactRouter } from '@ionic/react-router';
 import { AppPage } from './declarations';
 
 import Menu from './components/Menu';
-import Home from './pages/Home.jsx';
 import List from './pages/List';
 import Game from './pages/Game.jsx'
+import Games from './pages/Games.jsx'
+import Login from './pages/Login.jsx'
 import { home, list } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
@@ -31,8 +32,8 @@ import './theme/variables.css';
 
 const appPages: AppPage[] = [
   {
-    title: 'Home',
-    url: '/home',
+    title: 'Games',
+    url: '/games',
     icon: home
   },
   {
@@ -48,10 +49,11 @@ const App: React.FC = () => (
       <IonSplitPane contentId="main">
         <Menu appPages={appPages} />
         <IonRouterOutlet id="main">
-          <Route path="/home" component={Home} exact={true} />
+					<Route path="/login" component={Login} exact={true} />
+          <Route path="/games" component={Games} exact={true} />
 					<Route path="/game" component={Game} exact={true} />
           <Route path="/home/list" component={List} exact={true} />
-          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <Route exact path="/" render={() => <Redirect to="/games" />} />
         </IonRouterOutlet>
       </IonSplitPane>
     </IonReactRouter>
