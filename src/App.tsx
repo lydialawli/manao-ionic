@@ -8,10 +8,14 @@ import Menu from './components/Menu';
 import About from './pages/About.jsx';
 import Games from './pages/Games.jsx'
 import Login from './pages/Login.jsx'
+import Signup from './pages/Signup.jsx'
 import Join from './pages/Join.jsx'
 import Settings from './pages/Settings.jsx'
 
 import { home, list, football, options, planet } from 'ionicons/icons';
+
+
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -66,6 +70,7 @@ const App: React.FC = () => (
           <Route path="/about" component={About} exact={true} />
 					<Route path="/login" component={Login} exact={true} />
           <Route path="/games" component={Games} exact={true} />
+					<Route path="/signup" component={Signup} exact={true} />
           <Route exact path="/" render={() => <Redirect to="/games" />} />
         </IonRouterOutlet>
       </IonSplitPane>
