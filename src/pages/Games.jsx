@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSlides, IonSlide, IonButtons, IonButton, IonGrid, IonRow, IonCol, IonMenuButton, IonAvatar, IonIcon } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSlides, IonSlide, IonButtons, IonGrid, IonRow, IonCol, IonMenuButton, IonAvatar, IonIcon } from '@ionic/react';
 import { arrowBack, arrowForward } from 'ionicons/icons'
 import React from 'react';
 import Card from '../components/Card.jsx'
@@ -99,7 +99,6 @@ class Home extends React.Component {
 								}
 							</IonSlides> : <IonSlides options={{slidesPerView:1}}></IonSlides>
 						}
-          <IonButton className="play">PLAY NOW!</IonButton>
 					<IonIcon className="icon left" icon={arrowBack}></IonIcon>
 					<IonIcon className="icon right" icon={arrowForward}></IonIcon>
         </IonContent>

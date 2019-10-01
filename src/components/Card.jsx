@@ -18,17 +18,14 @@ class Card extends React.Component {
 	}
 
 	UNSAFE_componentWillReceiveProps(props) {
-		console.log('props received', props);
 		this.setState({game: props.game})
 	}
 
 	UNSAFE_componentWillMount() {
-		console.log('this.props', this.props);
 		let game = this.props.game
 		let rate = this.state.rate
 		let duration = this.state.duration
 		duration = parseInt(game.duration / 3600)
-		console.log(game.duration);
 		rate = game.rating.reduce((a,b) => a + b) / game.rating.length
 
 		this.setState({
@@ -40,7 +37,7 @@ class Card extends React.Component {
 
 	render () {
 		return (
-			<IonCard className="gameCard">
+			<IonCard className="gameCard" href="/game">
 				<div className="imgContainer">
 					<img className="cardImg" style={{width:'100%'}} src={this.state.game.image} alt=''/>
 						<div className="gameRating">
@@ -50,7 +47,7 @@ class Card extends React.Component {
 								}
 							</span>
 						</div>
-					<div className="idkYet"></div>
+					<div className="diagonal"></div>
 				</div>
 
 				<IonCardHeader>
