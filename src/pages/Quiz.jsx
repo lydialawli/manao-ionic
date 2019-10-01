@@ -5,6 +5,10 @@ import '../styles/quiz.css';
 
 
 class Quiz extends React.Component {
+    showHint = () => {
+    alert("hello!")
+    }
+
     render() {
         return (
             <IonPage>
@@ -52,6 +56,7 @@ class Quiz extends React.Component {
                     <IonItem className="answerForm">
                         <IonInput className="answer" type="number" placeholder="_ _"></IonInput>
                     </IonItem>
+                    <IonIcon className="manaoLogo hint" src="assets/hint-shadow.svg" oClick={this.showHint}></IonIcon>
                     <div className="triangleGame"></div>
                     <div className="footerQuiz ">
                         <IonIcon className="lockIcon" icon={lock}></IonIcon>

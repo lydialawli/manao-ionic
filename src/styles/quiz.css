@@ -70,7 +70,7 @@
 
 .problem {
     background-color: #FFE500;
-    padding:8px;
+    padding:20px;
     border-radius: 5px;
     width: 200px;
 }
@@ -92,7 +92,8 @@
     opacity: 0.6;
     position: absolute;
 	left:25%;
-	bottom: 50;
+    bottom: 0;
+    margin-bottom: 20px;
 }
 
 .triangleGame {
@@ -139,4 +140,12 @@
 .answer {
     font-size: 64px;
     font-family: 'Skranji', cursive;
+}
+
+.hint {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 20px;
+    z-index:1;
 }
