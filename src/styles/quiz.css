@@ -35,6 +35,7 @@
 
 .extraInfo {
     color: #F4F4F4;
+    font-size: 14px;
 }
 
 .description {
@@ -51,6 +52,7 @@
     right: 0;
     padding-right: 5px;
     color: black;
+    margin-bottom: 10px;
 }
 .fatPin {
     color: black;
@@ -68,8 +70,8 @@
 
 .problem {
     background-color: #FFE500;
-    padding:6px;
-    border-radius: 4px;
+    padding:8px;
+    border-radius: 5px;
     width: 200px;
 }
 
@@ -100,12 +102,12 @@
     border-style: solid;
     border-width: 0px 200px 100px 150px;
     width: 100%;
-    /* height: 70px; */
 }
 
 .titleChallenge {
     margin-left: auto;
-	margin-right: auto;
+    margin-right: auto;
+    margin-top:auto;
 	font-family: 'Skranji', cursive;
 	font-size: 24px;
     color: black;
@@ -122,4 +124,19 @@
     position: absolute;
     left:25%;
     margin-bottom: 10px;
+}
+
+.answerForm {
+    --background: transparent;
+	--border-color: #E14848;
+	--border-width: 2px;
+	--border-radius: 50px;
+    --highlight-color-focused: #E14848;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.answer {
+    font-size: 64px;
+    font-family: 'Skranji', cursive;
 }

@@ -1,4 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar, IonInput } from '@ionic/react';
 import { lock, map } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
@@ -39,7 +39,7 @@ class Quiz extends React.Component {
                     <IonGrid>
                         <IonRow>
                             <IonCol>
-                                <IonIcon className="manaoLogo" src="assets/Logo.svg"></IonIcon>
+                                <IonIcon className="manaoLogo" src="assets/logo-black-shadow.svg"></IonIcon>
                             </IonCol>
 
                             <IonCol>
@@ -49,6 +49,9 @@ class Quiz extends React.Component {
                             </IonCol>
                         </IonRow>
                     </IonGrid>
+                    <IonItem className="answerForm">
+                        <IonInput className="answer" type="number" placeholder="_ _"></IonInput>
+                    </IonItem>
                     <div className="triangleGame"></div>
                     <div className="footerQuiz ">
                         <IonIcon className="lockIcon" icon={lock}></IonIcon>
