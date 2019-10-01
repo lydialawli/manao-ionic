@@ -6,6 +6,7 @@ import { AppPage } from './declarations';
 
 import Menu from './components/Menu';
 import About from './pages/About.jsx';
+import Game from './pages/Game.jsx'
 import Games from './pages/Games.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'

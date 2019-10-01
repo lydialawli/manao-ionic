@@ -1,5 +1,5 @@
 import React from 'react'
-import { IonPage, IonGrid, IonRow, IonInput, IonItem, IonLabel, IonContent, IonButton, IonIcon, IonText, IonAlert } from '@ionic/react'
+import { IonPage, IonGrid, IonRow, IonInput, IonItem, IonLabel, IonContent, IonButton, IonIcon, IonAlert } from '@ionic/react'
 import '../styles/login.css'
 import axios from 'axios'
 
