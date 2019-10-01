@@ -52,6 +52,13 @@
     padding-right: 5px;
     color: black;
 }
+.fatPin {
+    color: black;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    position:relative;
+}
 
 .manaoLogo {
 	width: 60px;
@@ -106,4 +113,13 @@
 }
 
 
-
+.ionProgressBar {
+    --buffer-background: #E9E9E9;
+    --progress-background: #009688;
+    width: 60%;
+    height: 10px;
+    border-radius: 20px;
+    position: absolute;
+    left:25%;
+    margin-bottom: 10px;
+}

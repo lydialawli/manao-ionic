@@ -1,4 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar } from '@ionic/react';
 import { lock, map } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
@@ -14,11 +14,13 @@ class Quiz extends React.Component {
                             <IonMenuButton />
                         </IonButtons>
                         <div className="yellowBox"></div>
+                        <IonIcon className="fatPin" src="assets/fatPin.svg"></IonIcon>
+                        <IonProgressBar value={0.5} className="ionProgressBar"> </IonProgressBar>
                         <IonButtons >
                             <IonIcon className="mapIcon" slot="end" icon={map}></IonIcon>
                         </IonButtons>
-                    </IonToolbar>{" "}
-                </IonHeader>{" "}
+                    </IonToolbar>
+                </IonHeader>
 
                 <IonContent className="quizMain  ion-padding">
                     <IonGrid>
