@@ -14,7 +14,7 @@ class Quiz extends React.Component {
         quiz: {
             score: 20,
             question: {
-                type: 'String',
+                type: 'string',
                 content: 'Wow, so hot in here! How do this people survive?'
             },
             answer: '21',
