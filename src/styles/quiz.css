@@ -81,6 +81,11 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+.problemImg {
+    width: 300px;
+    height: 150px;
+}
+
 .footerQuiz {
     width: 100wv;
     height: 60px;

@@ -1,4 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
 import { lock, map } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
@@ -14,7 +14,7 @@ class Quiz extends React.Component {
         quiz: {
             score: 20,
             question: {
-                type: 'string',
+                type: 'String',
                 content: 'Wow, so hot in here! How do this people survive?'
             },
             answer: '21',
@@ -81,10 +81,11 @@ class Quiz extends React.Component {
                             <IonCol size="1" >
                                 <IonIcon className="manaoLogo" src="assets/logo-black-shadow.svg"></IonIcon>
                             </IonCol>
-                            <IonCol size="9" offset="2" className={`problemBox ${this.state.quiz.question.type==='string'? 'problemString' : 'problemImg'}`} >
-                                <p >
-                                    {this.state.problem}
-                                </p>
+                            <IonCol size="9" offset="2" className="problemBox">
+                                {
+                                    this.state.quiz.question.type==='string' ?  <p className="problemString">{this.state.quiz.question.content}</p> : <IonImg  className="problemImg" src="https://seakoala.io/src/seakoala.png"/>
+                                }
+                               
                             </IonCol>
                         </IonRow>
                     </IonGrid>
