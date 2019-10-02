@@ -64,6 +64,28 @@
     /* left: 2; */
 }
 
+.icons {
+    width: 20px;
+    height: 20px;
+    position:absolute;
+    top: 0;
+    margin-top: 12px;
+    /* left: 2; */
+}
+
+.trophy{
+    margin-left:110px;
+    color: rgb(196, 23, 23);
+}
+
+.score{
+    margin-left:130px;
+    color: black;
+    font-size: 15px;
+    font-family: 'Skranji', cursive;
+
+}
+
 .manaoLogo {
 	width: 60px;
     height: 60px;

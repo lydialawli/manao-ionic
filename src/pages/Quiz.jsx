@@ -1,24 +1,24 @@
 import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
-import { lock, map, check, checkmarkCircle, unlock } from 'ionicons/icons';
+import { lock, map, unlock, trophy } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
 import Swal from 'sweetalert2';
 
 class Quiz extends React.Component {
     state = {
-        progressDiff: 1/5, //5 is gameQuizzes.length
+        progressDiff: 1 / 5, // 5 is GameQuizzes.length
         totalScore: 0,
-        progressValue: 0 * (1/5),
+        progressValue: 0 * (1 / 5), // quiz index * 1/GameQuizzes.length
+        quizScore: 20,
         iconAnswer: '',
         iconAnswerStyle: '',
         showHint: false,
         answer: '',
         result: 'null',
+        hintUsed: false,
         disableInput: false,
-        lock: lock,
-        description: "Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.This exact spot on a Sunday evening is awesome!",
+        lockIcon: lock,
         challengeNum: 1,
-        problem: 'Wow, so hot in here! How do this people survive?',
         quiz: {
             score: 20,
             question: {
@@ -38,33 +38,44 @@ class Quiz extends React.Component {
 
 
     showHint = () => {
-        // let showHint = this.state.showHint
-        // showHint = !showHint
-        // this.setState({ showHint })
-        Swal.fire({
-            title: 'Sweet!',
-            text: 'Modal with a custom image.',
-            imageUrl: 'https://unsplash.it/400/200',
-            imageWidth: 400,
-            imageHeight: 200,
-            imageAlt: 'Custom image',
-            animation: false,
-            customClass: "hintContainer",
-        })
+        if (this.state.quiz.hint.type === 'string') {
+            let showHint = this.state.showHint
+            showHint = !showHint
+            this.setState({ showHint, hintUsed: true })
+        }
+
+        else {
+            Swal.fire({
+                title: 'Sweet!',
+                text: 'Modal with a custom image.',
+                imageUrl: 'https://unsplash.it/400/200',
+                imageWidth: 400,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+                animation: false,
+                customClass: "hintContainer",
+            })
+            this.setState({ hintUsed: true })
+        }
     }
     changeAnswer = (e) => {
         let answer = this.state.answer
         answer = e.target.value
         this.setState({ answer })
-        if (answer === this.state.quiz.answer)
+        if (answer === this.state.quiz.answer) {
+            let hint = this.state.hintUsed ? 5 : 0
+
             this.setState({
                 result: 'correct',
                 iconAnswer: "far fa-check-circle",
                 iconAnswerStyle: 'greenAnswer',
                 lock: unlock,
-                disableInput:true,
+                disableInput: true,
                 progressValue: this.state.progressValue + this.state.progressDiff,
+                totalScore: this.state.totalScore + this.state.quizScore - hint
             })
+        }
+
         else if (answer === '') {
             this.setState({
                 iconAnswer: ''
@@ -79,7 +90,6 @@ class Quiz extends React.Component {
         }
 
     }
-
 
     borderInput = () => {
         if (this.state.answer === '') {
@@ -102,8 +112,12 @@ class Quiz extends React.Component {
                             <IonMenuButton />
                         </IonButtons>
                         <div className="yellowBox"></div>
+                        <div> </div>
                         {/* <IonIcon className="fatPin" src="assets/fatPin.svg"></IonIcon> */}
-                        <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}> </IonProgressBar>
+                        <IonIcon className="icons trophy" icon={trophy}></IonIcon>
+                        <div className="icons score" >{this.state.totalScore}</div>
+                        <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}>
+                        </IonProgressBar>
                         <IonButtons >
                             <IonIcon className="mapIcon" slot="end" icon={map}></IonIcon>
                         </IonButtons>
@@ -118,7 +132,7 @@ class Quiz extends React.Component {
                         <div className="extraInfo">
                             <h6>Extra info</h6>
                             <p className="description" >
-                                {this.state.description}
+                                {this.state.quiz.placeDescription}
                             </p>
                         </div>
 
@@ -160,7 +174,7 @@ class Quiz extends React.Component {
                 </IonContent >
                 <IonFooter className="footerQuiz" >
                     <IonButtons className="hint" onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
-                    <IonIcon className="lockIcon" icon={this.state.lock}> </IonIcon>
+                    <IonIcon className="lockIcon" icon={this.state.lockIcon}> </IonIcon>
                     <div className="triangleGame"></div>
                 </IonFooter>
             </IonPage >
