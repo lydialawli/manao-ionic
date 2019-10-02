@@ -81,10 +81,6 @@
     width: 100wv;
     height: 60px;
     background-color: #FFE500;
-    position: absolute; 
-    bottom: 0;
-    left: 0;
-    right: 0;
 }
 
 .lockIcon{
@@ -92,14 +88,15 @@
     width: 50vw;
     height: 50px;
     opacity: 0.6;
-    position: absolute;
+    position: fixed;
 	left:25%;
     bottom: 0;
     margin-bottom: 20px;
+    z-index:1;
 }
 
 .triangleGame {
-    position: absolute; 
+    position: fixed; 
     bottom: 0;
     border-color: transparent transparent #FFE500 transparent;
     border-style: solid;
@@ -134,9 +131,10 @@
 	--border-color: #E14848;
 	--border-width: 2px;
 	--border-radius: 50px;
-    --highlight-color-focused: #E14848;
+    --highlight-color-focused:transparent;
     text-align: center;
     margin-top: 20px;
+    position: sticky;
 }
 
 .answer {

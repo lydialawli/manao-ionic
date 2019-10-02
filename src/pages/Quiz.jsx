@@ -1,4 +1,4 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar, IonInput, IonAlert } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
 import { lock, map } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
@@ -6,11 +6,28 @@ import Swal from 'sweetalert2'
 
 class Quiz extends React.Component {
     state = {
+        score: 0,
         showHint: false,
         description: "Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.This exact spot on a Sunday evening is awesome!",
         challengeNum: 1,
-        problem: 'Wow, so hot in here! How do this people survive?'
+        problem: 'Wow, so hot in here! How do this people survive?',
+        quiz: {
+            score: 20,
+            question: {
+                type: 'string',
+                content: 'Wow, so hot in here! How do this people survive?'
+            },
+            answer: '21',
+            locationName: "7/11 cross-streets",
+            indication: 'Get to the starting point. Head to:',
+            placeDescription: 'Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.This exact spot on a Sunday evening is awesome!',
+            hint: {
+                type: 'string',
+                content: ''
+            }
+        }
     }
+
 
     showHint = () => {
         // let showHint = this.state.showHint
@@ -25,8 +42,8 @@ class Quiz extends React.Component {
             imageAlt: 'Custom image',
             animation: false,
             customClass: "hintContainer"
-          })
-            
+        })
+
     }
 
     render() {
@@ -55,7 +72,7 @@ class Quiz extends React.Component {
                             <h6>Extra info</h6>
                             <p className="description" >
                                 {this.state.description}
-                        </p>
+                            </p>
                         </div>
 
                     </IonGrid>
@@ -68,7 +85,7 @@ class Quiz extends React.Component {
                             <IonCol>
                                 <p className="problem" >
                                     {this.state.problem}
-                        </p>
+                                </p>
                             </IonCol>
                         </IonRow>
                     </IonGrid>
@@ -82,16 +99,21 @@ class Quiz extends React.Component {
                                 isOpen={this.state.showHint}
                                 onDidDismiss={() => this.showHint()}
                                 header="hint is blabla"
-                                // message="🌀"
+                            // message="🌀"
                             /> : ''
                     }
                     <IonButtons className="hint" onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
-                    <div className="triangleGame"></div>
+                    {/* <IonFooter className="footerQuiz "> <IonIcon className="lockIcon" icon={lock}></IonIcon></IonFooter> */}
+                    {/* <div className="triangleGame"></div>
                     <div className="footerQuiz ">
                         <IonIcon className="lockIcon" icon={lock}></IonIcon>
 
-                    </div>
+                    </div> */}
                 </IonContent>
+                <IonFooter className="footerQuiz" >
+                    <IonIcon className="lockIcon" icon={lock}> </IonIcon>
+                    <div className="triangleGame"></div>
+                </IonFooter>
             </IonPage >
         )
     }
