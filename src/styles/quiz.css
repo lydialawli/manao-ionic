@@ -70,11 +70,15 @@
     margin: auto;
 }
 
-.problem {
+.problemBox {
     background-color: #FFE500;
-    padding:20px;
-    border-radius: 5px;
-    width: 200px;
+    text-align: center;
+    /* padding:10px; */
+    border-radius: 10px;
+}
+
+.problemString {
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .footerQuiz {
@@ -96,7 +100,7 @@
 }
 
 .triangleGame {
-    position: fixed; 
+    position: absolute; 
     bottom: 0;
     border-color: transparent transparent #FFE500 transparent;
     border-style: solid;
@@ -147,7 +151,7 @@
     right: 0;
     bottom: 0;
     margin-bottom: 20px;
-    z-index:1;
+    z-index:2;
 }
 
 .hintContainer {

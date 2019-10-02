@@ -2,7 +2,7 @@ import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuBu
 import { lock, map } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 class Quiz extends React.Component {
     state = {
@@ -76,14 +76,13 @@ class Quiz extends React.Component {
                         </div>
 
                     </IonGrid>
-                    <IonGrid>
+                    <IonGrid >
                         <IonRow>
-                            <IonCol>
+                            <IonCol size="1" >
                                 <IonIcon className="manaoLogo" src="assets/logo-black-shadow.svg"></IonIcon>
                             </IonCol>
-
-                            <IonCol>
-                                <p className="problem" >
+                            <IonCol size="9" offset="2" className={`problemBox ${this.state.quiz.question.type==='string'? 'problemString' : 'problemImg'}`} >
+                                <p >
                                     {this.state.problem}
                                 </p>
                             </IonCol>
@@ -102,7 +101,7 @@ class Quiz extends React.Component {
                             // message="🌀"
                             /> : ''
                     }
-                    <IonButtons className="hint" onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
+
                     {/* <IonFooter className="footerQuiz "> <IonIcon className="lockIcon" icon={lock}></IonIcon></IonFooter> */}
                     {/* <div className="triangleGame"></div>
                     <div className="footerQuiz ">
@@ -111,6 +110,7 @@ class Quiz extends React.Component {
                     </div> */}
                 </IonContent>
                 <IonFooter className="footerQuiz" >
+                    <IonButtons className="hint" onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
                     <IonIcon className="lockIcon" icon={lock}> </IonIcon>
                     <div className="triangleGame"></div>
                 </IonFooter>
