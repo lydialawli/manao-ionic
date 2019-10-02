@@ -67,7 +67,10 @@ class Quiz extends React.Component {
         else{
             return 'redBorder'
         }
-     
+    }
+
+    onCorrect = ()=>{
+        return this.state.result === 'correct' ? true : false
     }
 
     render() {
@@ -114,7 +117,7 @@ class Quiz extends React.Component {
                         </IonRow>
                     </IonGrid>
                     <IonItem className={`answerForm ${this.borderInput()}`}>
-                        <IonInput className="answer" type="number" placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+                        <IonInput className="answer" type="number" disabled={this.onCorrect()} placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                     </IonItem>
                     {
                         this.state.showHint ?
