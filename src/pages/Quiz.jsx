@@ -6,12 +6,15 @@ import Swal from 'sweetalert2';
 
 class Quiz extends React.Component {
     state = {
-        score: 0,
+        progressDiff: 1/5, //5 is gameQuizzes.length
+        totalScore: 0,
+        progressValue: 0 * (1/5),
         iconAnswer: '',
         iconAnswerStyle: '',
         showHint: false,
         answer: '',
         result: 'null',
+        disableInput: false,
         lock: lock,
         description: "Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.This exact spot on a Sunday evening is awesome!",
         challengeNum: 1,
@@ -46,7 +49,7 @@ class Quiz extends React.Component {
             imageHeight: 200,
             imageAlt: 'Custom image',
             animation: false,
-            customClass: "hintContainer"
+            customClass: "hintContainer",
         })
     }
     changeAnswer = (e) => {
@@ -58,7 +61,9 @@ class Quiz extends React.Component {
                 result: 'correct',
                 iconAnswer: "far fa-check-circle",
                 iconAnswerStyle: 'greenAnswer',
-                lock: unlock
+                lock: unlock,
+                disableInput:true,
+                progressValue: this.state.progressValue + this.state.progressDiff,
             })
         else if (answer === '') {
             this.setState({
@@ -88,11 +93,6 @@ class Quiz extends React.Component {
         }
     }
 
-
-    onCorrect = () => {
-        return this.state.result === 'correct' ? true : false
-    }
-
     render() {
         return (
             <IonPage>
@@ -102,8 +102,8 @@ class Quiz extends React.Component {
                             <IonMenuButton />
                         </IonButtons>
                         <div className="yellowBox"></div>
-                        <IonIcon className="fatPin" src="assets/fatPin.svg"></IonIcon>
-                        <IonProgressBar value={0.5} className="ionProgressBar"> </IonProgressBar>
+                        {/* <IonIcon className="fatPin" src="assets/fatPin.svg"></IonIcon> */}
+                        <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}> </IonProgressBar>
                         <IonButtons >
                             <IonIcon className="mapIcon" slot="end" icon={map}></IonIcon>
                         </IonButtons>
@@ -137,7 +137,7 @@ class Quiz extends React.Component {
                         </IonRow>
                     </IonGrid>
                     <IonItem className={`answerForm ${this.borderInput()}`}>
-                        <IonInput className="answer" type="number" disabled={this.onCorrect()} placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+                        <IonInput className="answer" type="number" disabled={this.state.disableInput} placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                         <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i class={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
                     {
