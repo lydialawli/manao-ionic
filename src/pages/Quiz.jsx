@@ -173,7 +173,7 @@ class Quiz extends React.Component {
                     </div> */}
                 </IonContent >
                 <IonFooter className="footerQuiz" >
-                    <IonButtons className="hint" onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
+                    <IonButtons className={`hint ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
                     <IonIcon className="lockIcon" icon={this.state.lockIcon}> </IonIcon>
                     <div className="triangleGame"></div>
                 </IonFooter>

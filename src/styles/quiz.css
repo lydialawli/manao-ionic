@@ -204,6 +204,10 @@
     z-index:2;
 }
 
+.hintUsed {
+    opacity: 0.5
+}
+
 .hintContainer {
     --background: #009688;
     text-align: center;
