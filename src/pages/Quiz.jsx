@@ -2,17 +2,31 @@ import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuBu
 import { lock, map } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
-
+import Swal from 'sweetalert2'
 
 class Quiz extends React.Component {
     state = {
-        showHint: false
+        showHint: false,
+        description: "Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.This exact spot on a Sunday evening is awesome!",
+        challengeNum: 1,
+        problem: 'Wow, so hot in here! How do this people survive?'
     }
 
     showHint = () => {
-        let showHint = this.state.showHint
-        showHint = !showHint
-        this.setState({ showHint })
+        // let showHint = this.state.showHint
+        // showHint = !showHint
+        // this.setState({ showHint })
+        Swal.fire({
+            title: 'Sweet!',
+            text: 'Modal with a custom image.',
+            imageUrl: 'https://unsplash.it/400/200',
+            imageWidth: 400,
+            imageHeight: 200,
+            imageAlt: 'Custom image',
+            animation: false,
+            customClass: "hintContainer"
+          })
+            
     }
 
     render() {
@@ -35,13 +49,12 @@ class Quiz extends React.Component {
                 <IonContent className="quizMain  ion-padding">
                     <IonGrid>
                         <IonRow>
-                            <h1 className="titleChallenge">CHALLENGE # 1</h1>
+                            <h1 className="titleChallenge">CHALLENGE # {this.state.challengeNum}</h1>
                         </IonRow>
                         <div className="extraInfo">
                             <h6>Extra info</h6>
                             <p className="description" >
-                                Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.
-                    This exact spot on a Sunday evening is awesome!
+                                {this.state.description}
                         </p>
                         </div>
 
@@ -54,7 +67,7 @@ class Quiz extends React.Component {
 
                             <IonCol>
                                 <p className="problem" >
-                                    Wow, so hot in here! How do this people survive?
+                                    {this.state.problem}
                         </p>
                             </IonCol>
                         </IonRow>
@@ -68,11 +81,11 @@ class Quiz extends React.Component {
                                 className="hintContainer"
                                 isOpen={this.state.showHint}
                                 onDidDismiss={() => this.showHint()}
-                                // header="🌀"
-                                message="🌀"
+                                header="hint is blabla"
+                                // message="🌀"
                             /> : ''
                     }
-                    <IonButtons  className="hint" onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
+                    <IonButtons className="hint" onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
                     <div className="triangleGame"></div>
                     <div className="footerQuiz ">
                         <IonIcon className="lockIcon" icon={lock}></IonIcon>
