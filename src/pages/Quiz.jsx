@@ -69,7 +69,7 @@ class Quiz extends React.Component {
                 result: 'correct',
                 iconAnswer: "far fa-check-circle",
                 iconAnswerStyle: 'greenAnswer',
-                lock: unlock,
+                lockIcon: unlock,
                 disableInput: true,
                 progressValue: this.state.progressValue + this.state.progressDiff,
                 totalScore: this.state.totalScore + this.state.quizScore - hint
