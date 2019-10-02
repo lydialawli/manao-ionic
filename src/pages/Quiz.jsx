@@ -1,5 +1,5 @@
 import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
-import { lock, map } from 'ionicons/icons';
+import { lock, map, check, checkmarkCircle, unlock } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
 import Swal from 'sweetalert2';
@@ -7,9 +7,12 @@ import Swal from 'sweetalert2';
 class Quiz extends React.Component {
     state = {
         score: 0,
+        iconAnswer: '',
+        iconAnswerStyle: '',
         showHint: false,
         answer: '',
-        result:'null',
+        result: 'null',
+        lock: lock,
         description: "Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.This exact spot on a Sunday evening is awesome!",
         challengeNum: 1,
         problem: 'Wow, so hot in here! How do this people survive?',
@@ -46,30 +49,47 @@ class Quiz extends React.Component {
             customClass: "hintContainer"
         })
     }
-    changeAnswer = (e) =>{
+    changeAnswer = (e) => {
         let answer = this.state.answer
         answer = e.target.value
-        this.setState({answer})
-        if(answer===this.state.quiz.answer)
-            this.setState({result:'correct'})
-        else {
-            this.setState({result:'incorrect'})
+        this.setState({ answer })
+        if (answer === this.state.quiz.answer)
+            this.setState({
+                result: 'correct',
+                iconAnswer: "far fa-check-circle",
+                iconAnswerStyle: 'greenAnswer',
+                lock: unlock
+            })
+        else if (answer === '') {
+            this.setState({
+                iconAnswer: ''
+            })
         }
+        else {
+            this.setState({
+                result: 'incorrect',
+                iconAnswer: "far fa-times-circle",
+                iconAnswerStyle: 'redAnswer'
+            })
+        }
+
     }
 
+
     borderInput = () => {
-        if(this.state.answer===''){
+        if (this.state.answer === '') {
             return ''
         }
-        if(this.state.result==='correct'){
+        if (this.state.result === 'correct') {
             return 'greenBorder'
         }
-        else{
+        else {
             return 'redBorder'
         }
     }
 
-    onCorrect = ()=>{
+
+    onCorrect = () => {
         return this.state.result === 'correct' ? true : false
     }
 
@@ -110,14 +130,15 @@ class Quiz extends React.Component {
                             </IonCol>
                             <IonCol size="9" offset="2" className="problemBox">
                                 {
-                                    this.state.quiz.question.type==='string' ?  <p className="problemString">{this.state.quiz.question.content}</p> : <IonImg  className="problemImg" src="https://seakoala.io/src/seakoala.png"/>
+                                    this.state.quiz.question.type === 'string' ? <p className="problemString">{this.state.quiz.question.content}</p> : <IonImg className="problemImg" src="https://seakoala.io/src/seakoala.png" />
                                 }
-                               
+
                             </IonCol>
                         </IonRow>
                     </IonGrid>
                     <IonItem className={`answerForm ${this.borderInput()}`}>
                         <IonInput className="answer" type="number" disabled={this.onCorrect()} placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+                        <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i class={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
                     {
                         this.state.showHint ?
@@ -136,10 +157,10 @@ class Quiz extends React.Component {
                         <IonIcon className="lockIcon" icon={lock}></IonIcon>
 
                     </div> */}
-                </IonContent>
+                </IonContent >
                 <IonFooter className="footerQuiz" >
                     <IonButtons className="hint" onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
-                    <IonIcon className="lockIcon" icon={lock}> </IonIcon>
+                    <IonIcon className="lockIcon" icon={this.state.lock}> </IonIcon>
                     <div className="triangleGame"></div>
                 </IonFooter>
             </IonPage >
