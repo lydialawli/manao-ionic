@@ -137,13 +137,24 @@
 
 .answerForm {
     --background: transparent;
-	--border-color: #E14848;
 	--border-width: 2px;
 	--border-radius: 50px;
     --highlight-color-focused:transparent;
     text-align: center;
     margin-top: 20px;
     position: sticky;
+}
+
+.yellowBorder {
+	--border-color: #FFE500;
+}
+
+.redBorder {
+	--border-color: #E14848;
+}
+
+.greenBorder {
+	--border-color: #2AF870;
 }
 
 .answer {

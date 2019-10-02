@@ -8,6 +8,8 @@ class Quiz extends React.Component {
     state = {
         score: 0,
         showHint: false,
+        answer: '',
+        result:'null',
         description: "Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.This exact spot on a Sunday evening is awesome!",
         challengeNum: 1,
         problem: 'Wow, so hot in here! How do this people survive?',
@@ -43,7 +45,29 @@ class Quiz extends React.Component {
             animation: false,
             customClass: "hintContainer"
         })
+    }
+    changeAnswer = (e) =>{
+        let answer = this.state.answer
+        answer = e.target.value
+        this.setState({answer})
+        if(answer===this.state.quiz.answer)
+            this.setState({result:'correct'})
+        else {
+            this.setState({result:'incorrect'})
+        }
+    }
 
+    borderInput = () => {
+        if(this.state.answer===''){
+            return ''
+        }
+        if(this.state.result==='correct'){
+            return 'greenBorder'
+        }
+        else{
+            return 'redBorder'
+        }
+     
     }
 
     render() {
@@ -89,8 +113,8 @@ class Quiz extends React.Component {
                             </IonCol>
                         </IonRow>
                     </IonGrid>
-                    <IonItem className="answerForm">
-                        <IonInput className="answer" type="number" placeholder="_ _"></IonInput>
+                    <IonItem className={`answerForm ${this.borderInput()}`}>
+                        <IonInput className="answer" type="number" placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                     </IonItem>
                     {
                         this.state.showHint ?
