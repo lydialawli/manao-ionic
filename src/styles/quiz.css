@@ -1,0 +1,215 @@
+.quizbar {
+    --background:#78839E;
+    border-left: 6px solid #FFE500;
+    border-right: 6px solid #FFE500;
+    border-top: 6px solid #FFE500;
+}
+
+.noShadow {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.yellowBox{
+    width: 60px;
+    height: 56px;
+    background-color: #FFE500;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-bottom-right-radius: 10px;
+}
+
+.quizMain {
+    --background:#78839E;
+    border-left: 6px solid #FFE500;
+    border-right: 6px solid #FFE500;
+}
+
+.playMenu {
+    --width: 20px;
+    --background: #FFE500;
+    --max-width: 20px;
+}
+
+.extraInfo {
+    color: #F4F4F4;
+    font-size: 14px;
+}
+
+.description {
+    border-top: 1px solid #F4F4F4;
+    border-bottom: 1px solid #F4F4F4;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.mapIcon{
+    position: absolute;
+    height: 30px;
+    width:30px;
+    right: 0;
+    padding-right: 5px;
+    color: black;
+    margin-bottom: 10px;
+}
+.fatPin {
+    width: 20px;
+    height: 20px;
+    position:absolute;
+    margin-left:100px;
+    top: 0;
+    margin-top: 12px;
+    /* left: 2; */
+}
+
+.icons {
+    width: 20px;
+    height: 20px;
+    position:absolute;
+    top: 0;
+    margin-top: 12px;
+    /* left: 2; */
+}
+
+.trophy{
+    margin-left:110px;
+    color: rgb(196, 23, 23);
+}
+
+.score{
+    margin-left:130px;
+    color: black;
+    font-size: 15px;
+    font-family: 'Skranji', cursive;
+
+}
+
+.manaoLogo {
+	width: 60px;
+    height: 60px;
+    margin: auto;
+}
+
+.problemBox {
+    background-color: #FFE500;
+    text-align: center;
+    /* padding:10px; */
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px #00000067;
+}
+
+.problemString {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.problemImg {
+    width: 300px;
+    height: 150px;
+}
+
+.footerQuiz {
+    width: 100wv;
+    height: 60px;
+    background-color: #FFE500;
+}
+
+.lockIcon{
+    color: black;
+    width: 50vw;
+    height: 50px;
+    opacity: 0.6;
+    position: fixed;
+	left:25%;
+    bottom: 0;
+    margin-bottom: 20px;
+    z-index:1;
+}
+
+.triangleGame {
+    position: absolute; 
+    bottom: 0;
+    border-color: transparent transparent #FFE500 transparent;
+    border-style: solid;
+    border-width: 0px 200px 100px 150px;
+    width: 100%;
+}
+
+.titleChallenge {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:auto;
+	font-family: 'Skranji', cursive;
+	font-size: 24px;
+    color: black;
+    text-shadow: 2px 2px 4px #00000067;
+}
+
+
+.ionProgressBar {
+    --buffer-background: #E9E9E9;
+    --progress-background: #009688;
+    width: 60%;
+    height: 10px;
+    border-radius: 20px;
+    position: absolute;
+    left:25%;
+    margin-bottom: 10px;
+}
+
+.answerForm {
+    --background: transparent;
+	--border-width: 2px;
+	--border-radius: 50px;
+    --highlight-color-focused:transparent;
+    text-align: center;
+    margin-top: 20px;
+    position: sticky;
+}
+
+.redBorder {
+	--border-color: #E14848;
+}
+
+.greenBorder {
+	--border-color: #2AF870;
+}
+
+.checkIcon{
+    font-size: 50px;
+    --background: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+.greenAnswer{
+    color: #2AF870;
+}
+
+.redAnswer{
+    color: #E14848;
+}
+
+.answer {
+    font-size: 64px;
+    font-family: 'Skranji', cursive;
+}
+
+.hint {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 20px;
+    z-index:2;
+}
+
+.hintUsed {
+    opacity: 0.5
+}
+
+.hintContainer {
+    --background: #009688;
+    text-align: center;
+    font-size: 60px;
+}

@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@ionic-native/keyboard": "^5.14.0",
     "@capacitor/cli": "^1.2.1",
     "@capacitor/core": "^1.2.1",
     "@ionic/react": "^4.9.0-rc.2",
@@ -22,6 +23,7 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.2",
+    "sweetalert2": "^8.18.0",
     "typescript": "3.6.3"
   },
   "scripts": {
