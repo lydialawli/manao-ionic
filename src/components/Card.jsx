@@ -20,7 +20,7 @@ class Card extends React.Component {
 		price:1
 	}
 
-	UNSAFE_componentWillReceiveProps(props) {
+	updateContent = (props) => {
 		let game = props.game
 		let rate = this.state.rate
 		let duration = this.state.duration
@@ -42,6 +42,14 @@ class Card extends React.Component {
 			duration: duration,
 			price: price
 		})
+	}
+
+	UNSAFE_componentWillReceiveProps(props) {
+		this.updateContent(props)
+	}
+
+	componentWillMount() {
+		this.updateContent(this.props)
 	}
 
 	render () {

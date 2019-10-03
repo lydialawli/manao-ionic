@@ -11,36 +11,7 @@ import '../styles/games.css'
 class Home extends React.Component {
 
 	state = {
-		games: [{
-			image: '',
-			title: '',
-			location: '',
-			intro: '',
-			duration: 0,
-			ratings: [0],
-			price: 0,
-			distance: 0
-		},
-		{
-			image: '',
-			title: '',
-			location: '',
-			intro: '',
-			duration: 0,
-			ratings: [0],
-			price: 0,
-			distance: 0
-		},
-		{
-			image: '',
-			title: '',
-			location: '',
-			intro: '',
-			duration: 0,
-			ratings: [0],
-			price: 0,
-			distance: 0
-		}],
+		games: [],
 
 		filterOptions: [
 			{filter: 'players', options: ['fas fa-user', 'fas fa-users']},
@@ -54,20 +25,36 @@ class Home extends React.Component {
 		}
 	}
 
-	UNSAFE_componentWillMount() {
+	componentDidMount() {
 		let token = localStorage.getItem('token')
-		Promise.all([
-			axios.get('http://localhost:4000/games'),
-			axios.get(`http://localhost:4000/auth?token=${token}`)
-		])
-		.then(([games, res]) => {
-			axios.get(`http://localhost:4000/users/${res.data._id}`)
-			.then(user => {
-				this.setState({
-					games: games.data,
-					user: user.data
+		let games = this.state.games
+
+		axios.get('http://localhost:4000/games')
+		.then(res => {
+			games = res.data
+			if (token) {
+				axios.get(`http://localhost:4000/auth?token=${token}`)
+				.then(res => {
+					axios.get(`http://localhost:4000/users/${res.data._id}`)
+					.then(user => {
+						this.setState({
+							games: games,
+							user: user.data
+						}, () => {
+							console.log('games', games);
+							let wrapper = document.getElementsByClassName('swiper-wrapper')[0]
+							let slides = Array.from(document.getElementsByTagName('ion-slide'))
+							slides.forEach(slide => {
+								if (slide.parentNode.className !== 'swiper-wrapper') {
+									wrapper.appendChild(slide)
+								}
+							})
+						})
+					})
 				})
-			})
+			} else {
+				this.setState({games})
+			}
 		})
 	}
 
