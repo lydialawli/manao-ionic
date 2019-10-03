@@ -1,11 +1,13 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonTitle, IonToolbar, IonText, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
 import { lock, map, unlock, trophy } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 class Quiz extends React.Component {
     state = {
+        quizzes: {},
         progressDiff: 1 / 5, // 5 is GameQuizzes.length
         totalScore: 0,
         progressValue: 0 * (1 / 5), // quiz index * 1/GameQuizzes.length
@@ -35,6 +37,20 @@ class Quiz extends React.Component {
             }
         }
     }
+
+    UNSAFE_componentWillMount() {
+        axios.get('http://localhost:4000/games/5d94347c14d4cf2435d84ef9/quizzes')
+            .then(res => {
+                // let games = this.state.games.concat(res.data)
+                // console.log('games', games);
+
+                this.setState({
+                    quizzes: res.data,
+                })
+            })
+            .catch(err => console.log(err))
+    }
+
 
 
     showHint = () => {
@@ -132,7 +148,7 @@ class Quiz extends React.Component {
                         <div className="extraInfo">
                             <h6>Extra info</h6>
                             <p className="description" >
-                                {this.state.quiz.placeDescription}
+                                {JSON.stringify(this.state.quizzes)}
                             </p>
                         </div>
 
