@@ -13,7 +13,8 @@ import Signup from './pages/Signup.jsx'
 import Join from './pages/Join.jsx'
 import Settings from './pages/Settings.jsx';
 import Quiz from './pages/Quiz.jsx';
-import UserOnboarding from './pages/UserOnboarding'
+import UserOnboarding from './pages/UserOnboarding.jsx'
+import Map from './pages/Map.jsx'
 
 import { home, options, football, planet } from 'ionicons/icons';
 
@@ -77,6 +78,7 @@ const App: React.FC = () => (
           <Route path="/games" component={Games} exact={true} />
 					<Route path="/game/:id" component={Game} exact={true} />
 					<Route path="/signup" component={Signup} exact={true} />
+					<Route path="/map" component={Map} exact={true} />
           <Route exact path="/" render={() => <Redirect to="/games" />} />
         </IonRouterOutlet>
       </IonSplitPane>

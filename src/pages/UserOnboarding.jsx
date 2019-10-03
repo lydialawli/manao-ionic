@@ -1,5 +1,6 @@
 import React from 'react'
 import { IonContent, IonPage, IonIcon, IonGrid, IonRow } from '@ionic/react';
+import {Link} from 'react-router-dom'
 import axios from 'axios'
 import '../styles/userOnboarding.css'
 
@@ -20,6 +21,15 @@ class UserOnboarding extends React.Component {
 		})
 	}
 
+	sendCoordinates = () => {
+		this.props.history.push({
+			pathname: '/map',
+			lat: this.state.quiz.location.lat,
+			lng: this.state.quiz.location.lng,
+			locationName: this.state.quiz.locationName
+		})
+	}
+
 	render () {
 		return(
 			<IonPage>
@@ -32,10 +42,11 @@ class UserOnboarding extends React.Component {
 							<h1 className="guide">{this.state.quiz.indication}</h1>
 						</IonRow>
 						<IonRow>
-							<h1 className="guide locationName">{this.state.quiz.locationName}</h1>
+							<Link to="/map"><h1 className="guide locationName">{this.state.quiz.locationName}</h1>
+							</Link>
 						</IonRow>
 					</IonGrid>
-					<i class="fas fa-angle-double-down"></i>
+					<i className="fas fa-angle-double-down"></i>
 				</IonContent>
 			</IonPage>
 		)
