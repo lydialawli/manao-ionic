@@ -1,7 +1,7 @@
 import React from 'react'
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon } from '@ionic/react'
 import '../styles/card.css'
-import { time, logoUsd, walk, star } from 'ionicons/icons'
+import { time, logoUsd, speedometer, star } from 'ionicons/icons'
 
 class Card extends React.Component {
 	state = {
@@ -10,34 +10,43 @@ class Card extends React.Component {
 			title: '',
 			location: '',
 			intro: '',
-			duration: '',
-			rating: [0]
+			duration: 0,
+			ratings: [0],
+			price: 0,
+			distance: 0
 		},
 		rate:0,
-		duration:0
+		duration:0,
+		price:1
 	}
 
 	UNSAFE_componentWillReceiveProps(props) {
-		this.setState({game: props.game})
-	}
-
-	UNSAFE_componentWillMount() {
-		let game = this.props.game
+		let game = props.game
 		let rate = this.state.rate
 		let duration = this.state.duration
+		let price = this.state.price
+
 		duration = parseInt(game.duration / 3600)
-		rate = game.rating.reduce((a,b) => a + b) / game.rating.length
+		rate = parseInt(game.ratings.reduce((a,b) => a + b) / game.ratings.length)
+		if (game.price > 1000) {
+			price = 3
+		} else if (game.price > 100) {
+			price = 2
+		} else {
+			price = 1
+		}
 
 		this.setState({
 			game: game,
 			rate: rate,
-			duration: duration
+			duration: duration,
+			price: price
 		})
 	}
 
 	render () {
 		return (
-			<IonCard className="gameCard" href="/game">
+			<IonCard className="gameCard" href={`/game/${this.state.game._id}`}>
 				<div className="imgContainer">
 					<img className="cardImg" style={{width:'100%'}} src={this.state.game.image} alt=''/>
 						<div className="gameRating">
@@ -61,10 +70,14 @@ class Card extends React.Component {
 						<span><IonIcon className="tag time" icon={time}/> {this.state.duration} h</span>
 					</div>
 					<div>
-						<span><IonIcon className="tag" icon={logoUsd}></IonIcon><IonIcon className="tag" icon={logoUsd}></IonIcon></span>
+						<span>
+							{
+								[...Array(this.state.price)].map((e,i) => <IonIcon className="tag" key={i} icon={logoUsd}></IonIcon>)
+							}
+						</span>
 					</div>
 					<div>
-						<span><IonIcon className="tag" icon={walk}></IonIcon> 2 km</span>
+						<span><IonIcon className="tag" icon={speedometer}></IonIcon> {this.state.game.distance} km</span>
 					</div>
 				</div>
 			</IonCard>

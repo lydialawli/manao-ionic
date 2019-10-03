@@ -13,7 +13,7 @@ import Signup from './pages/Signup.jsx'
 import Join from './pages/Join.jsx'
 import Settings from './pages/Settings.jsx'
 
-import { home, list, football, options, planet } from 'ionicons/icons';
+import { home, options, planet } from 'ionicons/icons';
 
 
 
@@ -71,6 +71,7 @@ const App: React.FC = () => (
           <Route path="/about" component={About} exact={true} />
 					<Route path="/login" component={Login} exact={true} />
           <Route path="/games" component={Games} exact={true} />
+					<Route path="/game/:id" component={Game} exact={true} />
 					<Route path="/signup" component={Signup} exact={true} />
           <Route exact path="/" render={() => <Redirect to="/games" />} />
         </IonRouterOutlet>

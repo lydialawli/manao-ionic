@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@capacitor/cli": "^1.2.1",
+    "@capacitor/core": "^1.2.1",
     "@ionic/react": "^4.9.0-rc.2",
     "@ionic/react-router": "^4.9.0-rc.2",
     "@types/jest": "24.0.18",
@@ -16,6 +18,7 @@
     "ionicons": "^4.6.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-native": "^0.61.1",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.2",
