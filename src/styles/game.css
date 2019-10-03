@@ -2,7 +2,7 @@
 	width: 100vw;
 	height: 40vh;
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: left;
 	background-size: cover;
 }
 
@@ -64,4 +64,25 @@
 	left: 10px;
 	font-size: 25px;
 	color: black;
+}
+
+.diagonal.big {
+	border: 0 solid #ffffff;
+	width: 100%;
+  border-left-width: 400px;
+  border-top-width: 40px;
+  border-top-color: transparent;
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+
+.playAlert {
+	--background: #E14848;
+	font-family: 'Skranji', cursive;
+	color: #212121;
+}
+
+.playAlert button span {
+	color: #212121;
 }
