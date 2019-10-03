@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonButton, IonIcon, IonText, IonBadge, IonBackButton } from '@ionic/react';
+import { IonContent, IonPage, IonButton, IonIcon, IonText, IonBadge, IonBackButton, IonAlert } from '@ionic/react';
 import { time, logoUsd, speedometer, star, arrowBack } from 'ionicons/icons'
 import React from 'react'
 import axios from 'axios'
@@ -15,7 +15,8 @@ class Game extends React.Component {
 		},
 		rate:0,
 		duration:0,
-		price:0
+		price:0,
+		showMessage: false
 	}
 
 	componentDidMount() {
@@ -23,6 +24,7 @@ class Game extends React.Component {
 
 		axios.get(`http://localhost:4000/games/${game}`)
 		.then(res => {
+
 			game = res.data
 			let rate = this.state.rate
 			let duration = this.state.duration
@@ -49,6 +51,15 @@ class Game extends React.Component {
 
 	goBack = () => {
 		this.props.history.goBack()
+	}
+
+	play = () => {
+		let token = localStorage.getItem('token')
+		if (token) {
+			//play
+		} else {
+			this.setState({showMessage: true})
+		}
 	}
 
 	render () {
@@ -96,9 +107,34 @@ class Game extends React.Component {
 								<span><IonIcon className="tag" icon={speedometer}></IonIcon> {this.state.game.distance} km</span>
 							</div>
 						</div>
-						<IonButton className="play">PLAY NOW!</IonButton>
+						<IonButton onClick={this.play} className="play">PLAY NOW!</IonButton>
 					</div>
 					<IonBackButton className="backBtn" text="" icon={arrowBack} defaultHref="/games" style={{position:"absolute"}}/>
+
+					<IonAlert className="playAlert"
+						isOpen={this.state.showMessage}
+						onDidDismiss={() => this.setState({showMessage: false})}
+						header="We don't know you yet!"
+						message="Please signup or login to play"
+						buttons={[
+							{
+								text: "Signup",
+								handler: () => {
+									this.props.history.push({
+										pathname: '/signup'
+									})
+								}
+							},
+							{
+								text: "Login",
+								handler: () => {
+									this.props.history.push({
+										pathname: '/login'
+									})
+								}
+							}
+						]}
+						/>
 
 				</IonContent>
 

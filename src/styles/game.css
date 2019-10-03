@@ -76,3 +76,13 @@
 	right: 0px;
 	bottom: 0px;
 }
+
+.playAlert {
+	--background: #E14848;
+	font-family: 'Skranji', cursive;
+	color: #212121;
+}
+
+.playAlert button span {
+	color: #212121;
+}
