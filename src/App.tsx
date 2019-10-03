@@ -18,9 +18,6 @@ import Map from './pages/Map.jsx'
 
 import { home, options, football, planet } from 'ionicons/icons';
 
-
-
-
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
