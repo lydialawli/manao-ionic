@@ -39,13 +39,13 @@ class Home extends React.Component {
 		let token = localStorage.getItem('token')
 		let games = this.state.games
 
-		axios.get('http://localhost:4000/games')
+		axios.get(`${process.env.REACT_APP_API}/games`)
 		.then(res => {
 			games = res.data
 			if (token) {
-				axios.get(`http://localhost:4000/auth?token=${token}`)
+				axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`)
 				.then(res => {
-					axios.get(`http://localhost:4000/users/${res.data._id}`)
+					axios.get(`${process.env.REACT_APP_API}/users/${res.data._id}`)
 					.then(user => {
 						this.setState({
 							games: games,

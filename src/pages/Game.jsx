@@ -22,7 +22,7 @@ class Game extends React.Component {
 	componentDidMount() {
 		let game = this.props.match.params.id
 
-		axios.get(`http://localhost:4000/games/${game}`)
+		axios.get(`${process.env.REACT_APP_API}/games/${game}`)
 		.then(res => {
 
 			game = res.data

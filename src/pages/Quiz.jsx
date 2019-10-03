@@ -7,7 +7,7 @@ import axios from 'axios';
 
 class Quiz extends React.Component {
     state = {
-        quizzes: {},
+        quizzes: [],
         progressDiff: 1 / 5, // 5 is GameQuizzes.length
         totalScore: 0,
         progressValue: 0 * (1 / 5), // quiz index * 1/GameQuizzes.length
@@ -40,13 +40,13 @@ class Quiz extends React.Component {
 
     UNSAFE_componentWillMount() {
         console.log('yay')
-        axios.get('http://bbcdbde6.ngrok.io/games/5d94347c14d4cf2435d84ef9/quizzes')
+        axios.get(`${process.env.REACT_APP_API}/games/5d94347c14d4cf2435d84ef9/quizzes`)
             .then(res => {
                 // let games = this.state.games.concat(res.data)
                 // console.log('games', games);
                 console.log('data=>',res)
                 this.setState({
-                    quizzes: res.data,
+                    quizzes: res.data.quizzes,
                 })
             })
             .catch(err => console.log('err',err))
@@ -62,16 +62,16 @@ class Quiz extends React.Component {
         }
 
         else {
-            Swal.fire({
-                title: 'Sweet!',
-                text: 'Modal with a custom image.',
-                imageUrl: 'https://unsplash.it/400/200',
-                imageWidth: 400,
-                imageHeight: 200,
-                imageAlt: 'Custom image',
-                animation: false,
-                customClass: "hintContainer",
-            })
+            // Swal.fire({
+            //     title: 'Sweet!',
+            //     text: 'Modal with a custom image.',
+            //     imageUrl: 'https://unsplash.it/400/200',
+            //     imageWidth: 400,
+            //     imageHeight: 200,
+            //     imageAlt: 'Custom image',
+            //     animation: false,
+            //     customClass: "hintContainer",
+            // })
             this.setState({ hintUsed: true })
         }
     }
@@ -149,7 +149,7 @@ class Quiz extends React.Component {
                         <div className="extraInfo">
                             <h6>Extra info</h6>
                             <p className="description" >
-                                {JSON.stringify(this.state.quizzes)}
+                                {JSON.stringify(this.state.quizzes[0])}
                             </p>
                         </div>
 
@@ -169,9 +169,9 @@ class Quiz extends React.Component {
                     </IonGrid>
                     <IonItem className={`answerForm ${this.borderInput()}`}>
                         <IonInput className="answer" type="number" disabled={this.state.disableInput} placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
-                        <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i class={this.state.iconAnswer}></i></IonItem>
+                        <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
-                    {
+                    /*{
                         this.state.showHint ?
                             <IonAlert
                                 className="hintContainer"
@@ -180,7 +180,7 @@ class Quiz extends React.Component {
                                 header="hint is blabla"
                             // message="🌀"
                             /> : ''
-                    }
+                    }*/
 
                     {/* <IonFooter className="footerQuiz "> <IonIcon className="lockIcon" icon={lock}></IonIcon></IonFooter> */}
                     {/* <div className="triangleGame"></div>

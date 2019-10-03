@@ -14,7 +14,7 @@ class UserOnboarding extends React.Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:4000/games/5d94347c14d4cf2435d84ef9/quizzes')
+		axios.get(`${process.env.REACT_APP_API}/games/5d94347c14d4cf2435d84ef9/quizzes`)
 		.then(res => {
 			console.log(res.data.quizzes[0].quiz);
 			this.setState({quiz: res.data.quizzes[0].quiz})
@@ -46,7 +46,7 @@ class UserOnboarding extends React.Component {
 							</Link>
 						</IonRow>
 					</IonGrid>
-					<i className="fas fa-angle-double-down"></i>
+					<Link to="/quiz"><i className="fas fa-angle-double-down"></i></Link>
 				</IonContent>
 			</IonPage>
 		)
