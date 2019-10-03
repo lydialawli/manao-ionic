@@ -81,7 +81,7 @@ class Signup extends React.Component {
 					<IonButton href='/login' className="changePage">Login instead</IonButton>
 					{
 						this.state.error ?
-						<IonAlert
+						<IonAlert className="signupAlert"
 							isOpen={this.state.error}
 							onDidDismiss={() => this.changeErrorState()}
 							header="Something went wrong"

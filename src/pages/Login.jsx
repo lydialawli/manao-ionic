@@ -1,5 +1,6 @@
 import React from 'react'
 import { IonPage, IonGrid, IonRow, IonInput, IonItem, IonLabel, IonContent, IonButton, IonIcon, IonText } from '@ionic/react'
+import { Plugins } from '@capacitor/core';
 import '../styles/login.css'
 import axios from 'axios'
 
@@ -19,6 +20,10 @@ class Login extends React.Component {
 			let token = res.data.token
 			if (token) {
 				localStorage.setItem('token', token)
+				// Plugins.Storage.set({
+				// 	key: 'token',
+				// 	value: token
+				// })
 				this.props.history.push({
 					pathname: '/games'
 				})
