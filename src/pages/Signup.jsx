@@ -49,7 +49,7 @@ class Signup extends React.Component {
 					<IonGrid>
 
 						<IonRow>
-							<IonIcon className="manaoLogo" src="assets/Logo-yellow.svg"></IonIcon>
+							<IonIcon className="manaoLogoLogin" src="assets/Logo-yellow.svg"></IonIcon>
 						</IonRow>
 
 						<IonRow>

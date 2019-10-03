@@ -47,7 +47,7 @@ class Login extends React.Component {
 					<IonGrid className="content">
 
 						<IonRow>
-							<IonIcon className="manaoLogo" src="assets/Logo-yellow.svg"></IonIcon>
+							<IonIcon className="manaoLogoLogin" src="assets/Logo-yellow.svg"></IonIcon>
 						</IonRow>
 
 						<IonRow>

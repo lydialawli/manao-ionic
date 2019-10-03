@@ -1,9 +1,9 @@
+import React from 'react'
 import { IonContent, IonPage, IonButton, IonIcon, IonText, IonBadge, IonBackButton, IonAlert } from '@ionic/react';
 import { time, logoUsd, speedometer, star, arrowBack } from 'ionicons/icons'
-import React from 'react'
 import axios from 'axios'
-import '../styles/games.css'
 import '../styles/game.css'
+import '../styles/games.css'
 
 class Game extends React.Component {
 	state = {
@@ -56,7 +56,9 @@ class Game extends React.Component {
 	play = () => {
 		let token = localStorage.getItem('token')
 		if (token) {
-			//play
+			this.props.history.push({
+				pathname: `/play/${this.state.game._id}/start`
+			})
 		} else {
 			this.setState({showMessage: true})
 		}
@@ -111,7 +113,7 @@ class Game extends React.Component {
 					</div>
 					<IonBackButton className="backBtn" text="" icon={arrowBack} defaultHref="/games" style={{position:"absolute"}}/>
 
-					<IonAlert className="playAlert"
+					<IonAlert className="alert"
 						isOpen={this.state.showMessage}
 						onDidDismiss={() => this.setState({showMessage: false})}
 						header="We don't know you yet!"

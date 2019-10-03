@@ -1,0 +1,29 @@
+.userOnboarding {
+	--background: #212738;
+	align-content: center;
+	font-family: 'Skranji', cursive;
+}
+
+.onboardingGrid {
+	margin-top: 50px;
+	margin-bottom: auto;
+}
+
+.guide {
+	font-size: 36px;
+	color: #57C4E5;
+	text-align: center;
+	padding: 30px;
+}
+
+.locationName {
+	color: #F97068;
+}
+
+.fa-angle-double-down {
+	color: white;
+	font-size: 50px;
+	position: absolute;
+	left: 45%;
+	bottom: 20px;
+}

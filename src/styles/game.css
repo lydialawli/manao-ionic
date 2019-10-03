@@ -36,7 +36,7 @@
 	color: black;
 	font-size: 15px;
 	width: fit-content;
-	border: 2px solid #E14848;
+	border: 2px solid #F97068;
 	height: fit-content;
 	align-content: center;
 }
@@ -49,7 +49,7 @@
 }
 
 .play {
-	--background: #FFE500;
+	--background: #D1D646;
 	width: 50vw;
 	height: 50px;
 	margin-left: auto;
@@ -63,7 +63,7 @@
 	top: 10px;
 	left: 10px;
 	font-size: 25px;
-	color: black;
+	color: white;
 }
 
 .diagonal.big {
@@ -78,7 +78,7 @@
 }
 
 .playAlert {
-	--background: #E14848;
+	--background-color: #E14848;
 	font-family: 'Skranji', cursive;
 	color: #212121;
 }

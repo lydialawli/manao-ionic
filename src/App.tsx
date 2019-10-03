@@ -13,8 +13,9 @@ import Signup from './pages/Signup.jsx'
 import Join from './pages/Join.jsx'
 import Settings from './pages/Settings.jsx';
 import Quiz from './pages/Quiz.jsx';
+import UserOnboarding from './pages/UserOnboarding'
 
-import { home, options, planet } from 'ionicons/icons';
+import { home, options, football, planet } from 'ionicons/icons';
 
 
 
@@ -67,6 +68,7 @@ const App: React.FC = () => (
       <IonSplitPane contentId="main">
         <Menu appPages={appPages} />
         <IonRouterOutlet id="main">
+					<Route path="/play/:id/start" component={UserOnboarding} exact={true} />
           <Route path="/join" component={Join} exact={true} />
           <Route path="/profile/:id/settings" component={Settings} exact={true} />
           <Route path="/quiz" component={Quiz} exact={true} />
