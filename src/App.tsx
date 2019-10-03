@@ -13,11 +13,10 @@ import Signup from './pages/Signup.jsx'
 import Join from './pages/Join.jsx'
 import Settings from './pages/Settings.jsx';
 import Quiz from './pages/Quiz.jsx';
+import UserOnboarding from './pages/UserOnboarding.jsx'
+import Map from './pages/Map.jsx'
 
-import { home, options, planet, football } from 'ionicons/icons';
-
-
-
+import { home, options, football, planet } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -67,6 +66,7 @@ const App: React.FC = () => (
       <IonSplitPane contentId="main">
         <Menu appPages={appPages} />
         <IonRouterOutlet id="main">
+					<Route path="/play/:id/start" component={UserOnboarding} exact={true} />
           <Route path="/join" component={Join} exact={true} />
           <Route path="/profile/:id/settings" component={Settings} exact={true} />
           <Route path="/quiz" component={Quiz} exact={true} />
@@ -75,6 +75,7 @@ const App: React.FC = () => (
           <Route path="/games" component={Games} exact={true} />
 					<Route path="/game/:id" component={Game} exact={true} />
 					<Route path="/signup" component={Signup} exact={true} />
+					<Route path="/map" component={Map} exact={true} />
           <Route exact path="/" render={() => <Redirect to="/games" />} />
         </IonRouterOutlet>
       </IonSplitPane>

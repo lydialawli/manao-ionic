@@ -25,6 +25,16 @@ class Home extends React.Component {
 		}
 	}
 
+	mountSlides = () => {
+		let wrapper = document.getElementsByClassName('swiper-wrapper')[0]
+		let slides = Array.from(document.getElementsByTagName('ion-slide'))
+		slides.forEach(slide => {
+			if (slide.parentNode.className !== 'swiper-wrapper') {
+				wrapper.appendChild(slide)
+			}
+		})
+	}
+
 	componentDidMount() {
 		let token = localStorage.getItem('token')
 		let games = this.state.games
@@ -40,20 +50,11 @@ class Home extends React.Component {
 						this.setState({
 							games: games,
 							user: user.data
-						}, () => {
-							console.log('games', games);
-							let wrapper = document.getElementsByClassName('swiper-wrapper')[0]
-							let slides = Array.from(document.getElementsByTagName('ion-slide'))
-							slides.forEach(slide => {
-								if (slide.parentNode.className !== 'swiper-wrapper') {
-									wrapper.appendChild(slide)
-								}
-							})
-						})
+						}, () => this.mountSlides())
 					})
 				})
 			} else {
-				this.setState({games})
+				this.setState({games}, () => this.mountSlides())
 			}
 		})
 	}

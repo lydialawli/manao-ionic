@@ -1,15 +1,15 @@
 .login {
-	--background: #212121;
+	--background: #212738;
 	--color: white;
 }
 
 .form {
 	margin: 20px 50px;
 	--background: transparent;
-	--border-color: #E14848;
+	--border-color: #F97068;
 	--border-width: 2px;
 	--border-radius: 50px;
-	--highlight-color-focused: #E14848;
+	--highlight-color-focused: #F97068;
 }
 
 .signup {
@@ -22,7 +22,7 @@
 }
 
 .submitBtn {
-	--background: #FFE500;
+	--background: #D1D646;
 	width: 50vw;
 	height: 50px;
 	margin: 30px auto 0px auto;
@@ -45,13 +45,13 @@
 .changePage {
 	margin: 50px auto 30px 20px;
 	width: 150px;
-	--background: #E14848;
+	--background: #F97068;
 	--border-radius: 50px;
 	font-family: 'Skranji', cursive;
-	color: #212121;
+	color: #212738;
 }
 
-.manaoLogo {
+.manaoLogoLogin {
 	width: 100px;
   height: 100px;
 	margin: 50px auto 20px auto;
@@ -63,15 +63,15 @@
 	margin-left: 100px;
 	--text-align: center;
 	font-family: 'Skranji', cursive;
-	color: #E14848;
+	color: #F97068;
 }
 
 .signupAlert {
-	--background: #E14848;
+	--background: #F97068;
 	font-family: 'Skranji', cursive;
-	color: #212121;
+	color: #212738;
 }
 
 .signupAlert button span {
-	color: #212121;
+	color: #212738;
 }
