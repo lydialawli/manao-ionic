@@ -14,7 +14,7 @@ import Join from './pages/Join.jsx'
 import Settings from './pages/Settings.jsx';
 import Quiz from './pages/Quiz.jsx';
 
-import { home, options, planet } from 'ionicons/icons';
+import { home, options, planet, football } from 'ionicons/icons';
 
 
 

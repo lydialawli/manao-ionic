@@ -39,16 +39,17 @@ class Quiz extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
-        axios.get('http://localhost:4000/games/5d94347c14d4cf2435d84ef9/quizzes')
+        console.log('yay')
+        axios.get('http://bbcdbde6.ngrok.io/games/5d94347c14d4cf2435d84ef9/quizzes')
             .then(res => {
                 // let games = this.state.games.concat(res.data)
                 // console.log('games', games);
-
+                console.log('data=>',res)
                 this.setState({
                     quizzes: res.data,
                 })
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log('err',err))
     }
 
 
