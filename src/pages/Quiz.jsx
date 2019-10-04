@@ -8,12 +8,16 @@ import axios from 'axios';
 class Quiz extends React.Component {
     state = {
         quizzes: [],
-        currentQuiz: {
+        currentQuizz: 1,
+        quiz: {
             location: {
                 lat: 0,
                 lng: 0
             },
-            question: '',
+            question: {
+                content: '',
+                type: 'text'
+            },
             answer: {
                 content: '',
                 type: 'text'
@@ -26,9 +30,9 @@ class Quiz extends React.Component {
             images: [],
             locationName: '',
             indication: '',
-            placeDescription: ''
+            placeDescription: '_ _'
         },
-        progressDiff: 1 / 5, // 5 is GameQuizzes.length
+        progressDiff: 0, // should be 1/gameNumQuizzes.length
         totalScore: 0,
         progressValue: 0 * (1 / 5), // quiz index * 1/GameQuizzes.length
         quizScore: 20,
@@ -40,22 +44,7 @@ class Quiz extends React.Component {
         hintUsed: false,
         disableInput: false,
         lockIcon: lock,
-        challengeNum: 1,
-        quiz: {
-            score: 20,
-            question: {
-                type: 'string',
-                content: 'Wow, so hot in here! How do this people survive?'
-            },
-            answer: '21',
-            locationName: "7/11 cross-streets",
-            indication: 'Get to the starting point. Head to:',
-            placeDescription: 'Markets are a huge part of the Thai culture, and the locals love markets just as much as tourists.This exact spot on a Sunday evening is awesome!',
-            hint: {
-                type: 'string',
-                content: ''
-            }
-        }
+        inputPlaceholder: '_ _'
     }
 
     UNSAFE_componentWillMount() {
@@ -64,43 +53,50 @@ class Quiz extends React.Component {
             .then(res => {
                 // let games = this.state.games.concat(res.data)
                 // console.log('games', games);
-                console.log('data=>', res)
+                console.log('hey ===>', res.data.quizzes[0].quiz)
                 this.setState({
                     quizzes: res.data.quizzes,
-                    currentQuiz: res.data.quizzes[0].quiz
+                    quiz: res.data.quizzes[0].quiz,
+                    progressDiff: 1 / res.data.quizzes.length
                 })
             })
             .catch(err => console.log('err', err))
     }
 
-
+    nextQuizSetup = () => {
+        this.setState({
+            quiz: this.state.quizzes[this.state.currentQuizz].quiz,
+            currentQuizz: this.state.currentQuizz + 1
+        })
+        // console.log('next Quiz is ready!')
+    }
 
     showHint = () => {
-        if (this.state.quiz.hint.type === 'string') {
+        if (this.state.quiz.hint.type === 'text') {
             let showHint = this.state.showHint
             showHint = !showHint
             this.setState({ showHint, hintUsed: true })
         }
 
-        else {
-            // Swal.fire({
-            //     title: 'Sweet!',
-            //     text: 'Modal with a custom image.',
-            //     imageUrl: 'https://unsplash.it/400/200',
-            //     imageWidth: 400,
-            //     imageHeight: 200,
-            //     imageAlt: 'Custom image',
-            //     animation: false,
-            //     customClass: "hintContainer",
-            // })
-            this.setState({ hintUsed: true })
-        }
+        //  else {
+        //     Swal.fire({
+        //         title: 'Sweet!',
+        //         text: 'Modal with a custom image.',
+        //         imageUrl: 'https://unsplash.it/400/200',
+        //         imageWidth: 400,
+        //         imageHeight: 200,
+        //         imageAlt: 'Custom image',
+        //         animation: false,
+        //         customClass: "hintContainer",
+        //     })
+        //     this.setState({ hintUsed: true })
+        // }
     }
     changeAnswer = (e) => {
-        let answer = this.state.currentQuiz.answer.content
+        let answer = this.state.quiz.answer.content
         answer = e.target.value
         this.setState({ answer })
-        if (answer === this.state.currentQuiz.answer.content) {
+        if (answer === this.state.quiz.answer.content) {
             let hint = this.state.hintUsed ? 5 : 0
 
             this.setState({
@@ -110,7 +106,7 @@ class Quiz extends React.Component {
                 lockIcon: unlock,
                 disableInput: true,
                 progressValue: this.state.progressValue + this.state.progressDiff,
-                totalScore: this.state.totalScore + this.state.currentQuiz.score - hint
+                totalScore: this.state.totalScore + this.state.quiz.score - hint
             })
         }
 
@@ -165,12 +161,12 @@ class Quiz extends React.Component {
                 <IonContent className="quizMain  ion-padding">
                     <IonGrid>
                         <IonRow>
-                            <h1 className="titleChallenge">CHALLENGE # {this.state.challengeNum}</h1>
+                            <h1 className="titleChallenge">CHALLENGE # {this.state.currentQuizz}</h1>
                         </IonRow>
                         <div className="extraInfo">
                             <h6>Extra info</h6>
                             <p className="description" >
-                                {JSON.stringify(this.state.currentQuiz)}
+                                {this.state.quiz.placeDescription}
                             </p>
                         </div>
 
@@ -182,14 +178,14 @@ class Quiz extends React.Component {
                             </IonCol>
                             <IonCol size="9" offset="2" className="problemBox">
                                 {
-                                    this.state.quiz.question.type === 'string' ? <p className="problemString">{this.state.quiz.question.content}</p> : <IonImg className="problemImg" src="https://seakoala.io/src/seakoala.png" />
+                                    this.state.quiz.question.type === 'text' ? <p className="problemString">{this.state.quiz.question.content}</p> : <IonImg className="problemImg" src={`${this.state.quiz.question.content}`} />
                                 }
 
                             </IonCol>
                         </IonRow>
                     </IonGrid>
                     <IonItem className={`answerForm ${this.borderInput()}`}>
-                        <IonInput className="answer" type="tel" maxlength={`${this.state.currentQuiz.answer.content.length}`} disabled={this.state.disableInput} placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+                        <IonInput className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                         <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
                     {
@@ -198,7 +194,7 @@ class Quiz extends React.Component {
                                 className="hintContainer"
                                 isOpen={this.state.showHint}
                                 onDidDismiss={() => this.showHint()}
-                                header="hint is blabla"
+                                header={`${this.state.quiz.hint.content}`}
                             // message="🌀"
                             /> : ''
                     }
@@ -212,7 +208,9 @@ class Quiz extends React.Component {
                 </IonContent >
                 <IonFooter className="footerQuiz" >
                     <IonButtons className={`hint ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
-                    <IonIcon className="lockIcon" icon={this.state.lockIcon}> </IonIcon>
+                    <button onClick={()=> this.nextQuizSetup()}>
+                        <IonIcon className="lockIcon" icon={this.state.lockIcon}> </IonIcon>
+                    </button>
                     <div className="triangleGame"></div>
                 </IonFooter>
             </IonPage >
@@ -222,3 +220,5 @@ class Quiz extends React.Component {
 
 
 export default Quiz;
+
+
