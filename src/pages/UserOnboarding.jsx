@@ -1,5 +1,5 @@
 import React from 'react'
-import { IonContent, IonPage, IonIcon, IonGrid, IonRow } from '@ionic/react';
+import { IonContent, IonPage, IonIcon, IonGrid, IonRow, IonItem } from '@ionic/react';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import '../styles/userOnboarding.css'
@@ -42,8 +42,9 @@ class UserOnboarding extends React.Component {
 							<h1 className="guide">{this.state.quiz.indication}</h1>
 						</IonRow>
 						<IonRow>
-							<Link to="/map"><h1 className="guide locationName">{this.state.quiz.locationName}</h1>
-							</Link>
+							<IonItem onClick={this.sendCoordinates}>
+								<h1 className="guide locationName">{this.state.quiz.locationName}</h1>
+							</IonItem>
 						</IonRow>
 					</IonGrid>
 					<Link to="/quiz"><i className="fas fa-angle-double-down"></i></Link>
