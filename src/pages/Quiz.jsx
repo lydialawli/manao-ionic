@@ -51,7 +51,7 @@ class Quiz extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
-        axios.get(`${process.env.REACT_APP_API}/games/5d94347c14d4cf2435d84ef9/quizzes`)
+        axios.get(`${process.env.REACT_APP_API}/games/5d94625514d4cf2435d84f09/quizzes`)
             .then(res => {
                 // let games = this.state.games.concat(res.data)
                 // console.log('games', games);
@@ -162,7 +162,7 @@ class Quiz extends React.Component {
                         <IonButtons slot="start">
                             <IonMenuButton />
                         </IonButtons>
-                        <div className="yellowBox"></div>
+                        <div className="menuBox"></div>
                         <div> </div>
                         {/* <IonIcon className="fatPin" src="assets/fatPin.svg"></IonIcon> */}
                         <IonIcon className="icons trophy" icon={trophy}></IonIcon>
@@ -214,7 +214,12 @@ class Quiz extends React.Component {
                         isOpen={this.state.showPopover}
                         onDidDismiss={e => this.setState({ showPopover: false })}
                     >
-                        <div className="hintBox">{this.state.quiz.hint.content}</div>
+                        {
+                            this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (<div className="hintBox">{this.state.quiz.hint.content}</div>)
+                                // (<img className="hintBox" src={this.state.quiz.hint.content}> </img>)
+                        }
+
+
                     </IonPopover>
 
                 </IonContent >
