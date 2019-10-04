@@ -202,7 +202,16 @@
     font-family: 'Skranji', cursive;
 }
 
-.hint {
+.hintBox { 
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.popover {
+    --box-shadow: 2px 2px 10px #00000067;
+    --background: red;
+}
+.hintIcon {
     position: absolute;
     right: 0;
     bottom: 0;

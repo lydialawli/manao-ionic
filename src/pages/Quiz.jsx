@@ -46,7 +46,6 @@ class Quiz extends React.Component {
         disableInput: false,
         inputPlaceholder: '______',
         showPopover: false,
-        setShowPopover: false,
         correctAnswer: false,
 
     }
@@ -70,7 +69,7 @@ class Quiz extends React.Component {
     }
 
     getPlaceholder = (num) => {
-        return [...Array(num)].forEach(()=> {return 'hello'})
+        return [...Array(num)].forEach(() => { return 'hello' })
     }
 
     nextQuizSetup = () => {
@@ -87,7 +86,10 @@ class Quiz extends React.Component {
     }
 
     showHint = () => {
-        this.setState({showPopover:true})
+        this.setState({
+            showPopover: true,
+            hintUsed: true
+        })
         // if (this.state.quiz.hint.type === 'text') {
         //     let showHint = this.state.showHint
         //     showHint = !showHint
@@ -204,36 +206,23 @@ class Quiz extends React.Component {
                         <IonInput className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                         <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
-                    {
-                        this.state.showHint ?
-                            <IonAlert
-                                className="hintContainer"
-                                isOpen={this.state.showHint}
-                                onDidDismiss={() => this.showHint()}
-                                header={`${this.state.quiz.hint.content}`}
-                            // message="🌀"
-                            /> : ''
-                    }
 
-                    {/* <IonFooter className="footerQuiz "> <IonIcon className="lockIcon" icon={lock}></IonIcon></IonFooter> */}
-                    {/* <div className="triangleGame"></div>
-                    <div className="footerQuiz ">
-                        <IonIcon className="lockIcon" icon={lock}></IonIcon>
-
-                    </div> */}
                     <IonPopover
+                        translucent={true}
+                        animated={false}
+                        cssClass="popover"
                         isOpen={this.state.showPopover}
-                        onDidDismiss={e => this.setState({setShowPopover:false})}
+                        onDidDismiss={e => this.setState({ showPopover: false })}
                     >
-                        <p>This is popover content</p>
+                        <div className="hintBox">{this.state.quiz.hint.content}</div>
                     </IonPopover>
-                   
+
                 </IonContent >
                 <IonFooter className="footerQuiz" >
-                    <IonButtons className={`hint ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
+                    <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
                     <button disabled={!this.state.correctAnswer} onClick={() => this.nextQuizSetup()}>
-                        {this.state.correctAnswer ?  (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
-                        (<IonIcon className="lockIcon" icon={lock}> </IonIcon>)}
+                        {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
+                            (<IonIcon className="lockIcon" icon={lock}> </IonIcon>)}
                     </button>
                     <div className="triangleGame"></div>
                 </IonFooter>
