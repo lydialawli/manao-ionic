@@ -177,8 +177,8 @@ class Quiz extends React.Component {
                         <div className="menuBox"></div>
                         <div> </div>
                         {/* <IonIcon className="fatPin" src="assets/fatPin.svg"></IonIcon> */}
-                        <IonIcon className="icons trophy" icon={trophy}></IonIcon>
-                        <div className="icons score" >{this.state.totalScore}</div>
+                        <IonIcon className="scoreIcons trophy" icon={trophy}></IonIcon>
+                        <div className="scoreIcons score" >{this.state.totalScore}</div>
                         <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}>
                         </IonProgressBar>
                         <IonButtons >
