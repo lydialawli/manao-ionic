@@ -34,7 +34,7 @@ class Home extends React.Component {
 		})
 	}
 
-	ionViewDidEnter() {
+	componentWillMount() {
 		let games = this.state.games
 
 		Promise.all([
