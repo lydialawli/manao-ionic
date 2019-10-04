@@ -169,7 +169,7 @@ class Quiz extends React.Component {
     render() {
         return (
             <IonPage>
-                <IonHeader className="noShadow">
+                <IonHeader no-border className="noShadow">
                     <IonToolbar className="quizbar noShadow">
                         <IonButtons slot="start">
                             <IonMenuButton />
