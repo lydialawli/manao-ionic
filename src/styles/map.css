@@ -16,8 +16,8 @@
 }
 
 .pin label {
-	background: white;
-	margin: 0 auto;
+	background: transparent;
+	margin: 10px auto;
 	border-radius: 4px;
 	box-shadow: 0 2px 20px rgba(0,0,0,.3);
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { IonContent, IonPage, IonButton, IonIcon, IonText, IonBadge, IonBackButton, IonAlert } from '@ionic/react';
 import { time, logoUsd, speedometer, star, arrowBack } from 'ionicons/icons'
+import { Plugins } from '@capacitor/core';
 import axios from 'axios'
 import '../styles/game.css'
 import '../styles/games.css'
@@ -54,14 +55,16 @@ class Game extends React.Component {
 	}
 
 	play = () => {
-		let token = localStorage.getItem('token')
-		if (token) {
-			this.props.history.push({
-				pathname: `/play/${this.state.game._id}/start`
-			})
-		} else {
-			this.setState({showMessage: true})
-		}
+		Plugins.Storage.get({key: 'token'})
+		.then(token => {
+			if (token.value) {
+				this.props.history.push({
+					pathname: `/play/${this.state.game._id}/start`
+				})
+			} else {
+				this.setState({showMessage: true})
+			}
+		})
 	}
 
 	render () {

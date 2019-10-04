@@ -1,8 +1,8 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
 import { lock, map, unlock, trophy } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 import axios from 'axios';
 
 class Quiz extends React.Component {
@@ -171,7 +171,7 @@ class Quiz extends React.Component {
                         <IonInput className="answer" type="number" disabled={this.state.disableInput} placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                         <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
-                    /*{
+                    {/*{
                         this.state.showHint ?
                             <IonAlert
                                 className="hintContainer"
@@ -180,7 +180,7 @@ class Quiz extends React.Component {
                                 header="hint is blabla"
                             // message="🌀"
                             /> : ''
-                    }*/
+                    }*/}
 
                     {/* <IonFooter className="footerQuiz "> <IonIcon className="lockIcon" icon={lock}></IonIcon></IonFooter> */}
                     {/* <div className="triangleGame"></div>
