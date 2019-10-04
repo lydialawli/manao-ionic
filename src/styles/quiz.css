@@ -128,6 +128,11 @@
     z-index:1;
 }
 
+.openLock {
+    color: rgb(51, 233, 81);
+    opacity: 1;
+}
+
 .triangleGame {
     position: absolute; 
     bottom: 0;

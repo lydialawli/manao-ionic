@@ -1,5 +1,6 @@
 import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
 import { lock, map, unlock, trophy } from 'ionicons/icons';
+import { IonPopover, IonButton } from '@ionic/react';
 import React from 'react';
 import '../styles/quiz.css';
 import Swal from 'sweetalert2';
@@ -35,17 +36,19 @@ class Quiz extends React.Component {
         },
         progressDiff: 0, // should be 1/gameNumQuizzes.length
         totalScore: 0,
-        progressValue: 0 * (1 / 5), // quiz index * 1/GameQuizzes.length
+        progressValue: 0,
         quizScore: 20,
         iconAnswer: '',
         iconAnswerStyle: '',
         showHint: false,
         answer: '',
-        result: 'null',
         hintUsed: false,
         disableInput: false,
-        lockIcon: lock,
-        inputPlaceholder: '_ _'
+        inputPlaceholder: '_ _',
+        showPopover: false,
+        setShowPopover: false,
+        correctAnswer: false,
+
     }
 
     UNSAFE_componentWillMount() {
@@ -64,27 +67,37 @@ class Quiz extends React.Component {
             .catch(err => console.log('err', err))
     }
 
+    presentPopover = (ev) => {
+        const popover = Object.assing(document.createElement('ion-popover'), {
+            component: 'quiz',
+            event: ev,
+            translucent: true
+        });
+        document.body.appendChild(popover)
+        return popover.present()
+    }
+
     nextQuizSetup = () => {
         this.setState({
             quiz: this.state.quizzes[this.state.currentQuizz].quiz,
             currentQuizz: this.state.currentQuizz + 1,
             iconAnswerStyle: '',
             iconAnswer: '',
-            result: 'null',
             hintUsed: false,
             disableInput: false,
-            lockIcon: lock,
-            inputPlaceholder: '_ _ _'
+            correctAnswer: false,
+            inputPlaceholder: '_ _ _',
         })
         // console.log('next Quiz is ready!')
     }
 
     showHint = () => {
-        if (this.state.quiz.hint.type === 'text') {
-            let showHint = this.state.showHint
-            showHint = !showHint
-            this.setState({ showHint, hintUsed: true })
-        }
+        this.setState({showPopover:true})
+        // if (this.state.quiz.hint.type === 'text') {
+        //     let showHint = this.state.showHint
+        //     showHint = !showHint
+        //     this.setState({ showHint, hintUsed: true })
+        // }
 
         //  else {
         //     Swal.fire({
@@ -108,13 +121,12 @@ class Quiz extends React.Component {
             let hint = this.state.hintUsed ? 5 : 0
 
             this.setState({
-                result: 'correct',
+                correctAnswer: true,
                 iconAnswer: "far fa-check-circle",
                 iconAnswerStyle: 'greenAnswer',
-                lockIcon: unlock,
                 disableInput: true,
                 progressValue: this.state.progressValue + this.state.progressDiff,
-                totalScore: this.state.totalScore + this.state.quiz.score - hint
+                totalScore: this.state.totalScore + this.state.quiz.score - hint,
             })
         }
 
@@ -125,7 +137,7 @@ class Quiz extends React.Component {
         }
         else {
             this.setState({
-                result: 'incorrect',
+                correctAnswer: false,
                 iconAnswer: "far fa-times-circle",
                 iconAnswerStyle: 'redAnswer',
             })
@@ -137,7 +149,7 @@ class Quiz extends React.Component {
         if (this.state.answer === '') {
             return ''
         }
-        if (this.state.result === 'correct') {
+        if (this.state.correctAnswer) {
             return 'greenBorder'
         }
         else {
@@ -193,8 +205,8 @@ class Quiz extends React.Component {
                         </IonRow>
                     </IonGrid>
                     <IonItem className={`answerForm ${this.borderInput()}`}>
-                        
-                        <IonInput  className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+
+                        <IonInput className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                         <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
                     {
@@ -214,11 +226,19 @@ class Quiz extends React.Component {
                         <IonIcon className="lockIcon" icon={lock}></IonIcon>
 
                     </div> */}
+                    <IonPopover
+                        isOpen={this.state.showPopover}
+                        onDidDismiss={e => this.setState({setShowPopover:false})}
+                    >
+                        <p>This is popover content</p>
+                    </IonPopover>
+                   
                 </IonContent >
                 <IonFooter className="footerQuiz" >
                     <IonButtons className={`hint ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
-                    <button onClick={()=> this.nextQuizSetup()}>
-                        <IonIcon className="lockIcon" icon={this.state.lockIcon}> </IonIcon>
+                    <button disabled={!this.state.correctAnswer} onClick={() => this.nextQuizSetup()}>
+                        {this.state.correctAnswer ?  (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
+                        (<IonIcon className="lockIcon" icon={lock}> </IonIcon>)}
                     </button>
                     <div className="triangleGame"></div>
                 </IonFooter>
