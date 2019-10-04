@@ -184,6 +184,7 @@ class Quiz extends React.Component {
                         <IonButtons >
                             <IonIcon className="mapIcon" slot="end" src="assets/locationmapIcon.svg"></IonIcon>
                         </IonButtons>
+                        <IonIcon className="roundCorner" slot="end" src="assets/roundCorner.svg"></IonIcon>
                     </IonToolbar>
                 </IonHeader>
 
