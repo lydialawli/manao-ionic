@@ -171,7 +171,7 @@ class Quiz extends React.Component {
                         <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}>
                         </IonProgressBar>
                         <IonButtons >
-                            <IonIcon className="mapIcon" slot="end" icon={map}></IonIcon>
+                            <IonIcon className="mapIcon" slot="end" src="assets/locationmapIcon.svg"></IonIcon>
                         </IonButtons>
                     </IonToolbar>
                 </IonHeader>
@@ -224,7 +224,7 @@ class Quiz extends React.Component {
 
                 </IonContent >
                 <IonFooter className="footerQuiz" >
-                    <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hint-shadow.svg"></IonIcon></IonButtons>
+                    <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hintIcon-white.svg"></IonIcon></IonButtons>
                     <button disabled={!this.state.correctAnswer} onClick={() => this.nextQuizSetup()}>
                         {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
                             (<IonIcon className="lockIcon" icon={lock}> </IonIcon>)}
