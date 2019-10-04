@@ -81,6 +81,7 @@ class Quiz extends React.Component {
             hintUsed: false,
             disableInput: false,
             correctAnswer: false,
+            answer: ''
         })
         // console.log('next Quiz is ready!')
     }
@@ -203,7 +204,7 @@ class Quiz extends React.Component {
                     </IonGrid>
                     <IonItem className={`answerForm ${this.borderInput()}`}>
 
-                        <IonInput className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+                        <IonInput value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                         <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
 
@@ -215,11 +216,10 @@ class Quiz extends React.Component {
                         onDidDismiss={e => this.setState({ showPopover: false })}
                     >
                         {
-                            this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (<div className="hintBox">{this.state.quiz.hint.content}</div>)
-                                // (<img className="hintBox" src={this.state.quiz.hint.content}> </img>)
+                            this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
+                            <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`}/> )
+                           
                         }
-
-
                     </IonPopover>
 
                 </IonContent >
