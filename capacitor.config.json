@@ -1,0 +1,7 @@
+{
+  "appId": "com.playmanao.www",
+  "appName": "PlayManao",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build"
+}

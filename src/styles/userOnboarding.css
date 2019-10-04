@@ -16,8 +16,15 @@
 	padding: 30px;
 }
 
+.guideContainer {
+	--background: transparent;
+	--border-style: hidden;
+}
+
 .locationName {
 	color: #F97068;
+	text-decoration: underline;
+	font-family: 'Skranji', cursive;
 }
 
 .fa-angle-double-down {

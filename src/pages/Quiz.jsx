@@ -1,8 +1,8 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
 import { lock, map, unlock, trophy } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 import axios from 'axios';
 
 class Quiz extends React.Component {
@@ -193,11 +193,12 @@ class Quiz extends React.Component {
                         </IonRow>
                     </IonGrid>
                     <IonItem className={`answerForm ${this.borderInput()}`}>
-                        
+
                         <IonInput  className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                         <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
-                    {
+
+                    {/*{
                         this.state.showHint ?
                             <IonAlert
                                 className="hintContainer"
@@ -206,7 +207,7 @@ class Quiz extends React.Component {
                                 header={`${this.state.quiz.hint.content}`}
                             // message="🌀"
                             /> : ''
-                    }
+                    }*/}
 
                     {/* <IonFooter className="footerQuiz "> <IonIcon className="lockIcon" icon={lock}></IonIcon></IonFooter> */}
                     {/* <div className="triangleGame"></div>
@@ -229,5 +230,3 @@ class Quiz extends React.Component {
 
 
 export default Quiz;
-
-
