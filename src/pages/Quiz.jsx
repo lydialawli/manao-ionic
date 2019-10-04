@@ -30,7 +30,8 @@ class Quiz extends React.Component {
             images: [],
             locationName: '',
             indication: '',
-            placeDescription: '_ _'
+            placeDescription: '_ _',
+
         },
         progressDiff: 0, // should be 1/gameNumQuizzes.length
         totalScore: 0,
@@ -66,7 +67,14 @@ class Quiz extends React.Component {
     nextQuizSetup = () => {
         this.setState({
             quiz: this.state.quizzes[this.state.currentQuizz].quiz,
-            currentQuizz: this.state.currentQuizz + 1
+            currentQuizz: this.state.currentQuizz + 1,
+            iconAnswerStyle: '',
+            iconAnswer: '',
+            result: 'null',
+            hintUsed: false,
+            disableInput: false,
+            lockIcon: lock,
+            inputPlaceholder: '_ _ _'
         })
         // console.log('next Quiz is ready!')
     }
@@ -119,7 +127,7 @@ class Quiz extends React.Component {
             this.setState({
                 result: 'incorrect',
                 iconAnswer: "far fa-times-circle",
-                iconAnswerStyle: 'redAnswer'
+                iconAnswerStyle: 'redAnswer',
             })
         }
 
@@ -185,7 +193,8 @@ class Quiz extends React.Component {
                         </IonRow>
                     </IonGrid>
                     <IonItem className={`answerForm ${this.borderInput()}`}>
-                        <IonInput className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+                        
+                        <IonInput  className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                         <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
                     {
