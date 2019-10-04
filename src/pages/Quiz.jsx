@@ -44,7 +44,7 @@ class Quiz extends React.Component {
         answer: '',
         hintUsed: false,
         disableInput: false,
-        inputPlaceholder: '_ _',
+        inputPlaceholder: '______',
         showPopover: false,
         setShowPopover: false,
         correctAnswer: false,
@@ -52,29 +52,25 @@ class Quiz extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
-        console.log('yay')
         axios.get(`${process.env.REACT_APP_API}/games/5d94347c14d4cf2435d84ef9/quizzes`)
             .then(res => {
                 // let games = this.state.games.concat(res.data)
                 // console.log('games', games);
+
                 console.log('hey ===>', res.data.quizzes[0].quiz)
                 this.setState({
                     quizzes: res.data.quizzes,
                     quiz: res.data.quizzes[0].quiz,
-                    progressDiff: 1 / res.data.quizzes.length
+                    progressDiff: 1 / res.data.quizzes.length,
+                    // inputPlaceholder: res.data.quizzes[0].quiz.answer.content.length
+
                 })
             })
             .catch(err => console.log('err', err))
     }
 
-    presentPopover = (ev) => {
-        const popover = Object.assing(document.createElement('ion-popover'), {
-            component: 'quiz',
-            event: ev,
-            translucent: true
-        });
-        document.body.appendChild(popover)
-        return popover.present()
+    getPlaceholder = (num) => {
+        return [...Array(num)].forEach(()=> {return 'hello'})
     }
 
     nextQuizSetup = () => {
@@ -86,7 +82,6 @@ class Quiz extends React.Component {
             hintUsed: false,
             disableInput: false,
             correctAnswer: false,
-            inputPlaceholder: '_ _ _',
         })
         // console.log('next Quiz is ready!')
     }
