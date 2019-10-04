@@ -8,6 +8,26 @@ import axios from 'axios';
 class Quiz extends React.Component {
     state = {
         quizzes: [],
+        currentQuiz: {
+            location: {
+                lat: 0,
+                lng: 0
+            },
+            question: '',
+            answer: {
+                content: '',
+                type: 'text'
+            },
+            hint: {
+                content: '',
+                type: ''
+            },
+            score: 0,
+            images: [],
+            locationName: '',
+            indication: '',
+            placeDescription: ''
+        },
         progressDiff: 1 / 5, // 5 is GameQuizzes.length
         totalScore: 0,
         progressValue: 0 * (1 / 5), // quiz index * 1/GameQuizzes.length
@@ -44,12 +64,13 @@ class Quiz extends React.Component {
             .then(res => {
                 // let games = this.state.games.concat(res.data)
                 // console.log('games', games);
-                console.log('data=>',res)
+                console.log('data=>', res)
                 this.setState({
                     quizzes: res.data.quizzes,
+                    currentQuiz: res.data.quizzes[0].quiz
                 })
             })
-            .catch(err => console.log('err',err))
+            .catch(err => console.log('err', err))
     }
 
 
@@ -76,10 +97,10 @@ class Quiz extends React.Component {
         }
     }
     changeAnswer = (e) => {
-        let answer = this.state.answer
+        let answer = this.state.currentQuiz.answer.content
         answer = e.target.value
         this.setState({ answer })
-        if (answer === this.state.quiz.answer) {
+        if (answer === this.state.currentQuiz.answer.content) {
             let hint = this.state.hintUsed ? 5 : 0
 
             this.setState({
@@ -89,7 +110,7 @@ class Quiz extends React.Component {
                 lockIcon: unlock,
                 disableInput: true,
                 progressValue: this.state.progressValue + this.state.progressDiff,
-                totalScore: this.state.totalScore + this.state.quizScore - hint
+                totalScore: this.state.totalScore + this.state.currentQuiz.score - hint
             })
         }
 
@@ -149,7 +170,7 @@ class Quiz extends React.Component {
                         <div className="extraInfo">
                             <h6>Extra info</h6>
                             <p className="description" >
-                                {JSON.stringify(this.state.quizzes[0])}
+                                {JSON.stringify(this.state.currentQuiz)}
                             </p>
                         </div>
 
@@ -168,10 +189,10 @@ class Quiz extends React.Component {
                         </IonRow>
                     </IonGrid>
                     <IonItem className={`answerForm ${this.borderInput()}`}>
-                        <IonInput className="answer" type="number" disabled={this.state.disableInput} placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+                        <IonInput className="answer" type="tel" maxlength={`${this.state.currentQuiz.answer.content.length}`} disabled={this.state.disableInput} placeholder="_ _" onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                         <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                     </IonItem>
-                    /*{
+                    {
                         this.state.showHint ?
                             <IonAlert
                                 className="hintContainer"
@@ -180,7 +201,7 @@ class Quiz extends React.Component {
                                 header="hint is blabla"
                             // message="🌀"
                             /> : ''
-                    }*/
+                    }
 
                     {/* <IonFooter className="footerQuiz "> <IonIcon className="lockIcon" icon={lock}></IonIcon></IonFooter> */}
                     {/* <div className="triangleGame"></div>
