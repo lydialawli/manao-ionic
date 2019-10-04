@@ -111,11 +111,22 @@ class Quiz extends React.Component {
         //     this.setState({ hintUsed: true })
         // }
     }
+
+    filterPlaces = (event) => {
+        let text = event.target.value
+        let filtered = this.state.originalPlaces.filter(e =>
+            e.title.toUpperCase().includes(text.toUpperCase()))
+
+        this.setState({ places: filtered })
+    }
+
+
     changeAnswer = (e) => {
-        let answer = this.state.quiz.answer.content
-        answer = e.target.value
-        this.setState({ answer })
-        if (answer === this.state.quiz.answer.content) {
+        this.setState({ answer: e.target.value })
+        let answer = e.target.value.toUpperCase()
+        let trueAnswer = this.state.quiz.answer.content.toUpperCase()
+
+        if (answer === trueAnswer) {
             let hint = this.state.hintUsed ? 5 : 0
 
             this.setState({
@@ -217,8 +228,8 @@ class Quiz extends React.Component {
                     >
                         {
                             this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
-                            <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`}/> )
-                           
+                                <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`} />)
+
                         }
                     </IonPopover>
 
