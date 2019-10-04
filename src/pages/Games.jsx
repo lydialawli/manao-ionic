@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSlides, IonSlide, IonButtons, IonGrid, IonRow, IonCol, IonMenuButton, IonAvatar, IonIcon } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSlides, IonSlide, IonButtons, IonGrid, IonRow, IonCol, IonMenuButton, IonAvatar, IonIcon, withIonLifeCycle } from '@ionic/react';
 import { arrowBack, arrowForward } from 'ionicons/icons'
 import { Plugins } from '@capacitor/core';
 import Card from '../components/Card.jsx'
@@ -20,8 +20,6 @@ class Home extends React.Component {
 			{filter: 'transportation', options: ['fas fa-walking', 'fas fa-bicycle', 'fas fa-motorcycle']}
 		],
 		user: {
-			email: '',
-			avatar: '',
 			_id: ''
 		}
 	}
@@ -36,8 +34,7 @@ class Home extends React.Component {
 		})
 	}
 
-	componentDidMount() {
-		//let token = localStorage.getItem('token')
+	ionViewDidEnter() {
 		let games = this.state.games
 
 		Promise.all([
@@ -58,7 +55,12 @@ class Home extends React.Component {
 					})
 				})
 			} else {
-				this.setState({games}, () => this.mountSlides())
+				let user = this.state.user
+				user._id = ''
+				this.setState({
+					games: games,
+					user: user
+				}, () => this.mountSlides())
 			}
 		})
 	}
@@ -75,13 +77,13 @@ class Home extends React.Component {
             <IonTitle> Manao </IonTitle>
             <IonButtons slot="end">
 							{
-								this.state.user._id ?
+								this.state.user._id !== '' ?
 								<Link className="link" to={`/profile/${this.state.user._id}/settings`}>
 									<IonAvatar>
 	                	<img alt="" src={this.state.user.avatar} />
 	              	</IonAvatar>
 								</Link>
-									: 
+									:
 								<Link className="link" to={`/login`}>
 									<IonAvatar>
 	                	<img alt="" src='/assets/default-avatar.png' />
@@ -129,4 +131,4 @@ class Home extends React.Component {
 
 };
 
-export default Home;
+export default withIonLifeCycle(Home);
