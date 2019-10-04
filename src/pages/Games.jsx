@@ -36,31 +36,31 @@ class Home extends React.Component {
 
 	componentWillMount() {
 		let games = this.state.games
-
-		Promise.all([
-			Plugins.Storage.get({key: 'token'}),
-			axios.get(`${process.env.REACT_APP_API}/games`)
-		])
-		.then(([token, res]) => {
+		axios.get(`${process.env.REACT_APP_API}/games`)
+		.then(res => {
 			games = res.data
+			this.setState({games}, () => this.mountSlides())
+		}).catch(err => {console.log('err', err)})
+
+		Plugins.Storage.get({key: 'token'})
+		.then(token => {
+			console.log(token)
 			if (token.value) {
 				axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
 				.then(res => {
 					axios.get(`${process.env.REACT_APP_API}/users/${res.data._id}`)
 					.then(user => {
 						this.setState({
-							games: games,
 							user: user.data
-						}, () => this.mountSlides())
+						})
 					})
 				})
 			} else {
 				let user = this.state.user
 				user._id = ''
 				this.setState({
-					games: games,
 					user: user
-				}, () => this.mountSlides())
+				})
 			}
 		})
 	}

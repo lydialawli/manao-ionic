@@ -13,7 +13,6 @@ import Signup from './pages/Signup.jsx'
 import Join from './pages/Join.jsx'
 import Settings from './pages/Settings.jsx';
 import Quiz from './pages/Quiz.jsx';
-import UserOnboarding from './pages/UserOnboarding.jsx'
 import Map from './pages/Map.jsx'
 import Welcome from './pages/Welcome.jsx'
 
@@ -67,10 +66,9 @@ const App: React.FC = () => (
       <IonSplitPane contentId="main">
         <Menu appPages={appPages} />
         <IonRouterOutlet id="main">
-					<Route path="/play/:id/start" component={UserOnboarding} exact={true} />
           <Route path="/join" component={Join} exact={true} />
           <Route path="/profile/:id/settings" component={Settings} exact={true} />
-					<Route path="/welcome" component={Welcome} exact={true} />
+					<Route path="/play/:id/start" component={Welcome} exact={true} />
           <Route path="/quiz" component={Quiz} exact={true} />
           <Route path="/about" component={About} exact={true} />
 					<Route path="/login" component={Login} exact={true} />

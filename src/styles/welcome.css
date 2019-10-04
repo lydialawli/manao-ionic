@@ -1,15 +1,32 @@
 .onboardingSlide {
-	height: fit-content;
+	height: 100vh !important;
 }
 
-.one {
-	background: red;
+.onboardingSlide > div {
+	height: 100vh;
+}
+
+.guide.ready {
+	text-decoration: none;
+}
+
+.guide.go {
+	color: black;
 }
 
 .two {
-	background: #ffffff;
+	background: #57C4E5;
 }
 
-.three {
-	background: #111111;
+.guide.instructions {
+	color: black;
+}
+
+.instructionsLogo {
+	height: 50px;
+	width: 50px;
+}
+
+.instructionsGrid {
+	padding-right: 20px;
 }
