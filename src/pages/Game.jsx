@@ -58,8 +58,21 @@ class Game extends React.Component {
 		Plugins.Storage.get({key: 'token'})
 		.then(token => {
 			if (token.value) {
-				this.props.history.push({
-					pathname: `/play/${this.state.game._id}/start`
+				axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
+				.then(user => {
+					axios.post(`${process.env.REACT_APP_API}/history`, {
+						players: [
+							{
+								user: user.data._id
+							}
+						],
+						game: this.state.game._id
+					})
+					.then(res => {
+						this.props.history.push({
+							pathname: `/play/${this.state.game._id}/start`
+						})
+					})
 				})
 			} else {
 				this.setState({showMessage: true})
