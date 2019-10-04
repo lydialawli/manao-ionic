@@ -42,7 +42,7 @@ class UserOnboarding extends React.Component {
 							<h1 className="guide">{this.state.quiz.indication}</h1>
 						</IonRow>
 						<IonRow>
-							<IonItem onClick={this.sendCoordinates}>
+							<IonItem className="guideContainer" onClick={this.sendCoordinates}>
 								<h1 className="guide locationName">{this.state.quiz.locationName}</h1>
 							</IonItem>
 						</IonRow>
