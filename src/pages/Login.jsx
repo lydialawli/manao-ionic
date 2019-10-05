@@ -19,11 +19,11 @@ class Login extends React.Component {
 		.then(res => {
 			let token = res.data.token
 			if (token) {
-				localStorage.setItem('token', token)
-				// Plugins.Storage.set({
-				// 	key: 'token',
-				// 	value: token
-				// })
+				//localStorage.setItem('token', token)
+				Plugins.Storage.set({
+					key: 'token',
+					value: token
+				})
 				this.props.history.push({
 					pathname: '/games'
 				})

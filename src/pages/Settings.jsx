@@ -1,9 +1,20 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonMenuButton, IonAvatar } from '@ionic/react';
 import React from 'react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonMenuButton, IonAvatar } from '@ionic/react';
+import { Plugins } from '@capacitor/core';
 import '../styles/toolbar.css'
 import '../styles/games.css'
 
 class Settings extends React.Component {
+
+	logout = () => {
+		Plugins.Storage.remove({key:'token'})
+		.then(res => {
+			this.props.history.push({pathname: '/games'})
+		})
+		Plugins.Storage.keys().then(res => console.log(res))
+
+
+	}
 
   render() {
     return (
@@ -24,7 +35,7 @@ class Settings extends React.Component {
 
 
         <IonContent className="main ion-padding">
-          <IonButton className="play">Here will go User Settings</IonButton>
+          <IonButton onClick={this.logout} className="play">Logout</IonButton>
         </IonContent>
       </IonPage>
     );

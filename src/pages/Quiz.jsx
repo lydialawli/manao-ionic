@@ -1,9 +1,9 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonAlert, IonFooter } from '@ionic/react';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
 import { lock, map, unlock, trophy } from 'ionicons/icons';
 import { IonPopover, IonButton } from '@ionic/react';
 import React from 'react';
 import '../styles/quiz.css';
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 import axios from 'axios';
 
 class Quiz extends React.Component {
@@ -250,5 +250,3 @@ class Quiz extends React.Component {
 
 
 export default Quiz;
-
-
