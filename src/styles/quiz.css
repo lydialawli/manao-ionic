@@ -1,8 +1,8 @@
 .quizbar {
-    --background:#78839E;
-    border-left: 6px solid #FFE500;
-    border-right: 6px solid #FFE500;
-    border-top: 6px solid #FFE500;
+    --background:#57C4E5;
+    border-left: 10px solid #212738;
+    border-right: 10px solid #212738;
+    border-top: 10px solid #212738;
 }
 
 .noShadow {
@@ -11,25 +11,32 @@
     box-shadow: none;
 }
 
-.yellowBox{
+.roundCorner {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.menuBox{
     width: 60px;
     height: 56px;
-    background-color: #FFE500;
+    background-color: #212738;
     position: absolute;
     left: 0;
     top: 0;
-    border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 2px 2px 10px #00000067;
 }
 
 .quizMain {
-    --background:#78839E;
-    border-left: 6px solid #FFE500;
-    border-right: 6px solid #FFE500;
+    --background:#57C4E5;
+    border-left: 10px solid #212738;
+    border-right: 10px solid #212738;
 }
 
 .playMenu {
     --width: 20px;
-    --background: #FFE500;
+    --background: #212738;
     --max-width: 20px;
 }
 
@@ -64,18 +71,18 @@
     /* left: 2; */
 }
 
-.icons {
+.scoreIcons {
     width: 20px;
     height: 20px;
     position:absolute;
     top: 0;
-    margin-top: 12px;
+    margin-top: 5px;
     /* left: 2; */
 }
 
 .trophy{
     margin-left:110px;
-    color: rgb(196, 23, 23);
+    color: #FF2929;
 }
 
 .score{
@@ -94,7 +101,7 @@
 }
 
 .problemBox {
-    background-color: #FFE500;
+    background-color: #EDF2EF;
     text-align: center;
     /* padding:10px; */
     border-radius: 10px;
@@ -113,11 +120,11 @@
 .footerQuiz {
     width: 100wv;
     height: 60px;
-    background-color: #FFE500;
+    background-color: #212738;
 }
 
 .lockIcon{
-    color: black;
+    color: rgb(172, 169, 169);
     width: 50vw;
     height: 50px;
     opacity: 0.6;
@@ -128,10 +135,15 @@
     z-index:1;
 }
 
+.openLock {
+    color: rgb(51, 233, 81);
+    opacity: 1;
+}
+
 .triangleGame {
     position: absolute; 
     bottom: 0;
-    border-color: transparent transparent #FFE500 transparent;
+    border-color: transparent transparent #212738 transparent;
     border-style: solid;
     border-width: 0px 200px 100px 150px;
     width: 100%;
@@ -150,7 +162,7 @@
 
 .ionProgressBar {
     --buffer-background: #E9E9E9;
-    --progress-background: #009688;
+    --progress-background: #FFE500;
     width: 60%;
     height: 10px;
     border-radius: 20px;
@@ -195,9 +207,31 @@
 .answer {
     font-size: 64px;
     font-family: 'Skranji', cursive;
+    text-align: center;
 }
 
-.hint {
+.hintBox { 
+    padding: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+}
+
+.imgHint {
+    max-width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.popover {
+    --box-shadow: 2px 2px 10px #00000067;
+    --background: #FFFFFF;
+    position: absolute;
+    bottom:1;
+    /* margin-bottom:20px;
+    margin-right: 20px; */
+}
+
+.hintIcon {
     position: absolute;
     right: 0;
     bottom: 0;
