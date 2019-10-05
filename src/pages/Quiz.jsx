@@ -161,7 +161,7 @@ class Quiz extends React.Component {
     render() {
         return (
 
-            <IonPage className={this.state.showModal ? 'modalPage' : 'quizPage'}>
+            <IonPage className="quizPage">
                 <IonModal
                     isOpen={this.state.showModal}
                     onDidDismiss={e => this.setState({ showModal: false })}
@@ -180,9 +180,9 @@ class Quiz extends React.Component {
                                 </IonItem>
                             </IonRow>
                         </IonGrid>
-                      
-                            <i  onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
-                     
+
+                        <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
+
                     </IonContent>
 
 
@@ -193,13 +193,12 @@ class Quiz extends React.Component {
                             <IonMenuButton style={{ color: 'white' }} />
                         </IonButtons>
                         <div className="menuBox"></div>
-                        <div> </div>
-                        {/* <IonIcon className="fatPin" src="assets/fatPin.svg"></IonIcon> */}
+
                         <IonIcon className="scoreIcons trophy" icon={trophy}></IonIcon>
                         <div className="scoreIcons score" >{this.state.totalScore}</div>
                         <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}>
                         </IonProgressBar>
-                        <IonButtons >
+                        <IonButtons  onClick={this.sendCoordinates}>
                             <IonIcon className="mapIcon" slot="end" src="assets/locationmapIcon.svg"></IonIcon>
                         </IonButtons>
                     </IonToolbar>
@@ -211,7 +210,7 @@ class Quiz extends React.Component {
                             <h1 className="titleChallenge">CHALLENGE # {this.state.currentQuizz}</h1>
                         </IonRow>
                         <div className="extraInfo">
-                            <h6>Extra info</h6>
+                            <h6>Did you know?</h6>
                             <p className="description" >
                                 {this.state.quiz.placeDescription}
                             </p>
