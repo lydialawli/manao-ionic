@@ -153,7 +153,7 @@ class Quiz extends React.Component {
                 <IonHeader no-border className="noShadow">
                     <IonToolbar className="quizbar noShadow">
                         <IonButtons slot="start">
-                            <IonMenuButton />
+                            <IonMenuButton style={{color:'white'}}/>
                         </IonButtons>
                         <div className="menuBox"></div>
                         <div> </div>
