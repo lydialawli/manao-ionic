@@ -168,7 +168,7 @@ class Quiz extends React.Component {
 
     render() {
         return (
-            <IonPage>
+            <IonPage className="quizPage">
                 <IonHeader no-border className="noShadow">
                     <IonToolbar className="quizbar noShadow">
                         <IonButtons slot="start">
@@ -184,7 +184,6 @@ class Quiz extends React.Component {
                         <IonButtons >
                             <IonIcon className="mapIcon" slot="end" src="assets/locationmapIcon.svg"></IonIcon>
                         </IonButtons>
-                        <IonIcon className="roundCorner" slot="end" src="assets/roundCorner.svg"></IonIcon>
                     </IonToolbar>
                 </IonHeader>
 

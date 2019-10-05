@@ -1,8 +1,13 @@
+.quizPage {
+    background-color: #212738;
+}
+
 .quizbar {
     --background:#57C4E5;
     border-left: 10px solid #212738;
     border-right: 10px solid #212738;
     border-top: 10px solid #212738;
+    border-top-right-radius: 30px;
 }
 
 .noShadow {
