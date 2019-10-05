@@ -1,10 +1,10 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
-import { lock, map, unlock, trophy } from 'ionicons/icons';
-import { IonPopover, IonButton } from '@ionic/react';
+import { IonPopover, IonButton, IonModal, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
+import { lock, unlock, trophy } from 'ionicons/icons';
 import React from 'react';
 import '../styles/quiz.css';
-//import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/userOnboarding.css'
 
 class Quiz extends React.Component {
     state = {
@@ -47,6 +47,7 @@ class Quiz extends React.Component {
         inputPlaceholder: '______',
         showPopover: false,
         correctAnswer: false,
+        showModal: true,
 
     }
 
@@ -81,7 +82,8 @@ class Quiz extends React.Component {
             hintUsed: false,
             disableInput: false,
             correctAnswer: false,
-            answer: ''
+            answer: '',
+            showModal: true,
         })
         // console.log('next Quiz is ready!')
     }
@@ -135,6 +137,15 @@ class Quiz extends React.Component {
 
     }
 
+    sendCoordinates = () => {
+        this.props.history.push({
+            pathname: '/map',
+            lat: this.state.quiz.location.lat,
+            lng: this.state.quiz.location.lng,
+            locationName: this.state.quiz.locationName
+        })
+    }
+
     borderInput = () => {
         if (this.state.answer === '') {
             return ''
@@ -149,11 +160,37 @@ class Quiz extends React.Component {
 
     render() {
         return (
-            <IonPage className="quizPage">
+
+            <IonPage className={this.state.showModal ? 'modalPage' : 'quizPage'}>
+                <IonModal
+                    isOpen={this.state.showModal}
+                    onDidDismiss={e => this.setState({ showModal: false })}
+                >
+                    <IonContent className="modalWindow three" >
+                        <IonGrid className="onboardingGrid">
+                            <IonRow>
+                                <IonIcon className="manaoLogoLogin game" src="assets/Logo-yellow.svg"></IonIcon>
+                            </IonRow>
+                            <IonRow>
+                                <h1 className="guide">{this.state.quiz.indication}</h1>
+                            </IonRow>
+                            <IonRow>
+                                <IonItem className="guideContainer" onClick={this.sendCoordinates}>
+                                    <h1 className="guide locationName">{this.state.quiz.locationName}</h1>
+                                </IonItem>
+                            </IonRow>
+                        </IonGrid>
+                      
+                            <i  onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
+                     
+                    </IonContent>
+
+
+                </IonModal>
                 <IonHeader no-border className="noShadow">
                     <IonToolbar className="quizbar noShadow">
                         <IonButtons slot="start">
-                            <IonMenuButton style={{color:'white'}}/>
+                            <IonMenuButton style={{ color: 'white' }} />
                         </IonButtons>
                         <div className="menuBox"></div>
                         <div> </div>
