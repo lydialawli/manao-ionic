@@ -91,25 +91,6 @@ class Quiz extends React.Component {
             showPopover: true,
             hintUsed: true
         })
-        // if (this.state.quiz.hint.type === 'text') {
-        //     let showHint = this.state.showHint
-        //     showHint = !showHint
-        //     this.setState({ showHint, hintUsed: true })
-        // }
-
-        //  else {
-        //     Swal.fire({
-        //         title: 'Sweet!',
-        //         text: 'Modal with a custom image.',
-        //         imageUrl: 'https://unsplash.it/400/200',
-        //         imageWidth: 400,
-        //         imageHeight: 200,
-        //         imageAlt: 'Custom image',
-        //         animation: false,
-        //         customClass: "hintContainer",
-        //     })
-        //     this.setState({ hintUsed: true })
-        // }
     }
 
     filterPlaces = (event) => {
