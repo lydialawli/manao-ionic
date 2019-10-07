@@ -1,0 +1,26 @@
+.outcome {
+	--background: #57C4E5;
+	text-align: center;
+	font-family: 'Skranji', cursive;
+	color: #212738;
+}
+
+.fa-trophy {
+	color: #F97068;
+	font-size: 40px;
+}
+
+.fa-star {
+	color: #FFFF00;
+	font-size: 40px;
+}
+
+.outcomeRow {
+	margin: 20px;
+}
+
+.outcomeRow.score {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
