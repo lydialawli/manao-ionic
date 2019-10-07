@@ -36,12 +36,12 @@ class Welcome extends React.Component {
 				this.setState({user: res.data})
 			})
 		})
-		setTimeout(() => {
-			let slides = Array.from(document.getElementsByTagName('ion-slide'))
-			slides.forEach(slide => {
-				slide.style.height = '812px'
-			})
-		}, 1500)
+		// setTimeout(() => {
+		// 	let slides = Array.from(document.getElementsByTagName('ion-slide'))
+		// 	slides.forEach(slide => {
+		// 		slide.style.height = '812px'
+		// 	})
+		// }, 1500)
 	}
 
 	sendCoordinates = () => {
