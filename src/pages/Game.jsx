@@ -69,6 +69,10 @@ class Game extends React.Component {
 						game: this.state.game._id
 					})
 					.then(res => {
+						Plugins.Storage.set({
+							key: 'history',
+							value: res.data
+						})
 						this.props.history.push({
 							pathname: `/play/${this.state.game._id}/start`
 						})
