@@ -9,6 +9,7 @@ import { Plugins } from '@capacitor/core';
 
 class Quiz extends React.Component {
     state = {
+        user: '',
         historyId: '',
         quizzes: [],
         currentQuizz: 1,
@@ -54,14 +55,20 @@ class Quiz extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
+        Plugins.Storage.get({ key: 'token' })
+            .then(token => {
+                axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
+                    .then(res => {
+                        this.setState({ user: res.data })
+                        console.log('userId:',res.data._id)
+                    })
+            })
         Plugins.Storage.get({ key: 'history' })
             .then(history => { this.setState({ historyId: history.value }) })
         let gameId = this.props.match.params.id
 
         axios.get(`${process.env.REACT_APP_API}/games/${gameId}/quizzes`)
             .then(res => {
-
-                console.log('hey ===>', res.data.quizzes[0].quiz)
                 this.setState({
                     quizzes: res.data.quizzes,
                     quiz: res.data.quizzes[0].quiz,
@@ -80,7 +87,7 @@ class Quiz extends React.Component {
     nextQuizSetup = () => {
         // console.log('totalscore: ',this.state.totalScore)
         axios.patch(`${process.env.REACT_APP_API}/histories/${this.state.historyId}`, {
-            userId: '5d8c4e75dd6be3103c79e40e',
+            userId: this.state.user._id,
             score: this.state.totalScore
         }).then(data => console.log('patched!', data.data))
 
