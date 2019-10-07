@@ -1,10 +1,11 @@
+import React from 'react';
 import { IonPopover, IonButton, IonModal, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
 import { lock, unlock, trophy } from 'ionicons/icons';
-import React from 'react';
 import '../styles/quiz.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/userOnboarding.css'
+import { Plugins } from '@capacitor/core';
 
 class Quiz extends React.Component {
     state = {
@@ -52,11 +53,13 @@ class Quiz extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
-        axios.get(`${process.env.REACT_APP_API}/games/5d94625514d4cf2435d84f09/quizzes`)
-            .then(res => {
-                // let games = this.state.games.concat(res.data)
-                // console.log('games', games);
+        Plugins.Storage.get({key: 'history'})
+        .then(history => { console.log('history id',history.value)})
+        let gameId = this.props.match.params.id
 
+        axios.get(`${process.env.REACT_APP_API}/games/${gameId}/quizzes`)
+            .then(res => {
+        
                 console.log('hey ===>', res.data.quizzes[0].quiz)
                 this.setState({
                     quizzes: res.data.quizzes,
