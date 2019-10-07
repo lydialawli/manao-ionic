@@ -60,7 +60,7 @@ class Quiz extends React.Component {
                 axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
                     .then(res => {
                         this.setState({ user: res.data })
-                        console.log('userId:',res.data._id)
+                        console.log('userId:', res.data._id)
                     })
             })
         Plugins.Storage.get({ key: 'history' })
@@ -91,17 +91,29 @@ class Quiz extends React.Component {
             score: this.state.totalScore
         }).then(data => console.log('patched!', data.data))
 
-        this.setState({
-            quiz: this.state.quizzes[this.state.currentQuizz].quiz,
-            currentQuizz: this.state.currentQuizz + 1,
-            iconAnswerStyle: '',
-            iconAnswer: '',
-            hintUsed: false,
-            disableInput: false,
-            correctAnswer: false,
-            answer: '',
-            showModal: true,
-        })
+        if (!this.state.quizzes[this.state.currentQuizz]) {
+            this.props.history.push({
+                pathname: '/outcome',
+                score: this.state.totalScore,
+                user: this.state.user,
+                gameId: this.props.match.params.id
+            })
+        }
+
+        else {
+            this.setState({
+                quiz: this.state.quizzes[this.state.currentQuizz].quiz,
+                currentQuizz: this.state.currentQuizz + 1,
+                iconAnswerStyle: '',
+                iconAnswer: '',
+                hintUsed: false,
+                disableInput: false,
+                correctAnswer: false,
+                answer: '',
+                showModal: true,
+            })
+        }
+
         // console.log('next Quiz is ready!')
     }
 

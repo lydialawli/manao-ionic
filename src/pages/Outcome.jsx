@@ -5,7 +5,16 @@ import '../styles/outcome.css'
 class Outcome extends React.Component {
 	state = {
 		coloredStars: 0,
-		alert: false
+		alert: false,
+		score: 0,
+		userId: ''
+	}
+
+	UNSAFE_componentWillMount() {
+		this.setState({
+			score: this.props.location.score,
+			userId: this.props.location.userId
+		})
 	}
 
 	changeColoredStars = (n) => {
@@ -34,7 +43,7 @@ class Outcome extends React.Component {
 							<h1>Congrax! You finished the game!</h1>
 						</IonRow>
 						<IonRow className="outcomeRow score">
-							<h1><i className="fas fa-trophy"></i> Score: 340</h1>
+							<h1><i className="fas fa-trophy"></i> Score: {this.state.score}</h1>
 						</IonRow>
 						<IonRow className="outcomeRow">
 							<h6>On behalf of the Manao Team, we hope you had a blast.</h6>
