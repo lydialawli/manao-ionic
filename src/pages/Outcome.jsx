@@ -1,14 +1,25 @@
 import React from 'react'
-import { IonContent, IonPage, IonIcon, IonGrid, IonRow } from '@ionic/react';
+import { IonContent, IonPage, IonIcon, IonGrid, IonRow, IonAlert } from '@ionic/react';
 import '../styles/outcome.css'
 
 class Outcome extends React.Component {
 	state = {
-		coloredStars: 0
+		coloredStars: 0,
+		alert: false
 	}
 
 	changeColoredStars = (n) => {
-		this.setState({coloredStars: n})
+		let coloredStars = this.state.coloredStars
+		if (coloredStars === n) {
+			this.setState({alert: true})
+			setTimeout(() => {
+				this.props.history.push({
+					pathname: '/games'
+				})
+			}, 5000)
+		} else {
+			this.setState({coloredStars: n})
+		}
 	}
 
 	render () {
@@ -29,7 +40,7 @@ class Outcome extends React.Component {
 							<h6>On behalf of the Manao Team, we hope you had a blast.</h6>
 						</IonRow>
 						<IonRow className="outcomeRow">
-							<h6 className="">If you’d like more free games throughout the world, let us know what you think!</h6>
+							<h6 className="">Please rate this game. Manao community will be very thankful!</h6>
 						</IonRow>
 						{
 							[...Array(this.state.coloredStars)].map((s, i) => <i className="fas fa-star" onClick={() => this.changeColoredStars(i+1)}></i>)
@@ -37,6 +48,13 @@ class Outcome extends React.Component {
 						{
 							[...Array(5-this.state.coloredStars)].map((s, i) => <i className="far fa-star" onClick={() => this.changeColoredStars(this.state.coloredStars+i+1)}></i>)
 						}
+
+						<IonAlert
+							isOpen={this.state.alert}
+							onDidDismiss={() => this.setState({alert: false})}
+							header="Thank you for playing Manao!"
+							message="If you’d like more free games throughout the world, contact us and let us know your ideas!"
+							/>
 					</IonGrid>
 				</IonContent>
 			</IonPage>
