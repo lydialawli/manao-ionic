@@ -1,7 +1,7 @@
 import React from 'react'
 import { IonContent, IonPage, IonIcon, IonGrid, IonRow, IonItem, IonSlide, IonSlides, IonCol } from '@ionic/react';
 import { Plugins } from '@capacitor/core';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import '../styles/userOnboarding.css'
 import '../styles/welcome.css'
@@ -15,8 +15,8 @@ class Welcome extends React.Component {
 		},
 		user: {},
 		options: {
-			slidesPerView:1,
-			spaceBetween:0,
+			slidesPerView: 1,
+			spaceBetween: 0,
 			direction: 'vertical',
 			speed: 1000
 		}
@@ -25,17 +25,17 @@ class Welcome extends React.Component {
 	componentDidMount() {
 		let game = this.props.match.params.id
 		axios.get(`${process.env.REACT_APP_API}/games/${game}/quizzes`)
-		.then(res => {
-			this.setState({quiz: res.data.quizzes[0].quiz})
-		})
-
-		Plugins.Storage.get({key: 'token'})
-		.then(token => {
-			axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
 			.then(res => {
-				this.setState({user: res.data})
+				this.setState({ quiz: res.data.quizzes[0].quiz })
 			})
-		})
+
+		Plugins.Storage.get({ key: 'token' })
+			.then(token => {
+				axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
+					.then(res => {
+						this.setState({ user: res.data })
+					})
+			})
 		setTimeout(() => {
 			let slides = Array.from(document.getElementsByTagName('ion-slide'))
 			slides.forEach(slide => {
@@ -53,13 +53,13 @@ class Welcome extends React.Component {
 		})
 	}
 
-	render () {
+	render() {
 		const styles = {
 			slide: {
 				height: '812px !important'
 			}
 		}
-		return(
+		return (
 			<IonPage>
 				<IonContent className="userOnboarding">
 					<IonSlides options={this.state.options}>
@@ -116,35 +116,18 @@ class Welcome extends React.Component {
 								</IonRow>
 								<IonRow>
 									<h6>To unlock the next challenge, you must first answer the previous quiz correctly.</h6>
-									</IonRow>
-									<IonRow>
-										<h1 className="guide go">Got it? Let's go!</h1>
+								</IonRow>
+								<IonRow>
+									<h1 className="guide go">Got it? Let's go!</h1>
 								</IonRow>
 							</IonGrid>
-							<i className="fas fa-angle-double-down"></i>
-						</IonSlide>
-
-						<IonSlide className="onboardingSlide three" style={styles.slide}>
-							<IonGrid className="onboardingGrid">
-								<IonRow>
-									<IonIcon className="manaoLogoLogin game" src="assets/Logo-yellow.svg"></IonIcon>
-								</IonRow>
-								<IonRow>
-									<h1 className="guide">{this.state.quiz.indication}</h1>
-								</IonRow>
-								<IonRow>
-									<IonItem className="guideContainer" onClick={this.sendCoordinates}>
-										<h1 className="guide locationName">{this.state.quiz.locationName}</h1>
-									</IonItem>
-								</IonRow>
-							</IonGrid>
-							<Link to="/quiz"><i className="fas fa-angle-double-down"></i></Link>
+							<Link to={`/play/${this.props.match.params.id}/quizzes`}><i className="fas fa-angle-double-down"></i></Link>
 						</IonSlide>
 
 					</IonSlides>
 
 				</IonContent>
-			</IonPage>
+			</IonPage >
 		)
 	}
 }

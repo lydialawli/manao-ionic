@@ -69,7 +69,7 @@ const App: React.FC = () => (
           <Route path="/join" component={Join} exact={true} />
           <Route path="/profile/:id/settings" component={Settings} exact={true} />
 					<Route path="/play/:id/start" component={Welcome} exact={true} />
-          <Route path="/quiz" component={Quiz} exact={true} />
+          <Route path="/play/:id/quizzes" component={Quiz} exact={true} />
           <Route path="/about" component={About} exact={true} />
 					<Route path="/login" component={Login} exact={true} />
           <Route path="/games" component={Games} exact={true} />

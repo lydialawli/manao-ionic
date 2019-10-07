@@ -1,13 +1,15 @@
+import React from 'react';
 import { IonPopover, IonButton, IonModal, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
 import { lock, unlock, trophy } from 'ionicons/icons';
-import React from 'react';
 import '../styles/quiz.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/userOnboarding.css'
+import { Plugins } from '@capacitor/core';
 
 class Quiz extends React.Component {
     state = {
+        historyId: '',
         quizzes: [],
         currentQuizz: 1,
         quiz: {
@@ -52,10 +54,12 @@ class Quiz extends React.Component {
     }
 
     UNSAFE_componentWillMount() {
-        axios.get(`${process.env.REACT_APP_API}/games/5d94625514d4cf2435d84f09/quizzes`)
+        Plugins.Storage.get({ key: 'history' })
+            .then(history => { this.setState({ historyId: history.value }) })
+        let gameId = this.props.match.params.id
+
+        axios.get(`${process.env.REACT_APP_API}/games/${gameId}/quizzes`)
             .then(res => {
-                // let games = this.state.games.concat(res.data)
-                // console.log('games', games);
 
                 console.log('hey ===>', res.data.quizzes[0].quiz)
                 this.setState({
@@ -74,6 +78,12 @@ class Quiz extends React.Component {
     }
 
     nextQuizSetup = () => {
+        // console.log('totalscore: ',this.state.totalScore)
+        axios.patch(`${process.env.REACT_APP_API}/histories/${this.state.historyId}`, {
+            userId: '5d8c4e75dd6be3103c79e40e',
+            score: this.state.totalScore
+        }).then(data => console.log('patched!', data.data))
+
         this.setState({
             quiz: this.state.quizzes[this.state.currentQuizz].quiz,
             currentQuizz: this.state.currentQuizz + 1,
@@ -180,9 +190,9 @@ class Quiz extends React.Component {
                                 </IonItem>
                             </IonRow>
                         </IonGrid>
-                      
-                            <i  onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
-                     
+
+                        <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
+
                     </IonContent>
 
 
@@ -193,7 +203,7 @@ class Quiz extends React.Component {
                             <IonMenuButton style={{ color: 'white' }} />
                         </IonButtons>
                         <div className="menuBox"></div>
-                    
+
                         <IonIcon className="scoreIcons trophy" icon={trophy}></IonIcon>
                         <div className="scoreIcons score" >{this.state.totalScore}</div>
                         <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}>
