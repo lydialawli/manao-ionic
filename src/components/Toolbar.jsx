@@ -15,7 +15,6 @@ class Toolbar extends React.Component {
 	componentWillReceiveProps(props) {
 		Plugins.Storage.get({key: 'token'})
 		.then(token => {
-			console.log(token)
 			if (token.value) {
 				axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
 				.then(res => {
@@ -24,7 +23,6 @@ class Toolbar extends React.Component {
 						this.setState({
 							user: user.data
 						})
-						console.log(this.state.user)
 					})
 				})
 			} else {

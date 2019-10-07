@@ -1,0 +1,9 @@
+.settings.label {
+	opacity: 1 !important;
+}
+.main ion-item {
+	margin-top: 40px;
+}
+.settingsInput {
+	margin-bottom: 40px;
+}
