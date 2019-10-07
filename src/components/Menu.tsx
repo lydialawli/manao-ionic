@@ -19,7 +19,7 @@ interface MenuProps extends RouteComponentProps {
 const Menu: React.FunctionComponent<MenuProps> = ({ appPages }) => (
   <IonMenu contentId="main" type="overlay">
     <IonContent className="menu">
-      <IonList >
+      <IonList className="menuList">
         {appPages.map((appPage, index) => {
           return (
             <IonMenuToggle key={index} autoHide={false}>

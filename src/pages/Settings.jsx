@@ -1,6 +1,7 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonButton, IonMenuButton, IonAvatar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonButton } from '@ionic/react';
 import { Plugins } from '@capacitor/core';
+import Toolbar from '../components/Toolbar.jsx'
 import '../styles/toolbar.css'
 import '../styles/games.css'
 
@@ -20,18 +21,8 @@ class Settings extends React.Component {
     return (
       <IonPage>
         <IonHeader>
-          <IonToolbar className="toolbar">
-            <IonButtons slot="start">
-              <IonMenuButton />
-            </IonButtons>{" "}
-            <IonTitle> Manao </IonTitle>{" "}
-            <IonButtons slot="end">
-              <IonAvatar>
-                <img src="https://previews.123rf.com/images/alex9230/alex92301710/alex9230171000012/87612992-cute-face-of-lime-fruit-vector-illustration.jpg" alt="" />
-              </IonAvatar>
-            </IonButtons>{" "}
-          </IonToolbar>{" "}
-        </IonHeader>{" "}
+          <Toolbar />
+        </IonHeader>
 
 
         <IonContent className="main ion-padding">

@@ -1,6 +1,10 @@
 .menu {
-    --ion-background-color: #FFE03B;
+    --ion-background-color: #57C4E5;
     --ion-text-color: black;
-    --ion-font-family: 'Open Sans';
+    --ion-font-family: 'Skranji', cursive;
     --height: 40px;
+}
+
+.menuList {
+	padding-top: 40px;
 }

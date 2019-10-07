@@ -1,10 +1,9 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSlides, IonSlide, IonButtons, IonGrid, IonRow, IonCol, IonMenuButton, IonAvatar, IonIcon, withIonLifeCycle } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonSlides, IonSlide, IonGrid, IonRow, IonCol, IonIcon, withIonLifeCycle } from '@ionic/react';
 import { arrowBack, arrowForward } from 'ionicons/icons'
-import { Plugins } from '@capacitor/core';
 import Card from '../components/Card.jsx'
 import Button from '../components/Buttons.jsx'
-import { Link } from 'react-router-dom'
+import Toolbar from '../components/Toolbar.jsx'
 import axios from 'axios'
 import '../styles/toolbar.css'
 import '../styles/games.css'
@@ -38,34 +37,12 @@ class Home extends React.Component {
 
 	componentWillMount() {
 		let games = this.state.games
-		axios.get(`${process.env.REACT_APP_API}/games`)
 
+		axios.get(`${process.env.REACT_APP_API}/games`)
 		.then(res => {
 			games = res.data
 			this.setState({games}, () => this.mountSlides())
 		}).catch(err => {console.log('err', err)})
-
-		Plugins.Storage.get({key: 'token'})
-		.then(token => {
-			console.log(token)
-			if (token.value) {
-				axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
-				.then(res => {
-					axios.get(`${process.env.REACT_APP_API}/users/${res.data._id}`)
-					.then(user => {
-						this.setState({
-							user: user.data
-						})
-					})
-				})
-			} else {
-				let user = this.state.user
-				user._id = ''
-				this.setState({
-					user: user
-				})
-			}
-		})
 
 	}
 
@@ -74,29 +51,7 @@ class Home extends React.Component {
 			<IonPage>
 
         <IonHeader>
-          <IonToolbar className="toolbar">
-            <IonButtons slot="start">
-              <IonMenuButton />
-            </IonButtons>
-            <IonTitle> Manao </IonTitle>
-            <IonButtons slot="end">
-							{
-								this.state.user._id !== '' ?
-								<Link className="link" to={`/profile/${this.state.user._id}/settings`}>
-									<IonAvatar>
-	                	<img alt="" src={this.state.user.avatar} />
-	              	</IonAvatar>
-								</Link>
-									:
-								<Link className="link" to={`/login`}>
-									<IonAvatar>
-	                	<img alt="" src='/assets/default-avatar.png' />
-	              	</IonAvatar>
-								</Link>
-							}
-
-            </IonButtons>
-          </IonToolbar>
+          <Toolbar />
         </IonHeader>
 
 				<IonContent className="main ion-padding">

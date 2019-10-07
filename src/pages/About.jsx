@@ -1,19 +1,14 @@
-import { IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonList, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { americanFootball, basketball, beer, bluetooth, boat, build, flask, football, paperPlane, wifi } from 'ionicons/icons';
 import React from 'react';
-import '../styles/toolbar.css'
+import { IonContent, IonHeader, IonIcon, IonItem, IonList, IonPage } from '@ionic/react';
+import { americanFootball, basketball, beer, bluetooth, boat, build, flask, football, paperPlane, wifi } from 'ionicons/icons';
+import Toolbar from '../components/Toolbar.jsx'
 
 class About extends React.Component {
   render() {
     return (
       <IonPage>
         <IonHeader>
-          <IonToolbar className="toolbar">
-            <IonButtons slot="start">
-              <IonMenuButton />
-            </IonButtons>
-            <IonTitle>About Manao</IonTitle>
-          </IonToolbar>
+          <Toolbar />
         </IonHeader>
 
         <IonContent>
