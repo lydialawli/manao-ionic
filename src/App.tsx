@@ -15,6 +15,7 @@ import Settings from './pages/Settings.jsx';
 import Quiz from './pages/Quiz.jsx';
 import Map from './pages/Map.jsx'
 import Welcome from './pages/Welcome.jsx'
+import Outcome from './pages/Outcome.jsx'
 
 import { home, options, football, planet } from 'ionicons/icons';
 
@@ -73,6 +74,7 @@ const App: React.FC = () => (
           <Route path="/about" component={About} exact={true} />
 					<Route path="/login" component={Login} exact={true} />
           <Route path="/games" component={Games} exact={true} />
+					<Route path="/outcome" component={Outcome} exact={true} />
 					<Route path="/game/:id" component={Game} exact={true} />
 					<Route path="/signup" component={Signup} exact={true} />
 					<Route path="/map" component={Map} exact={true} />
