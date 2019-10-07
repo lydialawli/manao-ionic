@@ -180,9 +180,9 @@ class Quiz extends React.Component {
                                 </IonItem>
                             </IonRow>
                         </IonGrid>
-
-                        <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
-
+                      
+                            <i  onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
+                     
                     </IonContent>
 
 
@@ -193,12 +193,12 @@ class Quiz extends React.Component {
                             <IonMenuButton style={{ color: 'white' }} />
                         </IonButtons>
                         <div className="menuBox"></div>
-
+                    
                         <IonIcon className="scoreIcons trophy" icon={trophy}></IonIcon>
                         <div className="scoreIcons score" >{this.state.totalScore}</div>
                         <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}>
                         </IonProgressBar>
-                        <IonButtons  onClick={this.sendCoordinates}>
+                        <IonButtons onClick={this.sendCoordinates}>
                             <IonIcon className="mapIcon" slot="end" src="assets/locationmapIcon.svg"></IonIcon>
                         </IonButtons>
                     </IonToolbar>
