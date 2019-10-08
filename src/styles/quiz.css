@@ -37,6 +37,7 @@
     --background:#57C4E5;
     border-left: 10px solid #212738;
     border-right: 10px solid #212738;
+    border-bottom: 10px solid #212738;
 }
 
 .playMenu {
@@ -123,9 +124,13 @@
 }
 
 .footerQuiz {
-    width: 100wv;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     height: 60px;
     background-color: #212738;
+    z-index:0;
 }
 
 .lockIcon{
@@ -184,6 +189,7 @@
     text-align: center;
     margin-top: 20px;
     position: sticky;
+    font-size: 40px;
 }
 
 .redBorder {
@@ -210,9 +216,10 @@
 }
 
 .answer {
-    font-size: 64px;
+    font-size: 60px;
     font-family: 'Skranji', cursive;
     text-align: center;
+    background-color: transparent;
 }
 
 .hintBox { 
@@ -242,7 +249,7 @@
     right: 0;
     bottom: 0;
     margin-bottom: 20px;
-    z-index:2;
+    z-index:1;
 }
 
 .hintUsed {
