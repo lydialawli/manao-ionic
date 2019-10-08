@@ -30,8 +30,8 @@ class Map extends React.Component {
 		return(
 			<IonPage>
 				<IonContent>
+					<IonBackButton className="backBtn" text="" icon={arrowBack} defaultHref="/games" style={{position:"absolute"}}/>
 					<MapCom lat={this.state.lat} lng={this.state.lng} label={this.state.label} />
-					<IonBackButton color="medium" className="backBtn" text="" icon={arrowBack} onClick={this.goBack} style={{position:"absolute"}}/>
 				</IonContent>
 			</IonPage>
 		)

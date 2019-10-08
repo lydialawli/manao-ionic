@@ -73,8 +73,8 @@ const App: React.FC = () => (
           <Route exact path="/profile/:id/settings" render={() => checkAuth() ? <Settings/> : <Redirect to="/login"/>} />
 					<Route exact path="/play/:id/quizzes" render={() => checkAuth() ? <Quizzes/> : <Redirect to="/login"/>} />
 					<Route exact path="/play/:id/start" render={() => checkAuth() ? <Welcome/> : <Redirect to="/login"/>} />
-					<Route exact path="/game/:id" render={() => checkAuth() ? <Game/> : <Redirect to="/login"/>} />
 					<Route exact path="/outcome" render={() => checkAuth() ? <Outcome/> : <Redirect to="/login"/>} />
+					<Route path="/game/:id" component={Game} exact={true} />
 					<Route path="/signup" component={Signup} exact={true} />
 					<Route path="/login" component={Login} exact={true} />
 					<Route path="/games" component={Games} exact={true} />
