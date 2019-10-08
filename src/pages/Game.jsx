@@ -1,7 +1,7 @@
 import React from 'react'
 import { IonContent, IonPage, IonButton, IonIcon, IonText, IonBadge, IonBackButton, IonAlert } from '@ionic/react';
 import { time, logoUsd, speedometer, star, arrowBack } from 'ionicons/icons'
-import { Plugins } from '@capacitor/core';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios'
 import '../styles/game.css'
 import '../styles/games.css'
@@ -55,33 +55,29 @@ class Game extends React.Component {
 	}
 
 	play = () => {
-		Plugins.Storage.get({key: 'token'})
-		.then(token => {
-			if (token.value) {
-				axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
-				.then(user => {
-					axios.post(`${process.env.REACT_APP_API}/history`, {
-						players: [
-							{
-								user: user.data._id
-							}
-						],
-						game: this.state.game._id
-					})
-					.then(res => {
-						Plugins.Storage.set({
-							key: 'history',
-							value: res.data
-						})
-						this.props.history.push({
-							pathname: `/play/${this.state.game._id}/start`
-						})
+		let token = localStorage.getItem('token')
+
+		if (token) {
+			axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`)
+			.then(user => {
+				axios.post(`${process.env.REACT_APP_API}/history`, {
+					players: [
+						{
+							user: user.data._id
+						}
+					],
+					game: this.state.game._id
+				})
+				.then(res => {
+					localStorage.setItem('history', res.data)
+					this.props.history.push({
+						pathname: `/play/${this.state.game._id}/start`
 					})
 				})
-			} else {
-				this.setState({showMessage: true})
-			}
-		})
+			})
+		} else {
+			this.setState({showMessage: true})
+		}
 	}
 
 	render () {
@@ -166,4 +162,4 @@ class Game extends React.Component {
 	}
 }
 
-export default Game;
+export default withRouter(Game);

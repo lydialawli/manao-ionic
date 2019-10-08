@@ -3,7 +3,6 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { AppPage } from './declarations';
-
 import Menu from './components/Menu';
 import About from './pages/About.jsx';
 import Game from './pages/Game.jsx'
@@ -61,22 +60,26 @@ const appPages: AppPage[] = [
   }
 ];
 
+const checkAuth = () => {
+	return localStorage.getItem('token') ? true : false
+}
+
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonSplitPane contentId="main">
         <Menu appPages={appPages} />
         <IonRouterOutlet id="main">
-          <Route path="/join" component={Join} exact={true} />
-          <Route path="/profile/:id/settings" component={Settings} exact={true} />
-					<Route path="/play/:id/start" component={Welcome} exact={true} />
-          <Route path="/play/:id/quizzes" component={Quizzes} exact={true} />
-          <Route path="/about" component={About} exact={true} />
-					<Route path="/login" component={Login} exact={true} />
-          <Route path="/games" component={Games} exact={true} />
-					<Route path="/outcome" component={Outcome} exact={true} />
-					<Route path="/game/:id" component={Game} exact={true} />
+          <Route exact path="/profile/:id/settings" render={() => checkAuth() ? <Settings/> : <Redirect to="/login"/>} />
+					<Route exact path="/play/:id/quizzes" render={() => checkAuth() ? <Quiz/> : <Redirect to="/login"/>} />
+					<Route exact path="/play/:id/start" render={() => checkAuth() ? <Welcome/> : <Redirect to="/login"/>} />
+					<Route exact path="/game/:id" render={() => checkAuth() ? <Game/> : <Redirect to="/login"/>} />
+					<Route exact path="/outcome" render={() => checkAuth() ? <Outcome/> : <Redirect to="/login"/>} />
 					<Route path="/signup" component={Signup} exact={true} />
+					<Route path="/login" component={Login} exact={true} />
+					<Route path="/games" component={Games} exact={true} />
+					<Route path="/about" component={About} exact={true} />
+					<Route path="/join" component={Join} exact={true} />
 					<Route path="/map" component={Map} exact={true} />
           <Route exact path="/" render={() => <Redirect to="/games" />} />
         </IonRouterOutlet>

@@ -3,6 +3,7 @@ import { IonPopover, IonButton, IonModal, IonButtons, IonContent, IonHeader, Ion
 import { lock, unlock, trophy } from 'ionicons/icons';
 import '../styles/quiz.css';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/userOnboarding.css'
 import { Plugins } from '@capacitor/core';
@@ -301,4 +302,4 @@ class Quiz extends React.Component {
 }
 
 
-export default Quiz;
+export default withRouter(Quiz);

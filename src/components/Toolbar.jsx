@@ -1,7 +1,6 @@
 import React from 'react'
 import { IonTitle, IonToolbar, IonButtons, IonMenuButton, IonAvatar, IonIcon } from '@ionic/react';
 import { Link } from 'react-router-dom';
-import { Plugins } from '@capacitor/core';
 import axios from 'axios';
 import '../styles/toolbar.css'
 
@@ -13,26 +12,24 @@ class Toolbar extends React.Component {
 	}
 
 	componentWillReceiveProps(props) {
-		Plugins.Storage.get({key: 'token'})
-		.then(token => {
-			if (token.value) {
-				axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
-				.then(res => {
-					axios.get(`${process.env.REACT_APP_API}/users/${res.data._id}`)
-					.then(user => {
-						this.setState({
-							user: user.data
-						})
+		let token = localStorage.getItem('token')
+		if (token) {
+			axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`)
+			.then(res => {
+				axios.get(`${process.env.REACT_APP_API}/users/${res.data._id}`)
+				.then(user => {
+					this.setState({
+						user: user.data
 					})
 				})
-			} else {
-				let user = this.state.user
-				user._id = ''
-				this.setState({
-					user: user
-				})
-			}
-		})
+			})
+		} else {
+			let user = this.state.user
+			user._id = ''
+			this.setState({
+				user: user
+			})
+		}
 	}
 
 	render () {
