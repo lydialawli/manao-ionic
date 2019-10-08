@@ -62,7 +62,6 @@ class Quiz extends React.Component {
             })
         }
 
-        console.log('question', props.quiz.question)
     }
 
     changeAnswer = (e) => {

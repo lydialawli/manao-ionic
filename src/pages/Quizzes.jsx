@@ -53,6 +53,7 @@ class PlayQuizzes extends React.Component {
 
 
     nextQuizSetup = () => {
+        console.log('nextquiz', this.state.quizzes[this.state.currentQuizz].quiz)
         if (!this.state.quizzes[this.state.currentQuizz]) {
             this.props.history.push({
                 pathname: '/outcome',
@@ -64,7 +65,7 @@ class PlayQuizzes extends React.Component {
 
         else {
             this.setState({
-                quiz: this.state.quizzes[this.state.currentQuizz],
+                quiz: this.state.quizzes[this.state.currentQuizz+1].quiz,
                 currentQuizz: this.state.currentQuizz + 1,
             })
         }
