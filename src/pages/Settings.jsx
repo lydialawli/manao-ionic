@@ -83,13 +83,13 @@ class Settings extends React.Component {
 						<IonInput disabled={this.state.isDisabled} color="light" type="text" placeholder={this.state.user.nationality} className="settings label input" onIonChange={(e) => this.changeField(e, 'nationality')}></IonInput>
 					</IonItem>
 
-					<IonButton onClick={() => this.editFields(this.state.isDisabled)} className="play">
+					<IonButton onClick={() => this.editFields(this.state.isDisabled)} className="settings play">
 						{
 							this.state.isDisabled ? 'Edit info' : 'Save'
 						}
 						</IonButton>
 					<br></br>
-          <IonButton onClick={this.logout} className="play">Logout</IonButton>
+          <IonButton onClick={this.logout} className="settings logout play">Logout</IonButton>
         </IonContent>
       </IonPage>
     );
