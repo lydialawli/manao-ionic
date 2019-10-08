@@ -40,6 +40,7 @@ class Quiz extends React.Component {
         correctAnswer: false,
         showModal: true,
         currentQuizz: 1,
+        progressDiff: 0
     }
 
 
@@ -57,7 +58,7 @@ class Quiz extends React.Component {
             this.setState({
                 quiz: props.quiz,
                 currentQuizz: props.currentQuizz + 1,
-                refreshedData: true
+                progressDiff: props.progressDiff
             })
         }
 
@@ -113,28 +114,18 @@ class Quiz extends React.Component {
     }
 
     backToDefault = () => {
-        if (!this.state.quizzes[this.state.currentQuizz]) {
-            this.props.history.push({
-                pathname: '/outcome',
-                score: this.state.totalScore,
-                user: this.state.user,
-                gameId: this.state.gameId
-            })
-        }
+        this.props.nextQuiz()
+        this.setState({
+            currentQuizz: this.state.currentQuizz + 1,
+            iconAnswerStyle: '',
+            iconAnswer: '',
+            hintUsed: false,
+            disableInput: false,
+            correctAnswer: false,
+            answer: '',
+            showModal: true,
+        })
 
-        else {
-            this.setState({
-                quiz: this.state.quizzes[this.state.currentQuizz].quiz,
-                currentQuizz: this.state.currentQuizz + 1,
-                iconAnswerStyle: '',
-                iconAnswer: '',
-                hintUsed: false,
-                disableInput: false,
-                correctAnswer: false,
-                answer: '',
-                showModal: true,
-            })
-        }
 
         // console.log('next Quiz is ready!')
     }

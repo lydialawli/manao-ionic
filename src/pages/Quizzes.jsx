@@ -38,7 +38,7 @@ class PlayQuizzes extends React.Component {
 
         axios.get(`${process.env.REACT_APP_API}/games/${this.props.location.gameId}/quizzes`)
             .then(res => {
-                // console.log(res.data.quizzes[0].quiz)
+                console.log('quizzes ',res.data.quizzes)
                 this.setState({
                     quizzes: res.data.quizzes,
                     progressDiff: 1 / res.data.quizzes.length,
@@ -51,12 +51,6 @@ class PlayQuizzes extends React.Component {
 
 
     nextQuizSetup = () => {
-        // console.log('totalscore: ',this.state.totalScore)
-        axios.patch(`${process.env.REACT_APP_API}/histories/${this.state.historyId}`, {
-            userId: this.state.user._id,
-            score: this.state.totalScore
-        }).then(data => console.log('patched!', data.data))
-
         if (!this.state.quizzes[this.state.currentQuizz]) {
             this.props.history.push({
                 pathname: '/outcome',
@@ -68,27 +62,12 @@ class PlayQuizzes extends React.Component {
 
         else {
             this.setState({
-                quiz: this.state.quizzes[this.state.currentQuizz].quiz,
+                quiz: this.state.quizzes[this.state.currentQuizz],
                 currentQuizz: this.state.currentQuizz + 1,
-                iconAnswerStyle: '',
-                iconAnswer: '',
-                hintUsed: false,
-                disableInput: false,
-                correctAnswer: false,
-                answer: '',
-                showModal: true,
             })
         }
-
-        // console.log('next Quiz is ready!')
     }
 
-    showHint = () => {
-        this.setState({
-            showPopover: true,
-            hintUsed: true
-        })
-    }
 
     changeProgress = (progressValue, score) => {
         console.log('progressValue',progressValue)
@@ -105,39 +84,6 @@ class PlayQuizzes extends React.Component {
         }).then(data => console.log('patched!', data.data))
     }
 
-    // changeAnswer = (e) => {
-    //     this.setState({ answer: e.target.value })
-    //     let answer = e.target.value.toUpperCase()
-    //     let trueAnswer = this.state.quiz.answer.content.toUpperCase()
-
-    //     if (answer === trueAnswer) {
-    //         let hint = this.state.hintUsed ? 5 : 0
-
-    //         this.setState({
-    //             correctAnswer: true,
-    //             iconAnswer: "far fa-check-circle",
-    //             iconAnswerStyle: 'greenAnswer',
-    //             disableInput: true,
-    //             progressValue: this.state.progressValue + this.state.progressDiff,
-    //             totalScore: this.state.totalScore + this.state.quiz.score - hint,
-    //         })
-    //     }
-
-    //     else if (answer === '') {
-    //         this.setState({
-    //             iconAnswer: ''
-    //         })
-    //     }
-    //     else {
-    //         this.setState({
-    //             correctAnswer: false,
-    //             iconAnswer: "far fa-times-circle",
-    //             iconAnswerStyle: 'redAnswer',
-    //         })
-    //     }
-
-    // }
-
     sendCoordinates = () => {
         this.props.history.push({
             pathname: '/map',
@@ -146,18 +92,6 @@ class PlayQuizzes extends React.Component {
             locationName: this.state.quiz.locationName
         })
     }
-
-    // borderInput = () => {
-    //     if (this.state.answer === '') {
-    //         return ''
-    //     }
-    //     if (this.state.correctAnswer) {
-    //         return 'greenBorder'
-    //     }
-    //     else {
-    //         return 'redBorder'
-    //     }
-    // }
 
     render() {
         return (
@@ -180,7 +114,7 @@ class PlayQuizzes extends React.Component {
                     </IonToolbar>
                 </IonHeader>
                 <IonContent>
-                    <Quiz quiz={this.state.quiz} currentQuizz={this.state.currentQuizz} history={this.props.history} onCorrect={this.changeProgress}></Quiz>
+                    <Quiz quiz={this.state.quiz} currentQuizz={this.state.currentQuizz} progressDiff={this.state.progressDiff} history={this.props.history} nextQuiz={this.nextQuizSetup} onCorrect={this.changeProgress}></Quiz>
                 </IonContent>
 
             </IonPage >
