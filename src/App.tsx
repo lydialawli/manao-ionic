@@ -10,8 +10,8 @@ import Games from './pages/Games.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import Join from './pages/Join.jsx'
-import Settings from './pages/Settings.jsx';
-import Quizzes from './pages/Quizzes.jsx';
+import Settings from './pages/Settings.jsx'
+import Quizzes from './pages/Quizzes.jsx'
 import Map from './pages/Map.jsx'
 import Welcome from './pages/Welcome.jsx'
 import Outcome from './pages/Outcome.jsx'

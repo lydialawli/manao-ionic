@@ -2,6 +2,7 @@ import React from 'react'
 import { IonPopover, IonButton, IonModal, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
 import { lock, unlock, trophy } from 'ionicons/icons'
 import '../styles/quiz.css';
+import '../styles/userOnboarding.css'
 
 class Quiz extends React.Component {
     state = {
@@ -207,7 +208,7 @@ class Quiz extends React.Component {
                     <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                 </IonItem>
 
-                <IonPopover
+                {/* <IonPopover
                     translucent={true}
                     animated={false}
                     cssClass="popover"
@@ -218,8 +219,18 @@ class Quiz extends React.Component {
                         this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
                             <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`} />)
                     }
-                </IonPopover>
+                </IonPopover> */}
 
+                <IonModal
+                    isOpen={this.state.showPopover}
+                    onDidDismiss={e => this.setState({ showPopover: false })}
+                    cssClass="popover"
+                >
+                    {
+                        this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
+                            <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`} />)
+                    }
+                </IonModal>
                 <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hintIcon-white.svg"></IonIcon></IonButtons>
                 <IonFooter className="footerQuiz" >
                     <button disabled={!this.state.correctAnswer} onClick={() => this.backToDefault()}>

@@ -8,7 +8,7 @@ import axios from 'axios';
 import '../styles/userOnboarding.css'
 import Quiz from '../components/Quiz.jsx'
 
-class PlayQuizzes extends React.Component {
+class Quizzes extends React.Component {
     state = {
         user: '',
         historyId: '',
@@ -127,5 +127,5 @@ class PlayQuizzes extends React.Component {
 
 
 
-export default withRouter(PlayQuizzes);
+export default withRouter(Quizzes);
 
