@@ -1,0 +1,12 @@
+.joinMessage {
+	font-family: 'Skranji', cursive;
+	padding: 40px;
+}
+
+.joinMessage h1 {
+	color: #57C4E5;
+}
+
+.joinMessage h5 {
+	color: #F97068;
+}
