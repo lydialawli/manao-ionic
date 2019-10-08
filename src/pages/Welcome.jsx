@@ -9,6 +9,7 @@ import '../styles/welcome.css'
 class Welcome extends React.Component {
 
 	state = {
+		gameId: '',
 		quiz: {
 			indication: '',
 			locationName: ''
@@ -25,7 +26,10 @@ class Welcome extends React.Component {
 		let game = this.props.match.params.id
 		axios.get(`${process.env.REACT_APP_API}/games/${game}/quizzes`)
 			.then(res => {
-				this.setState({ quiz: res.data.quizzes[0].quiz })
+				this.setState({ 
+					quiz: res.data.quizzes[0].quiz,
+					gameId: this.props.match.params.id
+				})
 			})
 
 		Plugins.Storage.get({ key: 'token' })
@@ -43,6 +47,14 @@ class Welcome extends React.Component {
 			lat: this.state.quiz.location.lat,
 			lng: this.state.quiz.location.lng,
 			locationName: this.state.quiz.locationName
+		})
+	}
+
+	goToPlayQuizzes = () => {
+		this.props.history.push({
+			pathname: `/play/${this.state.gameId}/quizzes`,
+			gameId: this.state.gameId,
+			user: this.state.user
 		})
 	}
 
@@ -110,7 +122,7 @@ class Welcome extends React.Component {
 									<h1 className="guide go">Got it? Let's go!</h1>
 								</IonRow>
 							</IonGrid>
-							<Link to={`/play/${this.props.match.params.id}/quizzes`}><i className="fas fa-thumbs-up"></i></Link>
+							<IonItem onClick={this.goToPlayQuizzes}><i className="fas fa-thumbs-up"></i></IonItem>
 						</IonSlide>
 
 					</IonSlides>
