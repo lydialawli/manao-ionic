@@ -12,7 +12,7 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import Join from './pages/Join.jsx'
 import Settings from './pages/Settings.jsx';
-import Quiz from './pages/Quiz.jsx';
+import Quizzes from './pages/Quizzes.jsx';
 import Map from './pages/Map.jsx'
 import Welcome from './pages/Welcome.jsx'
 import Outcome from './pages/Outcome.jsx'
@@ -70,7 +70,7 @@ const App: React.FC = () => (
           <Route path="/join" component={Join} exact={true} />
           <Route path="/profile/:id/settings" component={Settings} exact={true} />
 					<Route path="/play/:id/start" component={Welcome} exact={true} />
-          <Route path="/play/:id/quizzes" component={Quiz} exact={true} />
+          <Route path="/play/:id/quizzes" component={Quizzes} exact={true} />
           <Route path="/about" component={About} exact={true} />
 					<Route path="/login" component={Login} exact={true} />
           <Route path="/games" component={Games} exact={true} />

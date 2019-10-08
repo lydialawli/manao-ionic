@@ -54,7 +54,15 @@ class Quiz extends React.Component {
 
     }
 
-    UNSAFE_componentWillMount() {
+    ionViewWillEnter() {
+        this.onPageView()
+    }
+
+    componentWillMount() {
+        this.onPageView()
+    }
+
+    onPageView = () => {
         Plugins.Storage.get({ key: 'token' })
             .then(token => {
                 axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
@@ -213,7 +221,6 @@ class Quiz extends React.Component {
                         <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
 
                     </IonContent>
-
 
                 </IonModal>
                 <IonHeader no-border className="noShadow">
