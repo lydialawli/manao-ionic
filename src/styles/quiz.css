@@ -119,8 +119,11 @@
 }
 
 .problemImg {
-    width: 300px;
-    height: 150px;
+    max-width: 300px;
+    max-height: 150px;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-sizing: content-box;
 }
 
 .footerQuiz {

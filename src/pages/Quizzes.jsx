@@ -54,7 +54,7 @@ class Quizzes extends React.Component {
 
     nextQuizSetup = () => {
         console.log('nextquiz', this.state.quizzes[this.state.currentQuizz].quiz)
-        if (!this.state.quizzes[this.state.currentQuizz]) {
+        if (!this.state.quizzes[this.state.currentQuizz+1]) {
             this.props.history.push({
                 pathname: '/outcome',
                 score: this.state.totalScore,
