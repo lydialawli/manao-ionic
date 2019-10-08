@@ -1,6 +1,6 @@
 import React from 'react'
 import { IonPopover, IonButton, IonModal, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
-import { trophy } from 'ionicons/icons';
+import { lock, unlock, trophy } from 'ionicons/icons'
 import '../styles/quiz.css';
 
 class Quiz extends React.Component {
@@ -28,10 +28,7 @@ class Quiz extends React.Component {
             indication: '',
             placeDescription: '_ _',
         },
-        progressDiff: 0, // should be 1/gameNumQuizzes.length
-        totalScore: 0,
         progressValue: 0,
-        quizScore: 20,
         iconAnswer: '',
         iconAnswerStyle: '',
         showHint: false,
@@ -43,7 +40,6 @@ class Quiz extends React.Component {
         correctAnswer: false,
         showModal: true,
         currentQuizz: 1,
-        refreshedData: false
     }
 
 
@@ -65,7 +61,7 @@ class Quiz extends React.Component {
             })
         }
 
-        console.log('question',props.quiz.question)
+        console.log('question', props.quiz.question)
     }
 
     changeAnswer = (e) => {
@@ -75,14 +71,17 @@ class Quiz extends React.Component {
 
         if (answer === trueAnswer) {
             let hint = this.state.hintUsed ? 5 : 0
+            let progressValue = this.state.progressValue + this.state.progressDiff
+            let score = this.state.quiz.score - hint
+
+            this.props.onCorrect(progressValue, score)
 
             this.setState({
                 correctAnswer: true,
                 iconAnswer: "far fa-check-circle",
                 iconAnswerStyle: 'greenAnswer',
                 disableInput: true,
-                progressValue: this.state.progressValue + this.state.progressDiff,
-                totalScore: this.state.totalScore + this.state.quiz.score - hint,
+                progressValue: progressValue
             })
         }
 
@@ -113,15 +112,41 @@ class Quiz extends React.Component {
         })
     }
 
+    backToDefault = () => {
+        if (!this.state.quizzes[this.state.currentQuizz]) {
+            this.props.history.push({
+                pathname: '/outcome',
+                score: this.state.totalScore,
+                user: this.state.user,
+                gameId: this.state.gameId
+            })
+        }
 
-    sendCoordinates = () => {
-        this.props.history.push({
-            pathname: '/map',
-            lat: this.state.quiz.location.lat,
-            lng: this.state.quiz.location.lng,
-            locationName: this.state.quiz.locationName
-        })
+        else {
+            this.setState({
+                quiz: this.state.quizzes[this.state.currentQuizz].quiz,
+                currentQuizz: this.state.currentQuizz + 1,
+                iconAnswerStyle: '',
+                iconAnswer: '',
+                hintUsed: false,
+                disableInput: false,
+                correctAnswer: false,
+                answer: '',
+                showModal: true,
+            })
+        }
+
+        // console.log('next Quiz is ready!')
     }
+
+    // sendCoordinates = () => {
+    //     this.props.history.push({
+    //         pathname: '/map',
+    //         lat: this.state.quiz.location.lat,
+    //         lng: this.state.quiz.location.lng,
+    //         locationName: this.state.quiz.locationName
+    //     })
+    // }
 
     borderInput = () => {
         if (this.state.answer === '') {
@@ -179,7 +204,6 @@ class Quiz extends React.Component {
                             <IonIcon className="manaoLogo" src="assets/logo-black-shadow.svg"></IonIcon>
                         </IonCol>
                         <IonCol size="9" offset="2" className="problemBox">
-                            {/* {!this.state.refreshedData ? <p className="problemString">loading problem...</p> : <p className="problemString">problem loaded!</p>} */}
                             {
                                 this.state.quiz.question.type === 'text' ? <p className="problemString">{this.state.quiz.question.content}</p> : <IonImg className="problemImg" src={`${this.state.quiz.question.content}`} />
                             }
@@ -189,8 +213,7 @@ class Quiz extends React.Component {
                 </IonGrid>
 
                 <IonItem className={`answerForm ${this.borderInput()}`}>
-
-                    {/* <IonInput value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput> */}
+                    <IonInput value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                     <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                 </IonItem>
 
@@ -201,15 +224,22 @@ class Quiz extends React.Component {
                     isOpen={this.state.showPopover}
                     onDidDismiss={e => this.setState({ showPopover: false })}
                 >
-                    {/* {
+                    {
                         this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
                             <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`} />)
-
-                    } */}
+                    }
                 </IonPopover>
 
                 <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hintIcon-white.svg"></IonIcon></IonButtons>
+                <IonFooter className="footerQuiz" >
+                    <button disabled={!this.state.correctAnswer} onClick={() => this.backToDefault()}>
+                        {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
+                            (<IonIcon className="lockIcon" icon={lock}> </IonIcon>)}
+                    </button>
+                    {/* <div className="triangleGame"></div> */}
+                </IonFooter>
             </IonContent>
+
 
 
             // 

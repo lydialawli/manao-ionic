@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/userOnboarding.css'
 import Quiz from '../components/Quiz.jsx'
+import { thisExpression } from '@babel/types';
 
 class PlayQuizzes extends React.Component {
     state = {
@@ -15,6 +16,8 @@ class PlayQuizzes extends React.Component {
         currentQuizz: 0,
         quiz: {},
         totalScore: 0,
+        progressValue: 0,
+        progressDiff: 0, // should be 1/gameNumQuizzes.length
     }
 
     ionViewWillEnter() {
@@ -87,38 +90,53 @@ class PlayQuizzes extends React.Component {
         })
     }
 
-    changeAnswer = (e) => {
-        this.setState({ answer: e.target.value })
-        let answer = e.target.value.toUpperCase()
-        let trueAnswer = this.state.quiz.answer.content.toUpperCase()
+    changeProgress = (progressValue, score) => {
+        console.log('progressValue',progressValue)
+        console.log('score',score)
 
-        if (answer === trueAnswer) {
-            let hint = this.state.hintUsed ? 5 : 0
+        this.setState({
+            progressValue: progressValue,
+            totalScore: this.state.totalScore + score
+        })
 
-            this.setState({
-                correctAnswer: true,
-                iconAnswer: "far fa-check-circle",
-                iconAnswerStyle: 'greenAnswer',
-                disableInput: true,
-                progressValue: this.state.progressValue + this.state.progressDiff,
-                totalScore: this.state.totalScore + this.state.quiz.score - hint,
-            })
-        }
-
-        else if (answer === '') {
-            this.setState({
-                iconAnswer: ''
-            })
-        }
-        else {
-            this.setState({
-                correctAnswer: false,
-                iconAnswer: "far fa-times-circle",
-                iconAnswerStyle: 'redAnswer',
-            })
-        }
-
+        axios.patch(`${process.env.REACT_APP_API}/histories/${this.state.historyId}`, {
+            userId: this.state.user._id,
+            score: this.state.totalScore + score
+        }).then(data => console.log('patched!', data.data))
     }
+
+    // changeAnswer = (e) => {
+    //     this.setState({ answer: e.target.value })
+    //     let answer = e.target.value.toUpperCase()
+    //     let trueAnswer = this.state.quiz.answer.content.toUpperCase()
+
+    //     if (answer === trueAnswer) {
+    //         let hint = this.state.hintUsed ? 5 : 0
+
+    //         this.setState({
+    //             correctAnswer: true,
+    //             iconAnswer: "far fa-check-circle",
+    //             iconAnswerStyle: 'greenAnswer',
+    //             disableInput: true,
+    //             progressValue: this.state.progressValue + this.state.progressDiff,
+    //             totalScore: this.state.totalScore + this.state.quiz.score - hint,
+    //         })
+    //     }
+
+    //     else if (answer === '') {
+    //         this.setState({
+    //             iconAnswer: ''
+    //         })
+    //     }
+    //     else {
+    //         this.setState({
+    //             correctAnswer: false,
+    //             iconAnswer: "far fa-times-circle",
+    //             iconAnswerStyle: 'redAnswer',
+    //         })
+    //     }
+
+    // }
 
     sendCoordinates = () => {
         this.props.history.push({
@@ -129,22 +147,17 @@ class PlayQuizzes extends React.Component {
         })
     }
 
-    borderInput = () => {
-        if (this.state.answer === '') {
-            return ''
-        }
-        if (this.state.correctAnswer) {
-            return 'greenBorder'
-        }
-        else {
-            return 'redBorder'
-        }
-    }
-
-    getQuiz =()=> {
-        return this.state.quizzes[this.state.currentQuizz]
-    }
-
+    // borderInput = () => {
+    //     if (this.state.answer === '') {
+    //         return ''
+    //     }
+    //     if (this.state.correctAnswer) {
+    //         return 'greenBorder'
+    //     }
+    //     else {
+    //         return 'redBorder'
+    //     }
+    // }
 
     render() {
         return (
@@ -161,21 +174,15 @@ class PlayQuizzes extends React.Component {
                         <div className="scoreIcons score" >{this.state.totalScore}</div>
                         <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}>
                         </IonProgressBar>
-                        {/* <IonButtons onClick={this.sendCoordinates}>
+                        <IonButtons onClick={this.sendCoordinates}>
                             <IonIcon className="mapIcon" slot="end" src="assets/locationmapIcon.svg"></IonIcon>
-                        </IonButtons> */}
+                        </IonButtons>
                     </IonToolbar>
                 </IonHeader>
                 <IonContent>
-                    <Quiz quiz={this.state.quiz} currentQuizz={this.state.currentQuizz} history={this.props.history}></Quiz>
+                    <Quiz quiz={this.state.quiz} currentQuizz={this.state.currentQuizz} history={this.props.history} onCorrect={this.changeProgress}></Quiz>
                 </IonContent>
-                <IonFooter className="footerQuiz" >
-                    <button disabled={!this.state.correctAnswer} onClick={() => this.nextQuizSetup()}>
-                        {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
-                            (<IonIcon className="lockIcon" icon={lock}> </IonIcon>)}
-                    </button>
-                    {/* <div className="triangleGame"></div> */}
-                </IonFooter>
+
             </IonPage >
         )
     }
