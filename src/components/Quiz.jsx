@@ -41,7 +41,7 @@ class Quiz extends React.Component {
         correctAnswer: false,
         showModal: true,
         currentQuizz: 1,
-        progressDiff: 0
+        progressDiff: 0,
     }
 
 
@@ -114,7 +114,6 @@ class Quiz extends React.Component {
     }
 
     backToDefault = () => {
-        this.props.nextQuiz()
         this.setState({
             currentQuizz: this.state.currentQuizz + 1,
             iconAnswerStyle: '',
@@ -124,8 +123,9 @@ class Quiz extends React.Component {
             correctAnswer: false,
             answer: '',
             showModal: true,
+            quiz: {}
         })
-
+        this.props.nextQuiz()
 
         // console.log('next Quiz is ready!')
     }

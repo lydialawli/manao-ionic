@@ -17,6 +17,15 @@ class Home extends React.Component {
 		}
 	}
 
+	componentWillReceiveProps(props) {
+		console.log('refresh!=>',props)
+		if(props.history.location.refresh){
+			console.log('will refresh!')
+			window.location.reload(true)
+		}
+	}
+
+
 	mountSlides = () => {
 		let wrapper = document.getElementsByClassName('swiper-wrapper')[0]
 		let slides = Array.from(document.getElementsByTagName('ion-slide'))
@@ -33,23 +42,23 @@ class Home extends React.Component {
 		let games = this.state.games
 
 		axios.get(`${process.env.REACT_APP_API}/games`)
-		.then(res => {
-			games = res.data
-			this.setState({games}, () => this.mountSlides())
-		}).catch(err => {console.log('err', err)})
+			.then(res => {
+				games = res.data
+				this.setState({ games }, () => this.mountSlides())
+			}).catch(err => { console.log('err', err) })
 
 	}
 
 	sendCoordinates = () => {
 		Plugins.Geolocation.getCurrentPosition()
-		.then(res => {
-			this.props.history.push({
+			.then(res => {
+				this.props.history.push({
 					pathname: '/map',
 					lat: res.coords.latitude,
 					lng: res.coords.longitude,
 					locationName: 'You are here'
+				})
 			})
-		})
 
 
 	}
@@ -58,9 +67,9 @@ class Home extends React.Component {
 		return (
 			<IonPage>
 
-        <IonHeader>
-          <Toolbar />
-        </IonHeader>
+				<IonHeader>
+					<Toolbar />
+				</IonHeader>
 
 				<IonContent className="main ion-padding">
 					<IonGrid className="filters">

@@ -28,23 +28,32 @@ class Quizzes extends React.Component {
         this.onPageView()
     }
 
-    onPageView = () => {
-        let historyId = localStorage.getItem('history')
-        console.log('user', this.props.location.user)
-        console.log('historyId', historyId)
-        this.setState({
-            historyId: historyId,
-            user: this.props.location.user,
-            gameId: this.props.location.gameId
-        })
+    componentWillReceiveProps(props) {
+        this.onPageView(props)
+    }
 
-        axios.get(`${process.env.REACT_APP_API}/games/${this.props.location.gameId}/quizzes`)
+    onPageView = (p) => {
+        let props = ''
+        if (p) {
+            props = p
+        }
+        else { props = this.props }
+
+        let historyId = localStorage.getItem('history')
+        console.log('user', props.location.user)
+        console.log('historyId', historyId)
+        console.log('gameId ', props.location.gameId)
+
+        axios.get(`${process.env.REACT_APP_API}/games/${props.location.gameId}/quizzes`)
             .then(res => {
-                // console.log('progressDiff ', res.data.quizzes)
+                console.log('quizzes==> ', res.data.quizzes)
                 this.setState({
                     quizzes: res.data.quizzes,
                     progressDiff: 1 / res.data.quizzes.length,
-                    quiz: res.data.quizzes[0].quiz
+                    quiz: res.data.quizzes[0].quiz,
+                    historyId: historyId,
+                    user: props.location.user,
+                    gameId: props.location.gameId
                     // inputPlaceholder: res.data.quizzes[0].quiz.answer.content.length
                 })
             })
@@ -54,7 +63,8 @@ class Quizzes extends React.Component {
 
     nextQuizSetup = () => {
         console.log('nextquiz', this.state.quizzes[this.state.currentQuizz].quiz)
-        if (!this.state.quizzes[this.state.currentQuizz+1]) {
+        if (!this.state.quizzes[this.state.currentQuizz + 1]) {
+
             this.props.history.push({
                 pathname: '/outcome',
                 score: this.state.totalScore,
@@ -65,7 +75,7 @@ class Quizzes extends React.Component {
 
         else {
             this.setState({
-                quiz: this.state.quizzes[this.state.currentQuizz+1].quiz,
+                quiz: this.state.quizzes[this.state.currentQuizz + 1].quiz,
                 currentQuizz: this.state.currentQuizz + 1,
             })
         }
