@@ -11,7 +11,7 @@ class Toolbar extends React.Component {
 		}
 	}
 
-	componentWillReceiveProps(props) {
+	UNSAFE_componentWillReceiveProps(props) {
 		let token = localStorage.getItem('token')
 		if (token) {
 			axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`)
@@ -35,11 +35,11 @@ class Toolbar extends React.Component {
 	render () {
 		return (
 			<IonToolbar className="toolbar">
-				<IonButtons slot="start">
+				<IonButtons className="toolbarItem" slot="start">
 					<IonMenuButton />
 				</IonButtons>
-				<Link to={'/games'}><IonTitle><IonIcon className="toolbarLogo" src="assets/Logo-yellow.svg"></IonIcon></IonTitle></Link>
-				<IonButtons slot="end">
+				<Link to={'/games'}><IonTitle className="toolbarItem toolbar-title"><IonIcon className="toolbarLogo" src="assets/Logo-yellow.svg"></IonIcon></IonTitle></Link>
+				<IonButtons className="toolbarItem avatar" slot="end">
 					{
 						this.state.user._id !== '' ?
 						<Link to={`/profile/${this.state.user._id}/settings`}>

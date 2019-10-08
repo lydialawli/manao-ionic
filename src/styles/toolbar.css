@@ -3,23 +3,22 @@
 	color: white;
 }
 
+.toolbarItem {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.toolbarItem.avatar {
+	margin-right: 10px;
+}
+
 .toolbarLogo {
 	height: 40px;
 	width: 40px;
 }
 
-.profile {
-	padding-right: 10px;
-	display: flex;
-	justify-content: flex-end;
-	align-items: flex-end;
-}
-
-.avatar {
-	background: #ffffff;
-	border-radius: 50px;
-	height: 40px;
-	width: 40px;
+.toolbar-title {
+	text-align: center;
 }
 
 ion-avatar {

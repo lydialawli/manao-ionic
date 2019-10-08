@@ -1,10 +1,23 @@
 .menu {
-    --ion-background-color: #57C4E5;
+    --background: transparent;
     --ion-text-color: black;
-    --ion-font-family: 'Skranji', cursive;
+    /* --ion-font-family: 'Skranji', cursive; */
+		--ion-font-family: 'Titan One', cursive;
     --height: 40px;
 }
 
+ion-menu {
+	--background: transparent;
+
+}
+
+.menuItem {
+	margin: 20px 0px;
+}
+
 .menuList {
-	padding-top: 40px;
+	padding-top: 100px;
+	padding-bottom: 30vh;
+	--ion-background-color: #FFE03B;
+	border-bottom-right-radius: 10px;
 }

@@ -19,6 +19,16 @@ class Settings extends React.Component {
 		isDisabled: true
 	}
 
+	componentDidMount() {
+		let token = localStorage.getItem('token')
+		if (token) {
+			axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`)
+			.then(res => {
+				this.setState({user: res.data})
+			})
+		}
+	}
+
 	logout = () => {
 		localStorage.clear()
 		this.props.history.push({pathname: '/games'})
@@ -41,15 +51,6 @@ class Settings extends React.Component {
 				this.setState({isDisabled: true})
 			})
 		}
-	}
-
-	componentWillReceiveProps(props) {
-		console.log(this.props);
-		let user = this.props.match.params.id
-		axios.get(`${process.env.REACT_APP_API}/users/${user}`)
-		.then(res => {
-			this.setState({user: res.data})
-		})
 	}
 
 	ionViewWillLeave() {
