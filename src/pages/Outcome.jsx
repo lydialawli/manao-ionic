@@ -1,5 +1,6 @@
 import React from 'react'
 import { IonContent, IonPage, IonIcon, IonGrid, IonRow, IonAlert } from '@ionic/react';
+import { withRouter } from 'react-router-dom';
 import '../styles/outcome.css'
 
 class Outcome extends React.Component {
@@ -10,7 +11,7 @@ class Outcome extends React.Component {
 		userId: ''
 	}
 
-	UNSAFE_componentWillMount() {
+	ionViewWillEnter() {
 		this.setState({
 			score: this.props.location.score,
 			userId: this.props.location.userId
@@ -72,4 +73,4 @@ class Outcome extends React.Component {
 	}
 }
 
-export default Outcome;
+export default withRouter(Outcome);
