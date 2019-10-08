@@ -17,7 +17,6 @@ class Welcome extends React.Component {
 		options: {
 			slidesPerView: 1,
 			spaceBetween: 0,
-			direction: 'vertical',
 			speed: 1000
 		}
 	}
@@ -36,12 +35,6 @@ class Welcome extends React.Component {
 						this.setState({ user: res.data })
 					})
 			})
-		setTimeout(() => {
-			let slides = Array.from(document.getElementsByTagName('ion-slide'))
-			slides.forEach(slide => {
-				slide.style.height = '812px'
-			})
-		}, 1500)
 	}
 
 	sendCoordinates = () => {
@@ -54,17 +47,13 @@ class Welcome extends React.Component {
 	}
 
 	render() {
-		const styles = {
-			slide: {
-				height: '812px !important'
-			}
-		}
+
 		return (
 			<IonPage>
 				<IonContent className="userOnboarding">
 					<IonSlides options={this.state.options}>
 
-						<IonSlide className="onboardingSlide one" style={styles.slide}>
+						<IonSlide className="onboardingSlide one">
 							<IonGrid className="onboardingGrid">
 								<IonRow>
 									<IonIcon className="manaoLogoLogin game" src="assets/Logo-yellow.svg"></IonIcon>
@@ -78,10 +67,10 @@ class Welcome extends React.Component {
 									</IonItem>
 								</IonRow>
 							</IonGrid>
-							<i className="fas fa-angle-double-down"></i>
+							<i className="fas fa-angle-double-right"></i>
 						</IonSlide>
 
-						<IonSlide className="onboardingSlide two" style={styles.slide}>
+						<IonSlide className="onboardingSlide two">
 							<IonGrid className="onboardingGrid">
 								<IonRow>
 									<h1 className="guide instructions">Before we start, you should know...</h1>
@@ -93,7 +82,7 @@ class Welcome extends React.Component {
 												<h6><IonIcon className="instructionsLogo" src="assets/Logo.svg"></IonIcon></h6>
 											</IonCol>
 											<IonCol>
-												<h6>I will give you the problem that you need to solve.</h6>
+												<h6>I will give you the <b>problem</b> that you need to solve.</h6>
 											</IonCol>
 										</IonRow>
 										<IonRow>
@@ -101,7 +90,7 @@ class Welcome extends React.Component {
 												<h6><IonIcon className="instructionsLogo" src="assets/hint.svg"></IonIcon></h6>
 											</IonCol>
 											<IonCol>
-												<h6>I am your hint. If you use me, you get less points. I can help you only ONCE each quiz!</h6>
+												<h6>I am your <b>hint</b>. If you use me, you get less points. I can help you only ONCE each quiz!</h6>
 											</IonCol>
 										</IonRow>
 										<IonRow>
@@ -109,7 +98,7 @@ class Welcome extends React.Component {
 												<h6><IonIcon className="instructionsLogo" src="assets/location.svg"></IonIcon></h6>
 											</IonCol>
 											<IonCol>
-												<h6>I am the map to remind you where you are.</h6>
+												<h6>I am the <b>map</b> to remind you where you are.</h6>
 											</IonCol>
 										</IonRow>
 									</IonGrid>
@@ -121,7 +110,7 @@ class Welcome extends React.Component {
 									<h1 className="guide go">Got it? Let's go!</h1>
 								</IonRow>
 							</IonGrid>
-							<Link to={`/play/${this.props.match.params.id}/quizzes`}><i className="fas fa-angle-double-down"></i></Link>
+							<Link to={`/play/${this.props.match.params.id}/quizzes`}><i className="fas fa-thumbs-up"></i></Link>
 						</IonSlide>
 
 					</IonSlides>
