@@ -71,7 +71,7 @@ const App: React.FC = () => (
         <Menu appPages={appPages} />
         <IonRouterOutlet id="main">
           <Route exact path="/profile/:id/settings" render={() => checkAuth() ? <Settings/> : <Redirect to="/login"/>} />
-					<Route exact path="/play/:id/quizzes" render={() => checkAuth() ? <Quiz/> : <Redirect to="/login"/>} />
+					<Route exact path="/play/:id/quizzes" render={() => checkAuth() ? <Quizzes/> : <Redirect to="/login"/>} />
 					<Route exact path="/play/:id/start" render={() => checkAuth() ? <Welcome/> : <Redirect to="/login"/>} />
 					<Route exact path="/game/:id" render={() => checkAuth() ? <Game/> : <Redirect to="/login"/>} />
 					<Route exact path="/outcome" render={() => checkAuth() ? <Outcome/> : <Redirect to="/login"/>} />

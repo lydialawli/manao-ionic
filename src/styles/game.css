@@ -77,12 +77,7 @@
 	bottom: 0px;
 }
 
-.playAlert {
-	--background-color: #E14848;
-	font-family: 'Skranji', cursive;
-	color: #212121;
-}
-
-.playAlert button span {
-	color: #212121;
+.fas.fa-map-marker-alt {
+	color: #F97068;
+	font-size: 15px;
 }

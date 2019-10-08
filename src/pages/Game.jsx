@@ -1,6 +1,6 @@
 import React from 'react'
 import { IonContent, IonPage, IonButton, IonIcon, IonText, IonBadge, IonBackButton, IonAlert } from '@ionic/react';
-import { time, logoUsd, speedometer, star, arrowBack } from 'ionicons/icons'
+import { time, logoUsd, speedometer, arrowBack } from 'ionicons/icons'
 import { withRouter } from 'react-router-dom';
 import axios from 'axios'
 import '../styles/game.css'
@@ -88,18 +88,11 @@ class Game extends React.Component {
 					<div className="imgContainer">
 						<div className="gameImg" style={{backgroundImage:'url('+this.state.game.image+')'}}>
 						</div>
-						<div className="gameRating">
-							<span>
-								{
-									[...Array(this.state.rate)].map((e,i) => <IonIcon key={i} className="starRating" icon={star}></IonIcon>)
-								}
-							</span>
-						</div>
 						<div className="diagonal big"></div>
 					</div>
 					<div className="gameContent">
 						<h1 className="gameTitle big">{this.state.game.title}</h1>
-						<IonText className="gameSubtitle">{this.state.game.location}</IonText>
+						<IonText className="gameSubtitle"><i className="fas fa-map-marker-alt"></i> {this.state.game.location}</IonText>
 						<div className="gameTags">
 							{
 								this.state.game.tags.map((tag, key) => <IonBadge className="gameTag" key={key} color="light">{tag.name}</IonBadge>)
