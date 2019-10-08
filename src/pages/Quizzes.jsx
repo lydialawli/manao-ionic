@@ -13,44 +13,6 @@ class PlayQuizzes extends React.Component {
         historyId: '',
         quizzes: [],
         currentQuizz: 1,
-        quiz: {
-            location: {
-                lat: 0,
-                lng: 0
-            },
-            question: {
-                content: '',
-                type: 'text'
-            },
-            answer: {
-                content: '',
-                type: 'text'
-            },
-            hint: {
-                content: '',
-                type: ''
-            },
-            score: 0,
-            images: [],
-            locationName: '',
-            indication: '',
-            placeDescription: '_ _',
-
-        },
-        progressDiff: 0, // should be 1/gameNumQuizzes.length
-        totalScore: 0,
-        progressValue: 0,
-        quizScore: 20,
-        iconAnswer: '',
-        iconAnswerStyle: '',
-        showHint: false,
-        answer: '',
-        hintUsed: false,
-        disableInput: false,
-        inputPlaceholder: '______',
-        showPopover: false,
-        correctAnswer: false,
-        showModal: true,
 
     }
 
@@ -84,9 +46,6 @@ class PlayQuizzes extends React.Component {
             .catch(err => console.log('err', err))
     }
 
-    getPlaceholder = (num) => {
-        return [...Array(num)].forEach(() => { return 'hello' })
-    }
 
     nextQuizSetup = () => {
         // console.log('totalscore: ',this.state.totalScore)
@@ -127,15 +86,6 @@ class PlayQuizzes extends React.Component {
             hintUsed: true
         })
     }
-
-    filterPlaces = (event) => {
-        let text = event.target.value
-        let filtered = this.state.originalPlaces.filter(e =>
-            e.title.toUpperCase().includes(text.toUpperCase()))
-
-        this.setState({ places: filtered })
-    }
-
 
     changeAnswer = (e) => {
         this.setState({ answer: e.target.value })
@@ -236,55 +186,7 @@ class PlayQuizzes extends React.Component {
                     </IonToolbar>
                 </IonHeader>
 
-                <IonContent className="quizMain  ion-padding">
-                    <IonGrid>
-                        <IonRow>
-                            <h1 className="titleChallenge">CHALLENGE # {this.state.currentQuizz}</h1>
-                        </IonRow>
-                        <div className="extraInfo">
-                            <h6>Did you know?</h6>
-                            <p className="description" >
-                                {this.state.quiz.placeDescription}
-                            </p>
-                        </div>
-
-                    </IonGrid>
-                    <IonGrid >
-                        <IonRow>
-                            <IonCol size="1" >
-                                <IonIcon className="manaoLogo" src="assets/logo-black-shadow.svg"></IonIcon>
-                            </IonCol>
-                            <IonCol size="9" offset="2" className="problemBox">
-                                {
-                                    this.state.quiz.question.type === 'text' ? <p className="problemString">{this.state.quiz.question.content}</p> : <IonImg className="problemImg" src={`${this.state.quiz.question.content}`} />
-                                }
-
-                            </IonCol>
-                        </IonRow>
-                    </IonGrid>
-                    <IonItem className={`answerForm ${this.borderInput()}`}>
-
-                        <IonInput value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
-                        <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
-                    </IonItem>
-
-                    <IonPopover
-                        translucent={true}
-                        animated={false}
-                        cssClass="popover"
-                        isOpen={this.state.showPopover}
-                        onDidDismiss={e => this.setState({ showPopover: false })}
-                    >
-                        {
-                            this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
-                                <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`} />)
-
-                        }
-                    </IonPopover>
-
-                </IonContent >
                 <IonFooter className="footerQuiz" >
-                    <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hintIcon-white.svg"></IonIcon></IonButtons>
                     <button disabled={!this.state.correctAnswer} onClick={() => this.nextQuizSetup()}>
                         {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
                             (<IonIcon className="lockIcon" icon={lock}> </IonIcon>)}
