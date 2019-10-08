@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/userOnboarding.css'
 import { Plugins } from '@capacitor/core';
+import Quiz from '../components/Quiz.jsx'
 
 class PlayQuizzes extends React.Component {
     state = {
@@ -145,30 +146,6 @@ class PlayQuizzes extends React.Component {
         return (
 
             <IonPage className="quizPage">
-                <IonModal
-                    isOpen={this.state.showModal}
-                    onDidDismiss={e => this.setState({ showModal: false })}
-                >
-                    <IonContent className="modalWindow three" >
-                        <IonGrid className="onboardingGrid">
-                            <IonRow>
-                                <IonIcon className="manaoLogoLogin game" src="assets/Logo-yellow.svg"></IonIcon>
-                            </IonRow>
-                            <IonRow>
-                                <h1 className="guide">{this.state.quiz.indication}</h1>
-                            </IonRow>
-                            <IonRow>
-                                <IonItem className="guideContainer" onClick={this.sendCoordinates}>
-                                    <h1 className="guide locationName">{this.state.quiz.locationName}</h1>
-                                </IonItem>
-                            </IonRow>
-                        </IonGrid>
-
-                        <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
-
-                    </IonContent>
-
-                </IonModal>
                 <IonHeader no-border className="noShadow">
                     <IonToolbar className="quizbar noShadow">
                         <IonButtons slot="start">
@@ -176,16 +153,18 @@ class PlayQuizzes extends React.Component {
                         </IonButtons>
                         <div className="menuBox"></div>
 
-                        <IonIcon className="scoreIcons trophy" icon={trophy}></IonIcon>
+                        {/* <IonIcon className="scoreIcons trophy" icon={trophy}></IonIcon>
                         <div className="scoreIcons score" >{this.state.totalScore}</div>
                         <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}>
-                        </IonProgressBar>
-                        <IonButtons onClick={this.sendCoordinates}>
+                        </IonProgressBar> */}
+                        {/* <IonButtons onClick={this.sendCoordinates}>
                             <IonIcon className="mapIcon" slot="end" src="assets/locationmapIcon.svg"></IonIcon>
-                        </IonButtons>
+                        </IonButtons> */}
                     </IonToolbar>
                 </IonHeader>
-
+                <IonContent className="quizMain  ion-padding">
+                    <Quiz></Quiz>
+                </IonContent>
                 <IonFooter className="footerQuiz" >
                     <button disabled={!this.state.correctAnswer} onClick={() => this.nextQuizSetup()}>
                         {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
