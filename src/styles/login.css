@@ -65,13 +65,3 @@
 	font-family: 'Skranji', cursive;
 	color: #F97068;
 }
-
-.signupAlert {
-	--background: #F97068;
-	font-family: 'Skranji', cursive;
-	color: #212738;
-}
-
-.signupAlert button span {
-	color: #212738;
-}

@@ -27,7 +27,15 @@
 	font-family: 'Skranji', cursive;
 }
 
-.fa-angle-double-down {
+.fa-angle-double-right {
+	color: white;
+	font-size: 50px;
+	position: absolute;
+	left: 45%;
+	bottom: 20px;
+}
+
+.fa-thumbs-up {
 	color: white;
 	font-size: 50px;
 	position: absolute;

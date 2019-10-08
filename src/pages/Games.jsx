@@ -35,7 +35,7 @@ class Home extends React.Component {
 		})
 	}
 
-	componentWillMount() {
+	ionViewDidEnter() {
 		let games = this.state.games
 
 		axios.get(`${process.env.REACT_APP_API}/games`)
