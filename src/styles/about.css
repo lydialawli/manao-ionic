@@ -1,0 +1,37 @@
+.banner {
+	margin-top: 40px;
+	padding-left: 40px;
+	padding-right: 40px;
+}
+.aboutGrid {
+	padding: 40px;
+	font-family: 'Skranji', cursive;
+	color: white;
+	text-align: center;
+}
+.founderImg {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100px;
+	height: 100px;
+	border-radius: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.about {
+	margin: 20px auto;
+}
+
+.about.loc {
+	text-align: center;
+}
+
+.about.phone i {
+	color: #57C4E5;
+}
+
+.about.mail i {
+	color: #D1D646;
+}
