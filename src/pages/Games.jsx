@@ -18,9 +18,8 @@ class Home extends React.Component {
 	}
 
 	componentWillReceiveProps(props) {
-		console.log('refresh!=>',props)
 		if(props.history.location.refresh){
-			console.log('will refresh!')
+			console.log('refresh app!')
 			window.location.reload(true)
 		}
 	}
