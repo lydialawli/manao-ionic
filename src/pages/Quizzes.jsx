@@ -2,10 +2,9 @@ import React from 'react';
 import { IonPopover, IonButton, IonModal, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
 import { lock, unlock, trophy } from 'ionicons/icons';
 import '../styles/quiz.css';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/userOnboarding.css'
-import { Plugins } from '@capacitor/core';
 import Quiz from '../components/Quiz.jsx'
 
 class PlayQuizzes extends React.Component {
@@ -13,8 +12,8 @@ class PlayQuizzes extends React.Component {
         user: '',
         historyId: '',
         quizzes: [],
-        currentQuizz: 1,
-
+        currentQuizz: 0,
+        quiz: {}
     }
 
     ionViewWillEnter() {
@@ -26,21 +25,20 @@ class PlayQuizzes extends React.Component {
     }
 
     onPageView = () => {
-        Plugins.Storage.get({ key: 'history' })
-            .then(history => {
-                this.setState({
-                    historyId: history.value,
-                    user: this.props.location.user,
-                    gameId: this.props.location.gameId
-                })
-            })
+        let historyId = localStorage.getItem('history')
+        this.setState({
+            historyId: historyId,
+            user: this.props.location.user,
+            gameId: this.props.location.gameId
+        })
 
         axios.get(`${process.env.REACT_APP_API}/games/${this.props.location.gameId}/quizzes`)
             .then(res => {
+                // console.log(res.data.quizzes[0].quiz)
                 this.setState({
                     quizzes: res.data.quizzes,
-                    quiz: res.data.quizzes[0].quiz,
                     progressDiff: 1 / res.data.quizzes.length,
+                    quiz: res.data.quizzes[0].quiz
                     // inputPlaceholder: res.data.quizzes[0].quiz.answer.content.length
                 })
             })
@@ -142,6 +140,11 @@ class PlayQuizzes extends React.Component {
         }
     }
 
+    getQuiz =()=> {
+        return this.state.quizzes[this.state.currentQuizz]
+    }
+
+
     render() {
         return (
 
@@ -163,14 +166,14 @@ class PlayQuizzes extends React.Component {
                     </IonToolbar>
                 </IonHeader>
                 <IonContent className="quizMain  ion-padding">
-                    <Quiz></Quiz>
+                    <Quiz quiz={this.state.quiz}></Quiz>
                 </IonContent>
                 <IonFooter className="footerQuiz" >
                     <button disabled={!this.state.correctAnswer} onClick={() => this.nextQuizSetup()}>
                         {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
                             (<IonIcon className="lockIcon" icon={lock}> </IonIcon>)}
                     </button>
-                    <div className="triangleGame"></div>
+                    {/* <div className="triangleGame"></div> */}
                 </IonFooter>
             </IonPage >
         )
@@ -178,4 +181,4 @@ class PlayQuizzes extends React.Component {
 }
 
 
-export default PlayQuizzes;
+export default withRouter(PlayQuizzes);

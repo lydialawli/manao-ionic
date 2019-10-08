@@ -45,9 +45,16 @@ class Quiz extends React.Component {
 
     }
 
-    UNSAFE_componentWillMount(){
+    UNSAFE_componentWillMount() {
+        console.log('quizz ==>', this.props.quiz)
         this.setState({
             quiz: this.props.quiz
+        })
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({
+            quiz: props.quiz
         })
     }
 
@@ -121,33 +128,35 @@ class Quiz extends React.Component {
     render() {
         return (
             <IonPage>
-                
+                <IonModal
+                    isOpen={this.state.showModal}
+                    onDidDismiss={e => this.setState({ showModal: false })}
+                >
+                    <IonContent className="modalWindow three" >
+                        <IonGrid className="onboardingGrid">
+                            <IonRow>
+                                <IonIcon className="manaoLogoLogin game" src="assets/Logo-yellow.svg"></IonIcon>
+                            </IonRow>
+                            <IonRow>
+                                <h1 className="guide">{this.state.quiz.indication}</h1>
+                            </IonRow>
+                            <IonRow>
+                                <IonItem className="guideContainer" onClick={this.sendCoordinates}>
+                                    <h1 className="guide locationName">{this.state.quiz.locationName}</h1>
+                                </IonItem>
+                            </IonRow>
+                        </IonGrid>
+
+                        <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
+
+                    </IonContent>
+
+                </IonModal>
+                <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hintIcon-white.svg"></IonIcon></IonButtons>
             </IonPage>
-            // <IonPage className="quizPage">
-            //     <IonModal
-            //         isOpen={this.state.showModal}
-            //         onDidDismiss={e => this.setState({ showModal: false })}
-            //     >
-            //         <IonContent className="modalWindow three" >
-            //             <IonGrid className="onboardingGrid">
-            //                 <IonRow>
-            //                     <IonIcon className="manaoLogoLogin game" src="assets/Logo-yellow.svg"></IonIcon>
-            //                 </IonRow>
-            //                 <IonRow>
-            //                     <h1 className="guide">{this.state.quiz.indication}</h1>
-            //                 </IonRow>
-            //                 <IonRow>
-            //                     <IonItem className="guideContainer" onClick={this.sendCoordinates}>
-            //                         <h1 className="guide locationName">{this.state.quiz.locationName}</h1>
-            //                     </IonItem>
-            //                 </IonRow>
-            //             </IonGrid>
+            
 
-            //             <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
-
-            //         </IonContent>
-
-            //     </IonModal>
+            // 
             //     <IonHeader no-border className="noShadow">
             //         <IonToolbar className="quizbar noShadow">
             //             <IonButtons slot="start">
@@ -213,9 +222,9 @@ class Quiz extends React.Component {
 
             //     </IonContent >
             //     <IonFooter >
-            //     <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hintIcon-white.svg"></IonIcon></IonButtons>
+            //     
             //     </IonFooter>
-            // </IonPage >
+            
         )
     }
 }

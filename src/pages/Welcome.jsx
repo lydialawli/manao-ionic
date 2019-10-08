@@ -1,7 +1,6 @@
 import React from 'react'
 import { IonContent, IonPage, IonIcon, IonGrid, IonRow, IonItem, IonSlide, IonSlides, IonCol } from '@ionic/react';
 import { Plugins } from '@capacitor/core';
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 import '../styles/userOnboarding.css'
 import '../styles/welcome.css'
