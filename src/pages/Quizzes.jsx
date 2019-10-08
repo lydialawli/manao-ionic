@@ -30,8 +30,8 @@ class PlayQuizzes extends React.Component {
 
     onPageView = () => {
         let historyId = localStorage.getItem('history')
-        console.log('user',this.props.location.user)
-        console.log('historyId',historyId)
+        console.log('user', this.props.location.user)
+        console.log('historyId', historyId)
         this.setState({
             historyId: historyId,
             user: this.props.location.user,
@@ -40,7 +40,7 @@ class PlayQuizzes extends React.Component {
 
         axios.get(`${process.env.REACT_APP_API}/games/${this.props.location.gameId}/quizzes`)
             .then(res => {
-                console.log('quizzes ',res.data.quizzes)
+                // console.log('progressDiff ', res.data.quizzes)
                 this.setState({
                     quizzes: res.data.quizzes,
                     progressDiff: 1 / res.data.quizzes.length,
@@ -72,18 +72,18 @@ class PlayQuizzes extends React.Component {
 
 
     changeProgress = (progressValue, score) => {
-        console.log('progressValue',progressValue)
-        console.log('score',score)
-
-        this.setState({
-            progressValue: progressValue,
-            totalScore: this.state.totalScore + score
-        })
+        console.log('progressValue', progressValue)
+        console.log('score', score)
 
         axios.patch(`${process.env.REACT_APP_API}/histories/${this.state.historyId}`, {
             userId: this.state.user._id,
             score: this.state.totalScore + score
         }).then(data => console.log('patched!', data.data))
+
+        this.setState({
+            progressValue: progressValue,
+            totalScore: this.state.totalScore + score
+        })
     }
 
     sendCoordinates = () => {
