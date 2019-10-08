@@ -42,20 +42,30 @@ class Quiz extends React.Component {
         showPopover: false,
         correctAnswer: false,
         showModal: true,
-
+        currentQuizz: 1,
+        refreshedData: false
     }
 
-    UNSAFE_componentWillMount() {
+
+    UNSAFE_componentDidMount() {
         console.log('quizz ==>', this.props.quiz)
         this.setState({
-            quiz: this.props.quiz
+            quiz: this.props.quiz,
+            currentQuizz: this.props.currentQuizz,
         })
     }
 
     componentWillReceiveProps(props) {
-        this.setState({
-            quiz: props.quiz
-        })
+        console.log('quizzProp ==>', props)
+        if (props.quiz.question) {
+            this.setState({
+                quiz: props.quiz,
+                currentQuizz: props.currentQuizz + 1,
+                refreshedData: true
+            })
+        }
+
+        console.log('question',props.quiz.question)
     }
 
     changeAnswer = (e) => {
@@ -127,7 +137,8 @@ class Quiz extends React.Component {
 
     render() {
         return (
-            <IonPage>
+
+            <IonContent className="quizMain  ion-padding">
                 <IonModal
                     isOpen={this.state.showModal}
                     onDidDismiss={e => this.setState({ showModal: false })}
@@ -150,11 +161,56 @@ class Quiz extends React.Component {
                         <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
 
                     </IonContent>
-
                 </IonModal>
+                <IonGrid>
+                    <IonRow>
+                        <h1 className="titleChallenge">CHALLENGE # {this.state.currentQuizz}</h1>
+                    </IonRow>
+                    <div className="extraInfo">
+                        <h6>Did you know?</h6>
+                        <p className="description" >
+                            {this.state.quiz.placeDescription}
+                        </p>
+                    </div>
+                </IonGrid>
+                <IonGrid >
+                    <IonRow>
+                        <IonCol size="1" >
+                            <IonIcon className="manaoLogo" src="assets/logo-black-shadow.svg"></IonIcon>
+                        </IonCol>
+                        <IonCol size="9" offset="2" className="problemBox">
+                            {/* {!this.state.refreshedData ? <p className="problemString">loading problem...</p> : <p className="problemString">problem loaded!</p>} */}
+                            {
+                                this.state.quiz.question.type === 'text' ? <p className="problemString">{this.state.quiz.question.content}</p> : <IonImg className="problemImg" src={`${this.state.quiz.question.content}`} />
+                            }
+
+                        </IonCol>
+                    </IonRow>
+                </IonGrid>
+
+                <IonItem className={`answerForm ${this.borderInput()}`}>
+
+                    {/* <IonInput value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput> */}
+                    <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
+                </IonItem>
+
+                <IonPopover
+                    translucent={true}
+                    animated={false}
+                    cssClass="popover"
+                    isOpen={this.state.showPopover}
+                    onDidDismiss={e => this.setState({ showPopover: false })}
+                >
+                    {/* {
+                        this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
+                            <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`} />)
+
+                    } */}
+                </IonPopover>
+
                 <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hintIcon-white.svg"></IonIcon></IonButtons>
-            </IonPage>
-            
+            </IonContent>
+
 
             // 
             //     <IonHeader no-border className="noShadow">
@@ -175,56 +231,56 @@ class Quiz extends React.Component {
             //     </IonHeader>
 
             //     <IonContent className="quizMain  ion-padding">
-            //         <IonGrid>
-            //             <IonRow>
-            //                 <h1 className="titleChallenge">CHALLENGE # {this.state.currentQuizz}</h1>
-            //             </IonRow>
-            //             <div className="extraInfo">
-            //                 <h6>Did you know?</h6>
-            //                 <p className="description" >
-            //                     {this.state.quiz.placeDescription}
-            //                 </p>
-            //             </div>
+            // <IonGrid>
+            //     <IonRow>
+            //         <h1 className="titleChallenge">CHALLENGE # {this.state.currentQuizz}</h1>
+            //     </IonRow>
+            //     <div className="extraInfo">
+            //         <h6>Did you know?</h6>
+            //         <p className="description" >
+            //             {this.state.quiz.placeDescription}
+            //         </p>
+            //     </div>
 
-            //         </IonGrid>
-            //         <IonGrid >
-            //             <IonRow>
-            //                 <IonCol size="1" >
-            //                     <IonIcon className="manaoLogo" src="assets/logo-black-shadow.svg"></IonIcon>
-            //                 </IonCol>
-            //                 <IonCol size="9" offset="2" className="problemBox">
-            //                     {
-            //                         this.state.quiz.question.type === 'text' ? <p className="problemString">{this.state.quiz.question.content}</p> : <IonImg className="problemImg" src={`${this.state.quiz.question.content}`} />
-            //                     }
-
-            //                 </IonCol>
-            //             </IonRow>
-            //         </IonGrid>
-            //         <IonItem className={`answerForm ${this.borderInput()}`}>
-
-            //             <IonInput value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
-            //             <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
-            //         </IonItem>
-
-            //         <IonPopover
-            //             translucent={true}
-            //             animated={false}
-            //             cssClass="popover"
-            //             isOpen={this.state.showPopover}
-            //             onDidDismiss={e => this.setState({ showPopover: false })}
-            //         >
+            // </IonGrid>
+            // <IonGrid >
+            //     <IonRow>
+            //         <IonCol size="1" >
+            //             <IonIcon className="manaoLogo" src="assets/logo-black-shadow.svg"></IonIcon>
+            //         </IonCol>
+            //         <IonCol size="9" offset="2" className="problemBox">
             //             {
-            //                 this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
-            //                     <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`} />)
-
+            //                 this.state.quiz.question.type === 'text' ? <p className="problemString">{this.state.quiz.question.content}</p> : <IonImg className="problemImg" src={`${this.state.quiz.question.content}`} />
             //             }
-            //         </IonPopover>
+
+            //         </IonCol>
+            //     </IonRow>
+            // </IonGrid>
+            // <IonItem className={`answerForm ${this.borderInput()}`}>
+
+            //     <IonInput value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+            //     <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
+            // </IonItem>
+
+            // <IonPopover
+            //     translucent={true}
+            //     animated={false}
+            //     cssClass="popover"
+            //     isOpen={this.state.showPopover}
+            //     onDidDismiss={e => this.setState({ showPopover: false })}
+            // >
+            //     {
+            //         this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
+            //             <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`} />)
+
+            //     }
+            // </IonPopover>
 
             //     </IonContent >
             //     <IonFooter >
             //     
             //     </IonFooter>
-            
+
         )
     }
 }

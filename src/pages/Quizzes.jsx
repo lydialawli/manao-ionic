@@ -13,7 +13,8 @@ class PlayQuizzes extends React.Component {
         historyId: '',
         quizzes: [],
         currentQuizz: 0,
-        quiz: {}
+        quiz: {},
+        totalScore: 0,
     }
 
     ionViewWillEnter() {
@@ -156,17 +157,17 @@ class PlayQuizzes extends React.Component {
                         </IonButtons>
                         <div className="menuBox"></div>
 
-                        {/* <IonIcon className="scoreIcons trophy" icon={trophy}></IonIcon>
+                        <IonIcon className="scoreIcons trophy" icon={trophy}></IonIcon>
                         <div className="scoreIcons score" >{this.state.totalScore}</div>
                         <IonProgressBar value={this.state.progressValue} className="ionProgressBar" buffer={this.state.progressValue}>
-                        </IonProgressBar> */}
+                        </IonProgressBar>
                         {/* <IonButtons onClick={this.sendCoordinates}>
                             <IonIcon className="mapIcon" slot="end" src="assets/locationmapIcon.svg"></IonIcon>
                         </IonButtons> */}
                     </IonToolbar>
                 </IonHeader>
-                <IonContent className="quizMain  ion-padding">
-                    <Quiz quiz={this.state.quiz}></Quiz>
+                <IonContent>
+                    <Quiz quiz={this.state.quiz} currentQuizz={this.state.currentQuizz} history={this.props.history}></Quiz>
                 </IonContent>
                 <IonFooter className="footerQuiz" >
                     <button disabled={!this.state.correctAnswer} onClick={() => this.nextQuizSetup()}>
