@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/userOnboarding.css'
 import Quiz from '../components/Quiz.jsx'
-import { thisExpression } from '@babel/types';
 
 class PlayQuizzes extends React.Component {
     state = {
@@ -30,6 +29,8 @@ class PlayQuizzes extends React.Component {
 
     onPageView = () => {
         let historyId = localStorage.getItem('history')
+        console.log('user',this.props.location.user)
+        console.log('historyId',historyId)
         this.setState({
             historyId: historyId,
             user: this.props.location.user,

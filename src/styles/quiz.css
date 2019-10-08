@@ -189,6 +189,7 @@
     text-align: center;
     margin-top: 20px;
     position: sticky;
+    font-size: 40px;
 }
 
 .redBorder {
@@ -215,9 +216,10 @@
 }
 
 .answer {
-    font-size: 64px;
+    font-size: 60px;
     font-family: 'Skranji', cursive;
     text-align: center;
+    background-color: transparent;
 }
 
 .hintBox { 
