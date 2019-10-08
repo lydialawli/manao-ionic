@@ -51,6 +51,10 @@
 	font-size: 20px;
 }
 
+.tag.grey {
+	color: #DADADA;
+}
+
 .gameTitle {
 	font-family: 'Skranji', cursive;
 }
