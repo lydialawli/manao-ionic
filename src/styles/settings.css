@@ -7,3 +7,13 @@
 .settingsInput {
 	margin-bottom: 40px;
 }
+
+.settings.play {
+	margin-left: 80px;
+}
+
+.settings.play.logout {
+	--background: #F97068;
+	position: absolute;
+	bottom: 50px;
+}

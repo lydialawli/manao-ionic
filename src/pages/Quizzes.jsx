@@ -2,6 +2,7 @@ import React from 'react';
 import { IonPopover, IonButton, IonModal, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
 import { lock, unlock, trophy } from 'ionicons/icons';
 import '../styles/quiz.css';
+
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/userOnboarding.css'
@@ -124,4 +125,6 @@ class PlayQuizzes extends React.Component {
 }
 
 
+
 export default withRouter(PlayQuizzes);
+

@@ -1,6 +1,9 @@
 import React from 'react'
 import { IonContent, IonPage, IonIcon, IonGrid, IonRow, IonItem, IonSlide, IonSlides, IonCol } from '@ionic/react';
-import { Plugins } from '@capacitor/core';
+
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+
 import axios from 'axios'
 import '../styles/userOnboarding.css'
 import '../styles/welcome.css'
@@ -31,13 +34,11 @@ class Welcome extends React.Component {
 				})
 			})
 
-		Plugins.Storage.get({ key: 'token' })
-			.then(token => {
-				axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
-					.then(res => {
-						this.setState({ user: res.data })
-					})
-			})
+		let token = localStorage.getItem('token')
+		axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`)
+		.then(res => {
+			this.setState({ user: res.data })
+		})
 	}
 
 	sendCoordinates = () => {
@@ -132,4 +133,4 @@ class Welcome extends React.Component {
 	}
 }
 
-export default Welcome;
+export default withRouter(Welcome);

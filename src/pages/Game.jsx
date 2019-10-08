@@ -1,7 +1,7 @@
 import React from 'react'
 import { IonContent, IonPage, IonButton, IonIcon, IonText, IonBadge, IonBackButton, IonAlert } from '@ionic/react';
-import { time, logoUsd, speedometer, star, arrowBack } from 'ionicons/icons'
-import { Plugins } from '@capacitor/core';
+import { time, logoUsd, speedometer, arrowBack } from 'ionicons/icons'
+import { withRouter } from 'react-router-dom';
 import axios from 'axios'
 import '../styles/game.css'
 import '../styles/games.css'
@@ -12,11 +12,11 @@ class Game extends React.Component {
 			tags: [{
 				name: "",
 				icon: ""
-			}]
+			}],
+			price: 0
 		},
 		rate:0,
 		duration:0,
-		price:0,
 		showMessage: false
 	}
 
@@ -29,23 +29,14 @@ class Game extends React.Component {
 			game = res.data
 			let rate = this.state.rate
 			let duration = this.state.duration
-			let price = this.state.price
 
 			duration = parseInt(game.duration / 3600)
 			rate = parseInt(game.ratings.reduce((a,b) => a + b) / game.ratings.length)
-			if (game.price > 1000) {
-				price = 3
-			} else if (game.price > 100) {
-				price = 2
-			} else {
-				price = 1
-			}
 
 			this.setState({
 				game: game,
 				rate: rate,
-				duration: duration,
-				price: price
+				duration: duration
 			})
 		})
 	}
@@ -55,33 +46,29 @@ class Game extends React.Component {
 	}
 
 	play = () => {
-		Plugins.Storage.get({key: 'token'})
-		.then(token => {
-			if (token.value) {
-				axios.get(`${process.env.REACT_APP_API}/auth?token=${token.value}`)
-				.then(user => {
-					axios.post(`${process.env.REACT_APP_API}/history`, {
-						players: [
-							{
-								user: user.data._id
-							}
-						],
-						game: this.state.game._id
-					})
-					.then(res => {
-						Plugins.Storage.set({
-							key: 'history',
-							value: res.data
-						})
-						this.props.history.push({
-							pathname: `/play/${this.state.game._id}/start`
-						})
+		let token = localStorage.getItem('token')
+
+		if (token) {
+			axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`)
+			.then(user => {
+				axios.post(`${process.env.REACT_APP_API}/history`, {
+					players: [
+						{
+							user: user.data._id
+						}
+					],
+					game: this.state.game._id
+				})
+				.then(res => {
+					localStorage.setItem('history', res.data)
+					this.props.history.push({
+						pathname: `/play/${this.state.game._id}/start`
 					})
 				})
-			} else {
-				this.setState({showMessage: true})
-			}
-		})
+			})
+		} else {
+			this.setState({showMessage: true})
+		}
 	}
 
 	render () {
@@ -92,18 +79,11 @@ class Game extends React.Component {
 					<div className="imgContainer">
 						<div className="gameImg" style={{backgroundImage:'url('+this.state.game.image+')'}}>
 						</div>
-						<div className="gameRating">
-							<span>
-								{
-									[...Array(this.state.rate)].map((e,i) => <IonIcon key={i} className="starRating" icon={star}></IonIcon>)
-								}
-							</span>
-						</div>
 						<div className="diagonal big"></div>
 					</div>
 					<div className="gameContent">
 						<h1 className="gameTitle big">{this.state.game.title}</h1>
-						<IonText className="gameSubtitle">{this.state.game.location}</IonText>
+						<IonText className="gameSubtitle"><i className="fas fa-map-marker-alt"></i> {this.state.game.location}</IonText>
 						<div className="gameTags">
 							{
 								this.state.game.tags.map((tag, key) => <IonBadge className="gameTag" key={key} color="light">{tag.name}</IonBadge>)
@@ -121,7 +101,10 @@ class Game extends React.Component {
 							<div>
 								<span>
 									{
-										[...Array(this.state.price)].map((e,i) => <IonIcon className="tag" key={i} icon={logoUsd}></IonIcon>)
+										[...Array(this.state.game.price)].map((e,i) => <IonIcon className="tag" key={i} icon={logoUsd}></IonIcon>)
+									}
+									{
+										[...Array(3-this.state.game.price)].map((e,i) => <IonIcon className="tag grey" key={i} icon={logoUsd}></IonIcon>)
 									}
 								</span>
 							</div>
@@ -166,4 +149,4 @@ class Game extends React.Component {
 	}
 }
 
-export default Game;
+export default withRouter(Game);

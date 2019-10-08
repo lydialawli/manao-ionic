@@ -1,6 +1,6 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonButton, IonItem, IonLabel, IonInput } from '@ionic/react';
-import { Plugins } from '@capacitor/core';
+import { withRouter } from 'react-router-dom';
 import Toolbar from '../components/Toolbar.jsx'
 import axios from 'axios';
 import '../styles/toolbar.css'
@@ -20,11 +20,8 @@ class Settings extends React.Component {
 	}
 
 	logout = () => {
-		Plugins.Storage.remove({key:'token'})
-		.then(res => {
-			this.props.history.push({pathname: '/games'})
-		})
-		Plugins.Storage.keys().then(res => console.log(res))
+		localStorage.clear()
+		this.props.history.push({pathname: '/games'})
 	}
 
 	changeField = (e, field) => {
@@ -47,6 +44,7 @@ class Settings extends React.Component {
 	}
 
 	componentWillReceiveProps(props) {
+		console.log(this.props);
 		let user = this.props.match.params.id
 		axios.get(`${process.env.REACT_APP_API}/users/${user}`)
 		.then(res => {
@@ -85,13 +83,13 @@ class Settings extends React.Component {
 						<IonInput disabled={this.state.isDisabled} color="light" type="text" placeholder={this.state.user.nationality} className="settings label input" onIonChange={(e) => this.changeField(e, 'nationality')}></IonInput>
 					</IonItem>
 
-					<IonButton onClick={() => this.editFields(this.state.isDisabled)} className="play">
+					<IonButton onClick={() => this.editFields(this.state.isDisabled)} className="settings play">
 						{
 							this.state.isDisabled ? 'Edit info' : 'Save'
 						}
 						</IonButton>
 					<br></br>
-          <IonButton onClick={this.logout} className="play">Logout</IonButton>
+          <IonButton onClick={this.logout} className="settings logout play">Logout</IonButton>
         </IonContent>
       </IonPage>
     );
@@ -99,4 +97,4 @@ class Settings extends React.Component {
 
 };
 
-export default Settings;
+export default withRouter(Settings);

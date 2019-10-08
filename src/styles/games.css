@@ -17,10 +17,21 @@
 	right: 5px;
 }
 
-.filters {
-	margin: 30px 10px 30px 20px;
+/* .link {
+	--background: transparent;
+} */
+
+.game-location {
+	margin: 40px auto 20px auto;
+	padding: 10px 20px;
+	border: 1px solid #F97068;
+	border-radius: 50px;
+	text-decoration: none;
+	color: white;
+	font-size: 25px;
+	font-family: 'Titan One', cursive;
 }
 
-.link {
-	--background: transparent;
+.fas.fa-map-marker-alt.games {
+	font-size: 20px;
 }

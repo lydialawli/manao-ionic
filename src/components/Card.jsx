@@ -16,31 +16,21 @@ class Card extends React.Component {
 			distance: 0
 		},
 		rate:0,
-		duration:0,
-		price:1
+		duration:0
 	}
 
 	updateContent = (props) => {
 		let game = props.game
 		let rate = this.state.rate
 		let duration = this.state.duration
-		let price = this.state.price
 
 		duration = parseInt(game.duration / 3600)
 		rate = parseInt(game.ratings.reduce((a,b) => a + b) / game.ratings.length)
-		if (game.price > 1000) {
-			price = 3
-		} else if (game.price > 100) {
-			price = 2
-		} else {
-			price = 1
-		}
 
 		this.setState({
 			game: game,
 			rate: rate,
-			duration: duration,
-			price: price
+			duration: duration
 		})
 	}
 
@@ -80,7 +70,10 @@ class Card extends React.Component {
 					<div>
 						<span>
 							{
-								[...Array(this.state.price)].map((e,i) => <IonIcon className="tag" key={i} icon={logoUsd}></IonIcon>)
+								[...Array(this.state.game.price)].map((e,i) => <IonIcon className="tag" key={i} icon={logoUsd}></IonIcon>)
+							}
+							{
+								[...Array(3-this.state.game.price)].map((e,i) => <IonIcon className="tag grey" key={i} icon={logoUsd}></IonIcon>)
 							}
 						</span>
 					</div>

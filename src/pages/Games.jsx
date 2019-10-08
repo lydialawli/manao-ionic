@@ -1,8 +1,8 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonSlides, IonSlide, IonGrid, IonRow, IonCol, IonIcon, withIonLifeCycle } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonSlides, IonSlide, IonGrid, IonRow, IonText, IonIcon, withIonLifeCycle } from '@ionic/react';
 import { arrowBack, arrowForward } from 'ionicons/icons'
+import { Plugins } from '@capacitor/core';
 import Card from '../components/Card.jsx'
-import Button from '../components/Buttons.jsx'
 import Toolbar from '../components/Toolbar.jsx'
 import axios from 'axios'
 import '../styles/toolbar.css'
@@ -12,12 +12,6 @@ class Home extends React.Component {
 
 	state = {
 		games: [],
-
-		filterOptions: [
-			{ filter: 'players', options: ['fas fa-user', 'fas fa-users'] },
-			{ filter: 'location', options: ['fas fa-map-marker-alt'] },
-			{ filter: 'transportation', options: ['fas fa-walking', 'fas fa-bicycle', 'fas fa-motorcycle'] }
-		],
 		user: {
 			_id: ''
 		}
@@ -46,6 +40,20 @@ class Home extends React.Component {
 
 	}
 
+	sendCoordinates = () => {
+		Plugins.Geolocation.getCurrentPosition()
+		.then(res => {
+			this.props.history.push({
+					pathname: '/map',
+					lat: res.coords.latitude,
+					lng: res.coords.longitude,
+					locationName: 'You are here'
+			})
+		})
+
+
+	}
+
 	render() {
 		return (
 			<IonPage>
@@ -57,13 +65,7 @@ class Home extends React.Component {
 				<IonContent className="main ion-padding">
 					<IonGrid className="filters">
 						<IonRow>
-							{
-								this.state.filterOptions.map((filter, key) =>
-									<IonCol key={key}>
-										<Button key={key} icon={filter.options} />
-									</IonCol>
-								)
-							}
+							<IonText className="game-location" onClick={this.sendCoordinates}><i className="fas fa-map-marker-alt games"></i> Samui</IonText>
 						</IonRow>
 					</IonGrid>
 
