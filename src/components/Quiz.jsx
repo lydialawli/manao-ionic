@@ -106,11 +106,17 @@ class Quiz extends React.Component {
 
     }
 
+    // getInputFontSize = () => {
+    //     let w = width
+    //     let l = length
+    //     let r = 
+    // }
+
     getPlaceholder = (num) => {
         console.log('placeholder length', num)
         let outcome = ''
         for (var i = 0; i < num; i++) {
-            outcome += '_'
+            outcome += '_ '
         }
         console.log('outcome', outcome)
         return outcome
@@ -158,29 +164,6 @@ class Quiz extends React.Component {
         return (
 
             <IonContent className="quizMain  ion-padding">
-                {/* <IonModal
-                    isOpen={this.state.showModal}
-                    onDidDismiss={e => this.setState({ showModal: false })}
-                >
-                    <IonContent className="modalWindow three" >
-                        <IonGrid className="onboardingGrid">
-                            <IonRow>
-                                <IonIcon className="manaoLogoLogin game" src="assets/Logo-yellow.svg"></IonIcon>
-                            </IonRow>
-                            <IonRow>
-                                <h1 className="guide">{this.state.quiz.indication}</h1>
-                            </IonRow>
-                            <IonRow>
-                                <IonItem className="guideContainer" onClick={this.sendCoordinates}>
-                                    <h1 className="guide locationName">{this.state.quiz.locationName}</h1>
-                                </IonItem>
-                            </IonRow>
-                        </IonGrid>
-
-                        <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
-
-                    </IonContent>
-                </IonModal> */}
                 <IonGrid>
                     <IonRow>
                         <h1 className="titleChallenge">CHALLENGE # {this.state.currentQuizz}</h1>
@@ -215,6 +198,7 @@ class Quiz extends React.Component {
                     isOpen={this.state.showPopover}
                     onDidDismiss={e => this.setState({ showPopover: false })}
                     cssClass="popover"
+                    animated="false"
                 >
                     {
                         this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
@@ -224,8 +208,8 @@ class Quiz extends React.Component {
                 <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hintIcon-white.svg"></IonIcon></IonButtons>
                 <IonFooter className="footerQuiz" >
                     <button disabled={!this.state.correctAnswer} onClick={() => this.backToDefault()}>
-                        {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
-                            (<IonIcon className="lockIcon" icon={lock}> </IonIcon>)}
+                        {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}></IonIcon>) :
+                            (<IonIcon className="lockIcon" icon={lock}></IonIcon>)}
                     </button>
                     {/* <div className="triangleGame"></div> */}
                 </IonFooter>
