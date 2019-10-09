@@ -62,7 +62,7 @@ class Outcome extends React.Component {
 				<IonContent className="outcome">
 					<IonGrid>
 						<IonRow className="outcomeRow">
-							<IonIcon className="manaoLogoLogin game" src="assets/logo-black-shadow.svg"></IonIcon>
+							<img  style={{height:'100px', margin:'auto', marginTop:'20px'}} alt="outcome-icon" src="assets/icon-outcome.png"></img>
 						</IonRow>
 						<IonRow className="outcomeRow">
 							<h1>Congrax, {this.state.user.name}! You finished the game!</h1>
