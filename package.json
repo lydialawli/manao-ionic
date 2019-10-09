@@ -5,6 +5,7 @@
   "dependencies": {
     "@capacitor/cli": "^1.2.1",
     "@capacitor/core": "^1.2.1",
+    "@capacitor/ios": "^1.2.1",
     "@ionic-native/keyboard": "^5.14.0",
     "@ionic/react": "^4.9.0-rc.2",
     "@ionic/react-router": "^4.9.0-rc.2",
