@@ -24,7 +24,10 @@ class Settings extends React.Component {
 		if (token) {
 			axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`)
 			.then(res => {
-				this.setState({user: res.data})
+				axios.get(`${process.env.REACT_APP_API}/users/${res.data._id}`)
+				.then(user => {
+					this.setState({user:user.data})
+				})
 			})
 		}
 	}
