@@ -142,17 +142,17 @@ class Quizzes extends React.Component {
                                     <IonIcon className="manaoLogoLogin game" src="assets/Logo-yellow.svg"></IonIcon>
                                 </IonRow>
                                 <IonRow>
-                                    <h1 className="guide">{this.state.quiz.indication}</h1>
+                                    <h1 className="guide indication">{this.state.quiz.indication}</h1>
                                 </IonRow>
                                 <IonRow>
                                     <IonItem className="guideContainer" onClick={this.sendCoordinates}>
                                         <h1 className="guide locationName">{this.state.quiz.locationName}</h1>
                                     </IonItem>
                                 </IonRow>
+																<IonRow>
+																	<i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
+																</IonRow>
                             </IonGrid>
-
-                            <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
-
                         </IonContent>
                     </IonModal>
                     <Quiz quiz={this.state.quiz} currentQuizz={this.state.currentQuizz} progressDiff={this.state.progressDiff} history={this.props.history} nextQuiz={this.nextQuizSetup} onCorrect={this.changeProgress}></Quiz>
@@ -166,4 +166,3 @@ class Quizzes extends React.Component {
 
 
 export default withRouter(Quizzes);
-
