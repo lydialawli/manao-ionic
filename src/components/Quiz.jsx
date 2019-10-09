@@ -47,11 +47,11 @@ class Quiz extends React.Component {
 
     UNSAFE_componentDidMount() {
         console.log('quizz ==>', this.props.quiz)
-        let placeholderLength = this.props.quiz.answer.content.length
+        let answerLength = this.props.quiz.answer.content.length
         this.setState({
             quiz: this.props.quiz,
             currentQuizz: this.props.currentQuizz,
-            inputPlaceholder: this.getPlaceholder(placeholderLength)
+            inputPlaceholder: this.getPlaceholder(answerLength)
         })
     }
 
@@ -59,15 +59,14 @@ class Quiz extends React.Component {
         console.log('quizzProp ==>', props)
 
         if (props.quiz.question) {
-            let placeholderLength = props.quiz.answer.content.length
+            let answerLength = props.quiz.answer.content.length
             this.setState({
                 quiz: props.quiz,
                 currentQuizz: props.currentQuizz + 1,
                 progressDiff: props.progressDiff,
-                inputPlaceholder: this.getPlaceholder(placeholderLength)
+                inputPlaceholder: this.getPlaceholder(answerLength)
             })
         }
-
     }
 
     changeAnswer = (e) => {
@@ -190,7 +189,7 @@ class Quiz extends React.Component {
                 </IonGrid>
 
                 <IonItem className={`answerForm ${this.borderInput()}`}>
-                    <IonInput value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+                    <IonInput value={this.state.answer} className="answer"  disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                     <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                 </IonItem>
 

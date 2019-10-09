@@ -276,6 +276,7 @@
 
 .modalWindow {
     --background: #212738;
+    visibility: visible !important;
 }
 
 .fa-angle-double-down {
