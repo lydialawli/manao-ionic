@@ -1,6 +1,7 @@
 import React from 'react'
 import { IonContent, IonPage, IonIcon, IonGrid, IonRow, IonAlert } from '@ionic/react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios'
 import '../styles/outcome.css'
 
 class Outcome extends React.Component {
@@ -8,42 +9,52 @@ class Outcome extends React.Component {
 		coloredStars: 0,
 		alert: false,
 		score: 0,
-		userId: ''
+		user: {
+			name: ''
+		},
+		gameId: ''
 	}
 
-	ionViewWillEnter() {
-		this.setState({
-			score: this.props.location.score,
-			userId: this.props.location.userId
+	loadData = () => {
+		let token = localStorage.getItem('token')
+		axios.get(`${process.env.REACT_APP_API}/auth?token=${token}`)
+		.then(res => {
+			this.setState({
+				score: this.props.location.score,
+				user: res.data,
+				gameId: this.props.location.gameId
+			})
 		})
 	}
 
-	componentWillReceiveProps(props) {
-		if (props) {
-			this.setState({
-				score: props.location.score,
-				userId: props.location.userId
-			})
-		}
+	ionViewWillEnter() {
+		this.loadData()
+	}
+
+	UNSAFE_componentWillReceiveProps(props) {
+		this.loadData()
 	}
 
 	changeColoredStars = (n) => {
 		let coloredStars = this.state.coloredStars
+		console.log(this.state);
 		if (coloredStars === n) {
-			this.setState({ alert: true })
-			localStorage.removeItem("history")
-			setTimeout(() => {
-				this.props.history.push({
-					pathname: '/games',
-					refresh: true
-				})
-			}, 2000)
+			axios.patch(`${process.env.REACT_APP_API}/games/${this.state.gameId}`, {
+				rating: coloredStars
+			}).then(res => {
+				this.setState({ alert: true })
+				localStorage.removeItem("history")
+				setTimeout(() => {
+					this.props.history.push({
+						pathname: '/games',
+						refresh: true
+					})
+				}, 2000)
+			})
 		} else {
 			this.setState({ coloredStars: n })
 		}
 	}
-
-	
 
 	render() {
 		return (
@@ -54,7 +65,7 @@ class Outcome extends React.Component {
 							<IonIcon className="manaoLogoLogin game" src="assets/logo-black-shadow.svg"></IonIcon>
 						</IonRow>
 						<IonRow className="outcomeRow">
-							<h1>Congrax! You finished the game!</h1>
+							<h1>Congrax, {this.state.user.name}! You finished the game!</h1>
 						</IonRow>
 						<IonRow className="outcomeRow score">
 							<h1><i className="fas fa-trophy"></i> Score: {this.state.score}</h1>
@@ -66,10 +77,10 @@ class Outcome extends React.Component {
 							<h6 className="">Please rate this game. Manao community will be very thankful!</h6>
 						</IonRow>
 						{
-							[...Array(this.state.coloredStars)].map((s, i) => <i className="fas fa-star" onClick={() => this.changeColoredStars(i + 1)}></i>)
+							[...Array(this.state.coloredStars)].map((s, i) => <i className="fas fa-star" key={i} onClick={() => this.changeColoredStars(i + 1)}></i>)
 						}
 						{
-							[...Array(5 - this.state.coloredStars)].map((s, i) => <i className="far fa-star" onClick={() => this.changeColoredStars(this.state.coloredStars + i + 1)}></i>)
+							[...Array(5 - this.state.coloredStars)].map((s, i) => <i className="far fa-star" key={i} onClick={() => this.changeColoredStars(this.state.coloredStars + i + 1)}></i>)
 						}
 
 						<IonAlert
