@@ -2,7 +2,6 @@ import React from 'react'
 import { IonContent, IonPage, IonIcon, IonGrid, IonRow, IonItem, IonSlide, IonSlides, IonCol } from '@ionic/react';
 
 import { withRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom'
 
 import axios from 'axios'
 import '../styles/userOnboarding.css'
