@@ -62,8 +62,15 @@ class Login extends React.Component {
 
 					<IonText className="error">{this.state.message}</IonText>
 
-					<IonButton className="submitBtn" onClick={this.login} >SUBMIT!</IonButton>
-					<IonButton href='/signup' className="changePage">Signup instead</IonButton>
+					<IonGrid>
+						<IonRow>
+							<IonButton className="submitBtn" onClick={this.login} >SUBMIT!</IonButton>
+						</IonRow>
+						<IonRow>
+							<IonButton href='/signup' className="changePage">Signup instead</IonButton>
+						</IonRow>
+					</IonGrid>
+
 			  </IonContent>
 			</IonPage>
 		)

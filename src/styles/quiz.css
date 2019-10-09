@@ -129,23 +129,29 @@
 .footerQuiz {
     position: fixed;
     bottom: 0;
+    top: 100vh - 60px;
     left: 0;
-    right: 0;
+    right: 0; 
+    margin-left: 0;
     height: 60px;
     background-color: #212738;
+    width: 100vw;
     z-index:0;
 }
 
 .lockIcon{
-    color: rgb(172, 169, 169);
-    width: 50vw;
+    color: rgba(172, 169, 169, 0.644);
+    width: 30vw;
     height: 50px;
-    opacity: 0.6;
     position: fixed;
-	left:25%;
+    left:35%;
     bottom: 0;
     margin-bottom: 20px;
     z-index:1;
+    background-color:#212738;
+    border-top-left-radius: 80px;
+    border-top-right-radius: 80px;
+    padding-top: 20px;
 }
 
 .openLock {
@@ -219,7 +225,7 @@
 }
 
 .answer {
-    font-size: 60px;
+    font-size: 100%;
     font-family: 'Skranji', cursive;
     text-align: center;
     background-color: transparent;
@@ -275,11 +281,13 @@
 .fa-angle-double-down {
 	color: white;
 	font-size: 50px;
-	position: absolute;
-	left: 45%;
-	bottom: 20px;
 }
 
 .guide.indication {
 	font-family: 'Skranji', cursive;
+}
+
+.arrowIcon {
+	align-content: center;
+	padding-left: 35%;
 }

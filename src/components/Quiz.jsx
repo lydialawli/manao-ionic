@@ -106,11 +106,17 @@ class Quiz extends React.Component {
 
     }
 
+    // getInputFontSize = () => {
+    //     let w = width
+    //     let l = length
+    //     let r = 
+    // }
+
     getPlaceholder = (num) => {
         console.log('placeholder length', num)
         let outcome = ''
         for (var i = 0; i < num; i++) {
-            outcome += '_'
+            outcome += '_ '
         }
         console.log('outcome', outcome)
         return outcome
@@ -192,6 +198,7 @@ class Quiz extends React.Component {
                     isOpen={this.state.showPopover}
                     onDidDismiss={e => this.setState({ showPopover: false })}
                     cssClass="popover"
+                    animated="false"
                 >
                     {
                         this.state.quiz.hint.type === "text" ? (<div className="hintBox">{this.state.quiz.hint.content}</div>) : (
@@ -201,8 +208,8 @@ class Quiz extends React.Component {
                 <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hintIcon-white.svg"></IonIcon></IonButtons>
                 <IonFooter className="footerQuiz" >
                     <button disabled={!this.state.correctAnswer} onClick={() => this.backToDefault()}>
-                        {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}> </IonIcon>) :
-                            (<IonIcon className="lockIcon" icon={lock}> </IonIcon>)}
+                        {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}></IonIcon>) :
+                            (<IonIcon className="lockIcon" icon={lock}></IonIcon>)}
                     </button>
                     {/* <div className="triangleGame"></div> */}
                 </IonFooter>

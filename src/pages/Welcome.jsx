@@ -84,7 +84,7 @@ class Welcome extends React.Component {
 						<IonSlide className="onboardingSlide two">
 							<IonGrid className="onboardingGrid">
 								<IonRow>
-									<h1 className="guide instructions">Before we start, you should know...</h1>
+									<h1 className="instructions">Before we start, you should know...</h1>
 								</IonRow>
 								<IonRow>
 									<IonGrid className="instructionsGrid">
@@ -118,10 +118,16 @@ class Welcome extends React.Component {
 									<h6>To unlock the next challenge, you must first answer the previous quiz correctly.</h6>
 								</IonRow>
 								<IonRow>
-									<h1 className="guide go">Got it? Let's go!</h1>
+									<IonCol>
+										<h1 className="go">Got it?</h1>
+										<h1 className="go">Let's go!</h1>
+									</IonCol>
+									<IonCol className="iconCol">
+										<h1><i onClick={this.goToPlayQuizzes} className="fas fa-thumbs-up"></i></h1>
+
+									</IonCol>
 								</IonRow>
 							</IonGrid>
-							<i onClick={this.goToPlayQuizzes} className="fas fa-thumbs-up"></i>
 						</IonSlide>
 
 					</IonSlides>
