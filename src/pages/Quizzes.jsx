@@ -1,6 +1,6 @@
 import React from 'react';
-import { IonButtons, IonContent, IonHeader, IonIcon, IonMenuButton, IonPage,IonToolbar, IonProgressBar,} from '@ionic/react';
-import {  trophy } from 'ionicons/icons';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonMenuButton, IonPage, IonToolbar, IonProgressBar, IonModal, IonGrid, IonCol, IonRow, IonItem } from '@ionic/react';
+import { trophy } from 'ionicons/icons';
 import '../styles/quiz.css';
 
 import { withRouter } from 'react-router-dom';
@@ -18,6 +18,7 @@ class Quizzes extends React.Component {
         totalScore: 0,
         progressValue: 0,
         progressDiff: 0, // should be 1/gameNumQuizzes.length
+        showModal: true,
     }
 
     ionViewWillEnter() {
@@ -34,15 +35,12 @@ class Quizzes extends React.Component {
 
     onPageView = (p) => {
         let props = ''
-        if (p) {
-            props = p
-        }
-        else { props = this.props }
+        p ? props = p : props = this.props
 
         let historyId = localStorage.getItem('history')
-        console.log('user', props.location.user)
-        console.log('historyId', historyId)
-        console.log('gameId ', props.location.gameId)
+        // console.log('user', props.location.user)
+        // console.log('historyId', historyId)
+        // console.log('gameId ', props.location.gameId)
 
         axios.get(`${process.env.REACT_APP_API}/games/${props.location.gameId}/quizzes`)
             .then(res => {
@@ -62,7 +60,7 @@ class Quizzes extends React.Component {
 
 
     nextQuizSetup = () => {
-        console.log('nextquiz', this.state.quizzes[this.state.currentQuizz].quiz)
+        // console.log('nextquiz', this.state.quizzes[this.state.currentQuizz].quiz)
         if (!this.state.quizzes[this.state.currentQuizz + 1]) {
 
             this.props.history.push({
@@ -77,14 +75,15 @@ class Quizzes extends React.Component {
             this.setState({
                 quiz: this.state.quizzes[this.state.currentQuizz + 1].quiz,
                 currentQuizz: this.state.currentQuizz + 1,
+                showModal: true,
             })
         }
     }
 
 
     changeProgress = (progressValue, score) => {
-        console.log('progressValue', progressValue)
-        console.log('score', score)
+        // console.log('progressValue', progressValue)
+        // console.log('score', score)
 
         axios.patch(`${process.env.REACT_APP_API}/histories/${this.state.historyId}`, {
             userId: this.state.user._id,
@@ -98,12 +97,17 @@ class Quizzes extends React.Component {
     }
 
     sendCoordinates = () => {
-        this.props.history.push({
-            pathname: '/map',
-            lat: this.state.quiz.location.lat,
-            lng: this.state.quiz.location.lng,
-            locationName: this.state.quiz.locationName
-        })
+        console.log('opening map...')
+        this.setState({ showModal: false },
+            () => {
+                this.props.history.push({
+                    pathname: '/map',
+                    lat: this.state.quiz.location.lat,
+                    lng: this.state.quiz.location.lng,
+                    locationName: this.state.quiz.locationName
+                })
+            }
+        )
     }
 
     render() {
@@ -127,6 +131,30 @@ class Quizzes extends React.Component {
                     </IonToolbar>
                 </IonHeader>
                 <IonContent>
+                    <IonModal
+                        isOpen={this.state.showModal}
+                        onDidDismiss={e => this.setState({ showModal: false })}
+                        animated="false"
+                    >
+                        <IonContent className="modalWindow three" >
+                            <IonGrid className="onboardingGrid">
+                                <IonRow>
+                                    <IonIcon className="manaoLogoLogin game" src="assets/Logo-yellow.svg"></IonIcon>
+                                </IonRow>
+                                <IonRow>
+                                    <h1 className="guide">{this.state.quiz.indication}</h1>
+                                </IonRow>
+                                <IonRow>
+                                    <IonItem className="guideContainer" onClick={this.sendCoordinates}>
+                                        <h1 className="guide locationName">{this.state.quiz.locationName}</h1>
+                                    </IonItem>
+                                </IonRow>
+                            </IonGrid>
+
+                            <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
+
+                        </IonContent>
+                    </IonModal>
                     <Quiz quiz={this.state.quiz} currentQuizz={this.state.currentQuizz} progressDiff={this.state.progressDiff} history={this.props.history} nextQuiz={this.nextQuizSetup} onCorrect={this.changeProgress}></Quiz>
                 </IonContent>
 

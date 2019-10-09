@@ -122,7 +122,7 @@ class Welcome extends React.Component {
 									<h1 className="guide go">Got it? Let's go!</h1>
 								</IonRow>
 							</IonGrid>
-							<IonItem onClick={this.goToPlayQuizzes}><i style={{backgroundColor:"transparent"}} className="fas fa-thumbs-up"></i></IonItem>
+							<IonItem onClick={this.goToPlayQuizzes}><i className="fas fa-thumbs-up"></i></IonItem>
 						</IonSlide>
 
 					</IonSlides>
