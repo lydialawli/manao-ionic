@@ -108,7 +108,8 @@
 .problemBox {
     background-color: #EDF2EF;
     text-align: center;
-    /* padding:10px; */
+    padding:10px;
+    max-height: 140px;
     border-radius: 10px;
     box-shadow: 2px 2px 10px #00000067;
 }
@@ -119,10 +120,9 @@
 
 .problemImg {
     max-width: 300px;
-    max-height: 150px;
+    height: 100%;
     padding-left: 5px;
     padding-right: 5px;
-    box-sizing: content-box;
 }
 
 .footerQuiz {
