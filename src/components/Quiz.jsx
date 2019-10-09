@@ -47,7 +47,7 @@ class Quiz extends React.Component {
 
     UNSAFE_componentDidMount() {
         console.log('quizz ==>', this.props.quiz)
-        let answerLength = this.props.quiz.answer.content.length
+        let answerLength = this.props.quiz.answer.content.split(' ').length
         this.setState({
             quiz: this.props.quiz,
             currentQuizz: this.props.currentQuizz,
@@ -59,7 +59,7 @@ class Quiz extends React.Component {
         console.log('quizzProp ==>', props)
 
         if (props.quiz.question) {
-            let answerLength = props.quiz.answer.content.length
+            let answerLength = props.quiz.answer.content.split(' ').length
             this.setState({
                 quiz: props.quiz,
                 currentQuizz: props.currentQuizz + 1,
@@ -115,7 +115,7 @@ class Quiz extends React.Component {
         console.log('placeholder length', num)
         let outcome = ''
         for (var i = 0; i < num; i++) {
-            outcome += '_ '
+            outcome += '__ '
         }
         console.log('outcome', outcome)
         return outcome
