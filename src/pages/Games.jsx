@@ -18,7 +18,7 @@ class Home extends React.Component {
 	}
 
 	componentWillReceiveProps(props) {
-		if(props.history.location.refresh){
+		if (props.history.location.refresh) {
 			console.log('refresh app!')
 			window.location.reload(true)
 		}
@@ -91,8 +91,8 @@ class Home extends React.Component {
 
 					</IonSlides>
 
-					<IonIcon className="icon left" icon={arrowBack}></IonIcon>
-					<IonIcon className="icon right" icon={arrowForward}></IonIcon>
+					<IonIcon mode="ios" className="icon left" icon={arrowBack}></IonIcon>
+					<IonIcon mode="ios" className="icon right" icon={arrowForward}></IonIcon>
 				</IonContent>
 			</IonPage>
 		);

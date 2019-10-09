@@ -1,6 +1,6 @@
 import React from 'react';
-import { IonPopover, IonButton, IonModal, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonImg, IonMenuButton, IonPage, IonGrid, IonCol, IonRow, IonToolbar, IonProgressBar, IonInput, IonFooter } from '@ionic/react';
-import { lock, unlock, trophy } from 'ionicons/icons';
+import { IonButtons, IonContent, IonHeader, IonIcon, IonMenuButton, IonPage,IonToolbar, IonProgressBar,} from '@ionic/react';
+import {  trophy } from 'ionicons/icons';
 import '../styles/quiz.css';
 
 import { withRouter } from 'react-router-dom';
