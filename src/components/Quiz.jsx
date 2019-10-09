@@ -47,11 +47,11 @@ class Quiz extends React.Component {
 
     UNSAFE_componentDidMount() {
         console.log('quizz ==>', this.props.quiz)
-        let placeholderLength = this.props.quiz.answer.content.length
+        let answerLength = this.props.quiz.answer.content.length
         this.setState({
             quiz: this.props.quiz,
             currentQuizz: this.props.currentQuizz,
-            inputPlaceholder: this.getPlaceholder(placeholderLength)
+            inputPlaceholder: this.getPlaceholder(answerLength)
         })
     }
 
@@ -59,12 +59,12 @@ class Quiz extends React.Component {
         console.log('quizzProp ==>', props)
 
         if (props.quiz.question) {
-            let placeholderLength = props.quiz.answer.content.length
+            let answerLength = props.quiz.answer.content.length
             this.setState({
                 quiz: props.quiz,
                 currentQuizz: props.currentQuizz + 1,
                 progressDiff: props.progressDiff,
-                inputPlaceholder: this.getPlaceholder(placeholderLength)
+                inputPlaceholder: this.getPlaceholder(answerLength)
             })
         }
 
