@@ -110,6 +110,12 @@ class Quizzes extends React.Component {
         )
     }
 
+		toggleModal = () => {
+			this.setState({
+				showModal: !this.state.showModal
+			})
+		}
+
     render() {
         return (
 
@@ -133,8 +139,6 @@ class Quizzes extends React.Component {
                 <IonContent>
                     <IonModal
                         isOpen={this.state.showModal}
-                        onDidDismiss={e => this.setState({ showModal: false })}
-                        animated="false"
                     >
                         <IonContent className="modalWindow three" >
                             <IonGrid className="onboardingGrid">
@@ -150,7 +154,7 @@ class Quizzes extends React.Component {
                                     </IonItem>
                                 </IonRow>
                                 <IonRow className="arrowIcon">
-                                    <h1 className="guide locationName"><i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i></h1>
+                                    <h1 className="guide locationName"><i onClick={this.toggleModal} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i></h1>
                                 </IonRow>
                             </IonGrid>
                         </IonContent>
