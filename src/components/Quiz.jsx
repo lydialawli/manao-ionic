@@ -158,29 +158,6 @@ class Quiz extends React.Component {
         return (
 
             <IonContent className="quizMain  ion-padding">
-                {/* <IonModal
-                    isOpen={this.state.showModal}
-                    onDidDismiss={e => this.setState({ showModal: false })}
-                >
-                    <IonContent className="modalWindow three" >
-                        <IonGrid className="onboardingGrid">
-                            <IonRow>
-                                <IonIcon className="manaoLogoLogin game" src="assets/Logo-yellow.svg"></IonIcon>
-                            </IonRow>
-                            <IonRow>
-                                <h1 className="guide">{this.state.quiz.indication}</h1>
-                            </IonRow>
-                            <IonRow>
-                                <IonItem className="guideContainer" onClick={this.sendCoordinates}>
-                                    <h1 className="guide locationName">{this.state.quiz.locationName}</h1>
-                                </IonItem>
-                            </IonRow>
-                        </IonGrid>
-
-                        <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
-
-                    </IonContent>
-                </IonModal> */}
                 <IonGrid>
                     <IonRow>
                         <h1 className="titleChallenge">CHALLENGE # {this.state.currentQuizz}</h1>
