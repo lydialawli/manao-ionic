@@ -76,9 +76,14 @@ class Signup extends React.Component {
 						<IonLabel className="label" color="danger" position="floating">Password</IonLabel>
 						<IonInput type="password" className="label" onIonChange={(e) => this.changeField(e, 'password')}></IonInput>
 					</IonItem>
-
-					<IonButton className="submitBtn signup" onClick={this.signup} >SUBMIT!</IonButton>
-					<IonButton href='/login' className="changePage">Login instead</IonButton>
+					<IonGrid>
+						<IonRow>
+							<IonButton className="submitBtn signup" onClick={this.signup} >SUBMIT!</IonButton>
+						</IonRow>
+						<IonRow>
+							<IonButton href='/login' className="changePage">Login instead</IonButton>
+						</IonRow>
+					</IonGrid>
 					{
 						this.state.error ?
 						<IonAlert className="signupAlert"

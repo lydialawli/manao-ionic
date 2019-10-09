@@ -25,12 +25,12 @@
 	--background: #FFE500;
 	width: 50vw;
 	height: 50px;
-	margin: 30px auto 0px 85px;
+	margin: 30px auto 20px auto;
 	--border-radius: 0;
 	font-family: 'Titan One', cursive;
 	font-size: 25px;
 	color: black;
-	position: absolute;
+	position: relative;
 	left: 5%;
 	bottom: 20%;
 }
@@ -50,7 +50,7 @@
 	--border-radius: 50px;
 	font-family: 'Skranji', cursive;
 	color: #212738;
-	position: absolute;
+	position: relative;
 	left: 20px;
 	bottom: 30px;
 }

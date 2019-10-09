@@ -149,8 +149,8 @@ class Quizzes extends React.Component {
                                         <h1 className="guide locationName">{this.state.quiz.locationName}</h1>
                                     </IonItem>
                                 </IonRow>
-																<IonRow>
-																	<i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
+																<IonRow className="arrowIcon">
+																	<h1 className="guide locationName"><i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i></h1>
 																</IonRow>
                             </IonGrid>
                         </IonContent>
