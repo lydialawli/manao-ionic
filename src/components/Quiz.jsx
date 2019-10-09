@@ -196,7 +196,7 @@ class Quiz extends React.Component {
                 </IonGrid>
 
                 <IonItem className={`answerForm ${this.borderInput()}`}>
-                    <IonInput onFocus={this.toggleFooter} onBlur={this.toggleFooter} value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+                    <IonInput onFocus={this.toggleFooter} onBlur={this.toggleFooter} value={this.state.answer} className="answer" disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
 
                     <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                 </IonItem>
