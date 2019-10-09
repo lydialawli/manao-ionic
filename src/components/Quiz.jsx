@@ -42,6 +42,7 @@ class Quiz extends React.Component {
         showModal: true,
         currentQuizz: 1,
         progressDiff: 0,
+				showKeyboard: true
     }
 
 
@@ -69,6 +70,12 @@ class Quiz extends React.Component {
         }
 
     }
+
+		toggleFooter = () => {
+			this.setState({
+				showKeyboard: !this.state.showKeyboard
+			})
+		}
 
     changeAnswer = (e) => {
         this.setState({ answer: e.target.value })
@@ -109,7 +116,7 @@ class Quiz extends React.Component {
     // getInputFontSize = () => {
     //     let w = width
     //     let l = length
-    //     let r = 
+    //     let r =
     // }
 
     getPlaceholder = (num) => {
@@ -178,7 +185,7 @@ class Quiz extends React.Component {
                 <IonGrid >
                     <IonRow>
                         <IonCol size="1" >
-                            <IonIcon className="manaoLogo" src="assets/logo-black-shadow.svg"></IonIcon>
+                            <IonIcon className="manaoLogo" src="assets/manao-logo.svg"></IonIcon>
                         </IonCol>
                         <IonCol size="9" offset="2" className="problemBox">
                             {
@@ -190,7 +197,7 @@ class Quiz extends React.Component {
                 </IonGrid>
 
                 <IonItem className={`answerForm ${this.borderInput()}`}>
-                    <IonInput value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
+                    <IonInput onFocus={this.toggleFooter} onBlur={this.toggleFooter} value={this.state.answer} className="answer" type="tel" maxlength={`${this.state.quiz.answer.content.length}`} disabled={this.state.disableInput} placeholder={this.state.inputPlaceholder} onIonChange={(e) => this.changeAnswer(e)}></IonInput>
                     <IonItem className={`checkIcon ${this.state.iconAnswerStyle}`}><i className={this.state.iconAnswer}></i></IonItem>
                 </IonItem>
 
@@ -205,14 +212,22 @@ class Quiz extends React.Component {
                             <IonImg className="problemImg imgHint" src={`${this.state.quiz.hint.content}`} />)
                     }
                 </IonModal>
-                <IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo " src="assets/hintIcon-white.svg"></IonIcon></IonButtons>
-                <IonFooter className="footerQuiz" >
-                    <button disabled={!this.state.correctAnswer} onClick={() => this.backToDefault()}>
-                        {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}></IonIcon>) :
-                            (<IonIcon className="lockIcon" icon={lock}></IonIcon>)}
-                    </button>
-                    {/* <div className="triangleGame"></div> */}
-                </IonFooter>
+								{
+									this.state.showKeyboard ?
+									<IonButtons className={`hintIcon ${this.state.hintUsed ? 'hintUsed' : ''}`} onClick={this.showHint}><IonIcon className="manaoLogo" src="assets/hint.svg"></IonIcon></IonButtons> : ''
+								}
+
+								{
+									this.state.showKeyboard ?
+									<IonFooter className="footerQuiz" >
+	                    <button disabled={!this.state.correctAnswer} onClick={() => this.backToDefault()}>
+	                        {this.state.correctAnswer ? (<IonIcon className="lockIcon openLock" icon={unlock}></IonIcon>) :
+	                            (<IonIcon className="lockIcon" icon={lock}></IonIcon>)}
+	                    </button>
+	                    {/* <div className="triangleGame"></div> */}
+	                </IonFooter> : ''
+								}
+
             </IonContent>
 
         )
