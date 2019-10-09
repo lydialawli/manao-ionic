@@ -25,13 +25,14 @@
 	--background: #FFE500;
 	width: 50vw;
 	height: 50px;
-	margin: 30px auto 0px auto;
+	margin: 30px auto 0px 85px;
 	--border-radius: 0;
 	font-family: 'Titan One', cursive;
 	font-size: 25px;
 	color: black;
-	margin-left: auto;
-	margin-right: auto;
+	position: absolute;
+	left: 5%;
+	bottom: 20%;
 }
 
 .formTitle {
@@ -49,6 +50,9 @@
 	--border-radius: 50px;
 	font-family: 'Skranji', cursive;
 	color: #212738;
+	position: absolute;
+	left: 20px;
+	bottom: 30px;
 }
 
 .manaoLogoLogin {

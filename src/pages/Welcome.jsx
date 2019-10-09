@@ -2,7 +2,6 @@ import React from 'react'
 import { IonContent, IonPage, IonIcon, IonGrid, IonRow, IonItem, IonSlide, IonSlides, IonCol } from '@ionic/react';
 
 import { withRouter } from 'react-router-dom';
-import { Link } from 'react-router-dom'
 
 import axios from 'axios'
 import '../styles/userOnboarding.css'
@@ -28,7 +27,7 @@ class Welcome extends React.Component {
 		let game = this.props.match.params.id
 		axios.get(`${process.env.REACT_APP_API}/games/${game}/quizzes`)
 			.then(res => {
-				this.setState({ 
+				this.setState({
 					quiz: res.data.quizzes[0].quiz,
 					gameId: this.props.match.params.id
 				})
@@ -122,7 +121,7 @@ class Welcome extends React.Component {
 									<h1 className="guide go">Got it? Let's go!</h1>
 								</IonRow>
 							</IonGrid>
-							<IonItem onClick={this.goToPlayQuizzes}><i className="fas fa-thumbs-up"></i></IonItem>
+							<i onClick={this.goToPlayQuizzes} className="fas fa-thumbs-up"></i>
 						</IonSlide>
 
 					</IonSlides>
