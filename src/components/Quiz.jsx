@@ -47,19 +47,24 @@ class Quiz extends React.Component {
 
     UNSAFE_componentDidMount() {
         console.log('quizz ==>', this.props.quiz)
+        let placeholderLength = this.props.quiz.answer.content.length
         this.setState({
             quiz: this.props.quiz,
             currentQuizz: this.props.currentQuizz,
+            inputPlaceholder: this.getPlaceholder(placeholderLength)
         })
     }
 
     componentWillReceiveProps(props) {
         console.log('quizzProp ==>', props)
+
         if (props.quiz.question) {
+            let placeholderLength = props.quiz.answer.content.length
             this.setState({
                 quiz: props.quiz,
                 currentQuizz: props.currentQuizz + 1,
-                progressDiff: props.progressDiff
+                progressDiff: props.progressDiff,
+                inputPlaceholder: this.getPlaceholder(placeholderLength)
             })
         }
 
@@ -102,7 +107,13 @@ class Quiz extends React.Component {
     }
 
     getPlaceholder = (num) => {
-        return [...Array(num)].forEach(() => { return 'hello' })
+        console.log('placeholder length', num)
+        let outcome = ''
+        for (var i = 0; i < num; i++) {
+            outcome += '_'
+        }
+        console.log('outcome', outcome)
+        return outcome
     }
 
 
@@ -130,14 +141,6 @@ class Quiz extends React.Component {
         // console.log('next Quiz is ready!')
     }
 
-    // sendCoordinates = () => {
-    //     this.props.history.push({
-    //         pathname: '/map',
-    //         lat: this.state.quiz.location.lat,
-    //         lng: this.state.quiz.location.lng,
-    //         locationName: this.state.quiz.locationName
-    //     })
-    // }
 
     borderInput = () => {
         if (this.state.answer === '') {
@@ -155,7 +158,7 @@ class Quiz extends React.Component {
         return (
 
             <IonContent className="quizMain  ion-padding">
-                <IonModal
+                {/* <IonModal
                     isOpen={this.state.showModal}
                     onDidDismiss={e => this.setState({ showModal: false })}
                 >
@@ -177,7 +180,7 @@ class Quiz extends React.Component {
                         <i onClick={e => this.setState({ showModal: false })} style={{ backgroundColor: 'transparent' }} className="fas fa-angle-double-down"></i>
 
                     </IonContent>
-                </IonModal>
+                </IonModal> */}
                 <IonGrid>
                     <IonRow>
                         <h1 className="titleChallenge">CHALLENGE # {this.state.currentQuizz}</h1>

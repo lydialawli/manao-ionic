@@ -26,11 +26,11 @@ class Map extends React.Component {
 		this.props.history.goBack()
 	}
 
-	render () {
-		return(
+	render() {
+		return (
 			<IonPage>
 				<IonContent>
-					<IonBackButton className="backBtn" text="" icon={arrowBack} defaultHref="/games" style={{position:"absolute"}}/>
+					<IonBackButton className="backBtn" text="" icon={arrowBack} defaultHref="/games" style={{ position: "absolute" }} />
 					<MapCom lat={this.state.lat} lng={this.state.lng} label={this.state.label} />
 				</IonContent>
 			</IonPage>
