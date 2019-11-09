@@ -1,30 +1,28 @@
 # PLAY MANAO
 
-_Play Manao_ helps to make discovering a city/town a more interactive, challenging  yet fun activity to join and play, individually or with friends and family.
+Play Manao is a cross platform mobile app that provides a growing list of **interactive games in the real world** for everyone to join and play.
 
-<!-- To do so, it provides a friendly UI that resembles a videogame. And the on-going list of __games__ one can choose to view and play. -->
+The games are **free** for everyone.
 
-No matter if you have already been to those certain places or not, PlayManao can still be a very entertaining and new experience for you.
+## How to play?
 
-The __games are free__ for anyone to play. Though some games could also provide some recommendations on a good place to eat or have a coffee. It will be up to the user to follow the tips or not. It wouldn't influence the game.
+The player will need to get to the starting point to be allowed to start playing.
 
+Games are divided into **paths**. Each path **poses a challenge** that the player needs to figure out, very often having to observe around where he/she is located. It can be a quiz, a puzzle...
 
-Be a **player** or a **creator**. Join the community by making your own game or sharing the ones you like to play!
+**Once a challenge is solved**, the next path is **unlocked** and indications will lead the player to the next path.
 
-## PLAY A GAME
+When all the paths are opened, the game is over. The total score of the player will display then, and joined to the global leaderboard.
 
-Each __game__ is based on an area somewhere in the world. Say somewhere in the middle of Barcelona.
-
-The starting point of each game is provided so the player can know where he/she will be around during the game.
-
-A __problem__ will be given to the player. To unlock the quiz the user must solve the problem by interacting and observing the surroundings.
-
-A __clue__ is allowed in each quiz. Using it will reduce the points you gain from the quiz.
-
-One quiz leads to the next one.
-
-## CREATE A GAME
+## Create a game
 
 This is a key feature of Play Manao yet it is still under development.
 
 The idea is there will be the ability to create one's own game. The platform would provide some easy and intuitive set of tools to make it happen. Like making a form, same same but different :)
+
+Be a **player** or a **creator**. Join the community by making your own game or sharing the ones you like to play!
+
+## Road map
+
+We are aiming to launch the first version to the market by the end of this year.
+A list of improvements will happen before then.
