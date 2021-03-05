@@ -14,7 +14,7 @@ class About extends React.Component {
 					<img className="banner" alt="" src="/assets/banner.png"></img>
 	        <IonGrid className="aboutGrid">
 						<IonRow>
-							<IonCol>
+							 <IonCol>
 								<div style={{backgroundImage:'url(https://seakoala.io/docs/images/universeLy.png)'}} className="founderImg"></div>
 							</IonCol>
 							<IonCol>
